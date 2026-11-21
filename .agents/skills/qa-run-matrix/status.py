@@ -38,8 +38,8 @@ def main():
     a = ap.parse_args()
     os.chdir(ROOT)
     sys.path[:0] = ["tests", "."]
-    if a.phase in ("2", "3"):
-        os.environ["QA_P" + a.phase] = "1"  # bật test v1.1 / v1.2 (mặc định bị bỏ qua khi contract chưa lên)
+    if a.phase in ("2", "3", "4"):
+        os.environ["QA_P" + a.phase] = "1"  # bật test v1.1 / v1.2 / v1.3 (mặc định bị bỏ qua khi contract chưa lên)
     suite = unittest.defaultTestLoader.discover("tests", pattern="test_qa_*.py")
     methods = list(all_methods(suite))  # phải lấy TRƯỚC khi chạy: unittest giải phóng danh sách test sau khi chạy
     stream = io.StringIO()
