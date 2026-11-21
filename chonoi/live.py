@@ -29,6 +29,7 @@ from .runner import Session
 from .scenario import load_scenario
 
 WEB_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web")
+ASSET_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cho-noi-assets")
 TICK_S = 1.0 / 60.0
 MAX_BODY = 4096
 RECENT_EVENTS = 40
@@ -154,6 +155,20 @@ class _Handler(BaseHTTPRequestHandler):
                     self._send(200, f.read(), "text/html; charset=utf-8")
             except OSError:
                 self._send(404, b'{"error":"thieu index.html"}')
+        elif path.startswith("/assets/"):
+            rel = path[len("/assets/"):].replace("/", os.sep)
+            asset_root = os.path.abspath(ASSET_DIR)
+            asset_path = os.path.abspath(os.path.join(asset_root, rel))
+            if os.path.commonpath([asset_root, asset_path]) != asset_root:
+                self._send(403, b'{"error":"duong dan khong hop le"}')
+                return
+            try:
+                with open(asset_path, "rb") as f:
+                    body = f.read()
+                ctype = "image/svg+xml" if asset_path.lower().endswith(".svg") else "application/octet-stream"
+                self._send(200, body, ctype)
+            except (OSError, ValueError):
+                self._send(404, b'{"error":"khong tim thay asset"}')
         else:
             self._send(404, b'{"error":"khong co"}')
 
