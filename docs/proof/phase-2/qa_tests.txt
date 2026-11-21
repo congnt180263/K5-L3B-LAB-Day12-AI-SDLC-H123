@@ -1,0 +1,478 @@
+# Log test QA phase 2 @ f240fff (2026-11-21 11:38)
+# Lệnh: python .agents/skills/qa-run-matrix/status.py --phase 2
+
+test_ac_p1_01_ticks_0_chi_dung_fixture (test_qa_contract.AC_01_06.test_ac_p1_01_ticks_0_chi_dung_fixture) ... ok
+test_ac_p1_02_cung_dau_vao_cung_byte (test_qa_contract.AC_01_06.test_ac_p1_02_cung_dau_vao_cung_byte) ... ok
+test_ac_p1_03_duong_dan_vao_ra_phai_khac_nhau (test_qa_contract.AC_01_06.test_ac_p1_03_duong_dan_vao_ra_phai_khac_nhau) ... ok
+test_ac_p1_03_tham_so_va_inputs_sai_thoat_2_truoc_khi_ghi (test_qa_contract.AC_01_06.test_ac_p1_03_tham_so_va_inputs_sai_thoat_2_truoc_khi_ghi) ... ok
+test_ac_p1_04_scenario_sai_thoat_2 (test_qa_contract.AC_01_06.test_ac_p1_04_scenario_sai_thoat_2) ... ok
+test_ac_p1_04_truong_chua_ho_tro_invuln_ticks (test_qa_contract.AC_01_06.test_ac_p1_04_truong_chua_ho_tro_invuln_ticks) ... FAIL
+test_ac_p1_05_frame_chi_cap_nhat_truong_co_mat (test_qa_contract.AC_01_06.test_ac_p1_05_frame_chi_cap_nhat_truong_co_mat) ... ok
+test_ac_p1_05_nut_chi_tac_dong_o_canh_len (test_qa_contract.AC_01_06.test_ac_p1_05_nut_chi_tac_dong_o_canh_len) ... ok
+test_ac_p1_06_end_va_thu_tu_su_kien_truoc_snapshot (test_qa_contract.AC_01_06.test_ac_p1_06_end_va_thu_tu_su_kien_truoc_snapshot) ... ok
+test_ac_p1_06_snapshot_va_end (test_qa_contract.AC_01_06.test_ac_p1_06_snapshot_va_end) ... ok
+test_ac_p1_26_dinh_dang_file_kho (test_qa_contract.AC_Kho.test_ac_p1_26_dinh_dang_file_kho) ... ok
+test_ac_p1_27_kho_hop_le_va_mac_dinh (test_qa_contract.AC_Kho.test_ac_p1_27_kho_hop_le_va_mac_dinh) ... ok
+test_ac_p1_27_quan_tu_choi_kho_sai (test_qa_contract.AC_Kho.test_ac_p1_27_quan_tu_choi_kho_sai) ... ok
+test_ac_p1_28_smoke_hai_tien_trinh_theo_prd (test_qa_contract.AC_Kho.test_ac_p1_28_smoke_hai_tien_trinh_theo_prd) ... ok
+test_ac_p1_20_bat_ca_yield_xoa_dan_va_hoi_chieu (test_qa_gather.AC_Bat.test_ac_p1_20_bat_ca_yield_xoa_dan_va_hoi_chieu) ... 
+  test_ac_p1_20_bat_ca_yield_xoa_dan_va_hoi_chieu (test_qa_gather.AC_Bat.test_ac_p1_20_bat_ca_yield_xoa_dan_va_hoi_chieu) [payload theo PRD mục E] ... FAIL
+test_ac_p1_20_dang_hoi_chieu_thi_bo_qua_sau_hoi_thi_bat_duoc (test_qa_gather.AC_Bat.test_ac_p1_20_dang_hoi_chieu_thi_bo_qua_sau_hoi_thi_bat_duoc) ... ok
+test_ac_p1_20_o_mat_nuoc_khong_bat (test_qa_gather.AC_Bat.test_ac_p1_20_o_mat_nuoc_khong_bat) ... ok
+test_ac_p1_21_khong_co_dan_trong_tam_thi_khong_su_kien_khong_hoi_chieu (test_qa_gather.AC_Bat.test_ac_p1_21_khong_co_dan_trong_tam_thi_khong_su_kien_khong_hoi_chieu) ... FAIL
+test_ac_p1_21_thieu_cho_hold_full_giu_dan_va_hoi_chieu (test_qa_gather.AC_Bat.test_ac_p1_21_thieu_cho_hold_full_giu_dan_va_hoi_chieu) ... FAIL
+test_ac_p1_17_chon_nut_gan_nhat_hoa_theo_id (test_qa_gather.AC_Hai.test_ac_p1_17_chon_nut_gan_nhat_hoa_theo_id) ... ok
+test_ac_p1_17_hai_o_mep_ban_kinh_va_lifo (test_qa_gather.AC_Hai.test_ac_p1_17_hai_o_mep_ban_kinh_va_lifo) ... 
+  test_ac_p1_17_hai_o_mep_ban_kinh_va_lifo (test_qa_gather.AC_Hai.test_ac_p1_17_hai_o_mep_ban_kinh_va_lifo) [payload theo PRD mục E] ... FAIL
+test_ac_p1_17_ngoai_ban_kinh_hoac_duoi_nuoc_khong_hai (test_qa_gather.AC_Hai.test_ac_p1_17_ngoai_ban_kinh_hoac_duoi_nuoc_khong_hai) ... ok
+test_ac_p1_18_nut_moc_lai_va_hai_ngay (test_qa_gather.AC_Hai.test_ac_p1_18_nut_moc_lai_va_hai_ngay) ... ok
+test_ac_p1_19_gio_day_hold_full_giu_nut (test_qa_gather.AC_Hai.test_ac_p1_19_gio_day_hold_full_giu_nut) ... 
+  test_ac_p1_19_gio_day_hold_full_giu_nut (test_qa_gather.AC_Hai.test_ac_p1_19_gio_day_hold_full_giu_nut) [payload theo PRD mục E] ... FAIL
+test_ac_p1_22_ben_xet_truoc_hai (test_qa_gather.AC_Hai.test_ac_p1_22_ben_xet_truoc_hai) ... ok
+test_ac_p1_23_hai_hop_le_o_buoc_cuoi_van_vao_kho (test_qa_gather.AC_KetThuc.test_ac_p1_23_hai_hop_le_o_buoc_cuoi_van_vao_kho) ... ok
+test_ac_p1_23_het_gio_giu_gio_o_moi_do_sau (test_qa_gather.AC_KetThuc.test_ac_p1_23_het_gio_giu_gio_o_moi_do_sau) ... ok
+test_ac_p1_23_interact_dung_mep_ben_o_buoc_cuoi_van_docked (test_qa_gather.AC_KetThuc.test_ac_p1_23_interact_dung_mep_ben_o_buoc_cuoi_van_docked) ... ok
+test_ac_p1_25_kho_chi_ghi_khi_gather_end (test_qa_gather.AC_KetThuc.test_ac_p1_25_kho_chi_ghi_khi_gather_end) ... ok
+test_ac_p1_11_dive_surface_chi_khi_doi_phia_bien (test_qa_gather.AC_Oxy.test_ac_p1_11_dive_surface_chi_khi_doi_phia_bien) ... ok
+test_ac_p1_11_khong_dive_khi_dung_yen_o_mat_nuoc (test_qa_gather.AC_Oxy.test_ac_p1_11_khong_dive_khi_dung_yen_o_mat_nuoc) ... ok
+test_ac_p1_12_oxy_hoi_6_o_mat_nuoc_va_ket_max (test_qa_gather.AC_Oxy.test_ac_p1_12_oxy_hoi_6_o_mat_nuoc_va_ket_max) ... ok
+test_ac_p1_12_oxy_tru_1_duoi_nuoc (test_qa_gather.AC_Oxy.test_ac_p1_12_oxy_tru_1_duoi_nuoc) ... ok
+test_ac_p1_13_oxygen_empty_khi_tu_duong_xuong_0 (test_qa_gather.AC_Oxy.test_ac_p1_13_oxygen_empty_khi_tu_duong_xuong_0) ... 
+  test_ac_p1_13_oxygen_empty_khi_tu_duong_xuong_0 (test_qa_gather.AC_Oxy.test_ac_p1_13_oxygen_empty_khi_tu_duong_xuong_0) [payload theo PRD mục E] ... FAIL
+test_ac_p1_14_choke_dau_o_t_cong_59_roi_moi_60_buoc (test_qa_gather.AC_Oxy.test_ac_p1_14_choke_dau_o_t_cong_59_roi_moi_60_buoc) ... ok
+test_ac_p1_15_noi_len_dung_buoc_dang_ngat_thi_khong_ngat (test_qa_gather.AC_Oxy.test_ac_p1_15_noi_len_dung_buoc_dang_ngat_thi_khong_ngat) ... ok
+test_ac_p1_16_ngat_mat_gio_lifo_va_kho_rong (test_qa_gather.AC_Oxy.test_ac_p1_16_ngat_mat_gio_lifo_va_kho_rong) ... 
+  test_ac_p1_16_ngat_mat_gio_lifo_va_kho_rong (test_qa_gather.AC_Oxy.test_ac_p1_16_ngat_mat_gio_lifo_va_kho_rong) [payload theo PRD mục E] ... FAIL
+test_ac_p2_03_days (test_qa_p2.P2_Cli.test_ac_p2_03_days) ... FAIL
+test_ac_p2_04_nut_moi (test_qa_p2.P2_Cli.test_ac_p2_04_nut_moi) ... FAIL
+test_ac_p2_05_scenario_v11 (test_qa_p2.P2_Cli.test_ac_p2_05_scenario_v11) ... FAIL
+test_ac_p2_01_khoa_v11 (test_qa_p2.P2_Contract.test_ac_p2_01_khoa_v11) ... FAIL
+test_ac_p2_02_sau_mon (test_qa_p2.P2_Contract.test_ac_p2_02_sau_mon) ... ok
+test_ac_p2_06_07_snapshot_gather_tick_0 (test_qa_p2.P2_Contract.test_ac_p2_06_07_snapshot_gather_tick_0) ... FAIL
+test_ac_p2_15_22_quai_va_snapshot (test_qa_p2.P2_Contract.test_ac_p2_15_22_quai_va_snapshot) ... FAIL
+test_ac_p2_23_quan_2_bep_4_ban (test_qa_p2.P2_Contract.test_ac_p2_23_quan_2_bep_4_ban) ... ok
+test_ac_p2_24_khach_den_theo_lich_va_lay_ban_trong_nho_nhat (test_qa_p2.P2_Contract.test_ac_p2_24_khach_den_theo_lich_va_lay_ban_trong_nho_nhat) ... ok
+test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi (test_qa_p2.P2_Contract.test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi) ... FAIL
+test_ac_p2_27_kho_va_giu_cho_mon_moi (test_qa_p2.P2_Contract.test_ac_p2_27_kho_va_giu_cho_mon_moi) ... ok
+test_ac_p2_27_nau_mon_moi_o_bep_b2 (test_qa_p2.P2_Contract.test_ac_p2_27_nau_mon_moi_o_bep_b2) ... 
+  test_ac_p2_27_nau_mon_moi_o_bep_b2 (test_qa_p2.P2_Contract.test_ac_p2_27_nau_mon_moi_o_bep_b2) (dish_id='canh_chua_ca_loc') ... FAIL
+  test_ac_p2_27_nau_mon_moi_o_bep_b2 (test_qa_p2.P2_Contract.test_ac_p2_27_nau_mon_moi_o_bep_b2) (dish_id='ca_keo_nuong') ... FAIL
+  test_ac_p2_27_nau_mon_moi_o_bep_b2 (test_qa_p2.P2_Contract.test_ac_p2_27_nau_mon_moi_o_bep_b2) (dish_id='lau_mam') ... FAIL
+test_ac_p2_29_ke_hoach_d1_d5 (test_qa_p2.P2_Contract.test_ac_p2_29_ke_hoach_d1_d5) ... ERROR
+test_ac_p2_29_38_cong_bo_ke_hoach_ngay_1 (test_qa_p2.P2_Day.test_ac_p2_29_38_cong_bo_ke_hoach_ngay_1) ... FAIL
+test_ac_p2_39_pause (test_qa_p2.P2_Day.test_ac_p2_39_pause) ... FAIL
+test_ac_p2_40_41_byte_giong_nhau_va_hieu_nang (test_qa_p2.P2_Day.test_ac_p2_40_41_byte_giong_nhau_va_hieu_nang) ... FAIL
+test_ac_p2_31_chon_mon_trong_ke_hoach_va_khong_gioi_han_suat (test_qa_p2.P2_QuanPlan.test_ac_p2_31_chon_mon_trong_ke_hoach_va_khong_gioi_han_suat) ... ok
+test_ac_p2_31_fixture_ngoai_ke_hoach (test_qa_p2.P2_QuanPlan.test_ac_p2_31_fixture_ngoai_ke_hoach) ... ok
+test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot (test_qa_quan.AC_Bep.test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot) ... FAIL
+test_ac_p1_36_bep_idle_bat_dau_nau (test_qa_quan.AC_Bep.test_ac_p1_36_bep_idle_bat_dau_nau) ... FAIL
+test_ac_p1_37_nau_xong_thanh_ready (test_qa_quan.AC_Bep.test_ac_p1_37_nau_xong_thanh_ready) ... FAIL
+test_ac_p1_38_lay_mon_tu_bep (test_qa_quan.AC_Bep.test_ac_p1_38_lay_mon_tu_bep) ... FAIL
+test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan (test_qa_quan.AC_Bep.test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan) ... ERROR
+test_ac_p1_39_phuc_vu_va_boa (test_qa_quan.AC_Bep.test_ac_p1_39_phuc_vu_va_boa) ... FAIL
+test_ac_p1_40_an_xong_tra_tien (test_qa_quan.AC_Bep.test_ac_p1_40_an_xong_tra_tien) ... FAIL
+test_ac_p1_41_khach_roi_bo_mon_khong_hoan_nguyen_lieu (test_qa_quan.AC_Bep.test_ac_p1_41_khach_roi_bo_mon_khong_hoan_nguyen_lieu) ... ok
+test_ac_p1_42_het_ca (test_qa_quan.AC_Bep.test_ac_p1_42_het_ca) ... FAIL
+test_ac_p1_43_mau_thuan_o_scenario_thoat_2 (test_qa_quan.AC_Bep.test_ac_p1_43_mau_thuan_o_scenario_thoat_2) ... ok
+test_ac_p1_29_snapshot_tick_0 (test_qa_quan.AC_Khach.test_ac_p1_29_snapshot_tick_0) ... ok
+test_ac_p1_30_lich_khach_theo_phase_tick (test_qa_quan.AC_Khach.test_ac_p1_30_lich_khach_theo_phase_tick) ... ok
+test_ac_p1_30_tat_khach_tu_sinh_va_ca_rut_ngan (test_qa_quan.AC_Khach.test_ac_p1_30_tat_khach_tu_sinh_va_ca_rut_ngan) ... ok
+test_ac_p1_31_ban_dang_co_khach_thi_bo_luot (test_qa_quan.AC_Khach.test_ac_p1_31_ban_dang_co_khach_thi_bo_luot) ... ok
+test_ac_p1_32_chon_mon_giu_cho_va_no_dish (test_qa_quan.AC_Khach.test_ac_p1_32_chon_mon_giu_cho_va_no_dish) ... ok
+test_ac_p1_33_het_kien_nhan_thi_roi_tru_uy_tin (test_qa_quan.AC_Khach.test_ac_p1_33_het_kien_nhan_thi_roi_tru_uy_tin) ... ok
+test_ac_p1_34_khach_roi_nha_cho_va_tra_ban (test_qa_quan.AC_Khach.test_ac_p1_34_khach_roi_nha_cho_va_tra_ban) ... ok
+
+======================================================================
+ERROR: test_ac_p2_29_ke_hoach_d1_d5 (test_qa_p2.P2_Contract.test_ac_p2_29_ke_hoach_d1_d5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 86, in test_ac_p2_29_ke_hoach_d1_d5
+    entry = next(e for e in TUNING["day_plan"] if e["day"] == day)
+                            ~~~~~~^^^^^^^^^^^^
+KeyError: 'day_plan'
+
+======================================================================
+ERROR: test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan (test_qa_quan.AC_Bep.test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_quan.py", line 178, in test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan
+    self.assertEqual(ev(self.serve(1801), "served")[0]["data"]["tip"], 12, "AC-P1-39: đúng ngưỡng 0.5")
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_ac_p1_04_truong_chua_ho_tro_invuln_ticks (test_qa_contract.AC_01_06.test_ac_p1_04_truong_chua_ho_tro_invuln_ticks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_contract.py", line 129, in test_ac_p1_04_truong_chua_ho_tro_invuln_ticks
+    self.assertEqual(r["code"], 2, "AC-P1-04: trường chưa hỗ trợ (invuln_ticks) phải thoát mã 2")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : AC-P1-04: trường chưa hỗ trợ (invuln_ticks) phải thoát mã 2
+
+======================================================================
+FAIL: test_ac_p1_20_bat_ca_yield_xoa_dan_va_hoi_chieu (test_qa_gather.AC_Bat.test_ac_p1_20_bat_ca_yield_xoa_dan_va_hoi_chieu) [payload theo PRD mục E]
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_gather.py", line 209, in test_ac_p1_20_bat_ca_yield_xoa_dan_va_hoi_chieu
+    self.assertEqual(fc[0]["data"], {"fish_id": "F1", "kind": "ca_linh", "yield": g["fish_yield"]["ca_linh"]}, "AC-P1-20")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'fish_id': 'F1', 'kind': 'ca_linh', 'count': 3} != {'fish_id': 'F1', 'kind': 'ca_linh', 'yield': 3}
+- {'count': 3, 'fish_id': 'F1', 'kind': 'ca_linh'}
+?  ------------
+
++ {'fish_id': 'F1', 'kind': 'ca_linh', 'yield': 3}
+?                                    ++++++++++++
+ : AC-P1-20
+
+======================================================================
+FAIL: test_ac_p1_21_khong_co_dan_trong_tam_thi_khong_su_kien_khong_hoi_chieu (test_qa_gather.AC_Bat.test_ac_p1_21_khong_co_dan_trong_tam_thi_khong_su_kien_khong_hoi_chieu)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_gather.py", line 249, in test_ac_p1_21_khong_co_dan_trong_tam_thi_khong_su_kien_khong_hoi_chieu
+    self.assertEqual(snap(rows, 1)["player"]["catch_cd_ticks"], 0, "AC-P1-21: không đàn thì không hồi chiêu")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 30 != 0 : AC-P1-21: không đàn thì không hồi chiêu
+
+======================================================================
+FAIL: test_ac_p1_21_thieu_cho_hold_full_giu_dan_va_hoi_chieu (test_qa_gather.AC_Bat.test_ac_p1_21_thieu_cho_hold_full_giu_dan_va_hoi_chieu)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_gather.py", line 235, in test_ac_p1_21_thieu_cho_hold_full_giu_dan_va_hoi_chieu
+    self.assertEqual(ev(rows, "fish_caught"), [], "AC-P1-21: thiếu chỗ thì không lấy một phần, không thử đàn khác")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [{'type': 'event', 'tick': 1, 'phase': 'ga[83 chars] 1}}] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+{'type': 'event', 'tick': 1, 'phase': 'gather', 'name': 'fish_caught', 'data': {'fish_id': 'F1', 'kind': 'ca_linh', 'count': 1}}
+
++ []
+- [{'data': {'count': 1, 'fish_id': 'F1', 'kind': 'ca_linh'},
+-   'name': 'fish_caught',
+-   'phase': 'gather',
+-   'tick': 1,
+-   'type': 'event'}] : AC-P1-21: thiếu chỗ thì không lấy một phần, không thử đàn khác
+
+======================================================================
+FAIL: test_ac_p1_17_hai_o_mep_ban_kinh_va_lifo (test_qa_gather.AC_Hai.test_ac_p1_17_hai_o_mep_ban_kinh_va_lifo) [payload theo PRD mục E]
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_gather.py", line 144, in test_ac_p1_17_hai_o_mep_ban_kinh_va_lifo
+    self.assertEqual(g[0]["data"], {"node_id": "N1", "kind": "bong_dien_dien", "amount": 1}, "AC-P1-17")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'node_id': 'N1', 'kind': 'bong_dien_dien', 'count': 1} != {'node_id': 'N1', 'kind': 'bong_dien_dien', 'amount': 1}
+- {'count': 1, 'kind': 'bong_dien_dien', 'node_id': 'N1'}
+?   ^
+
++ {'amount': 1, 'kind': 'bong_dien_dien', 'node_id': 'N1'}
+?   ^^
+ : AC-P1-17
+
+======================================================================
+FAIL: test_ac_p1_19_gio_day_hold_full_giu_nut (test_qa_gather.AC_Hai.test_ac_p1_19_gio_day_hold_full_giu_nut) [payload theo PRD mục E]
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_gather.py", line 185, in test_ac_p1_19_gio_day_hold_full_giu_nut
+    self.assertEqual(hf[0]["data"], {"action": "gather", "node_id": "N1", "required": 1, "free": 0}, "AC-P1-19")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'capacity': 12} != {'action': 'gather', 'node_id': 'N1', 'required': 1, 'free': 0}
+- {'capacity': 12}
++ {'action': 'gather', 'free': 0, 'node_id': 'N1', 'required': 1} : AC-P1-19
+
+======================================================================
+FAIL: test_ac_p1_13_oxygen_empty_khi_tu_duong_xuong_0 (test_qa_gather.AC_Oxy.test_ac_p1_13_oxygen_empty_khi_tu_duong_xuong_0) [payload theo PRD mục E]
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_gather.py", line 93, in test_ac_p1_13_oxygen_empty_khi_tu_duong_xuong_0
+    self.assertEqual(e[0]["data"], {"oxygen_ticks": 0}, "AC-P1-13")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'pos': [20.0, 10.0]} != {'oxygen_ticks': 0}
+- {'pos': [20.0, 10.0]}
++ {'oxygen_ticks': 0} : AC-P1-13
+
+======================================================================
+FAIL: test_ac_p1_16_ngat_mat_gio_lifo_va_kho_rong (test_qa_gather.AC_Oxy.test_ac_p1_16_ngat_mat_gio_lifo_va_kho_rong) [payload theo PRD mục E]
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_gather.py", line 122, in test_ac_p1_16_ngat_mat_gio_lifo_va_kho_rong
+    self.assertEqual(faint[0]["data"], {"cause": "choke", "lost": ["ca_linh", "bong_sung", "ca_loc"], "hp": 0},
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     "AC-P1-16: faint{cause,lost LIFO,hp:0}")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'pos': [20.0, 10.0]} != {'cause': 'choke', 'lost': ['ca_linh', 'bong_sung', 'ca_loc'], 'hp': 0}
+- {'pos': [20.0, 10.0]}
++ {'cause': 'choke', 'hp': 0, 'lost': ['ca_linh', 'bong_sung', 'ca_loc']} : AC-P1-16: faint{cause,lost LIFO,hp:0}
+
+======================================================================
+FAIL: test_ac_p2_03_days (test_qa_p2.P2_Cli.test_ac_p2_03_days)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 177, in test_ac_p2_03_days
+    self.assertEqual(r["code"], 0, f"AC-P2-03 --days {d}: {r['err']}")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : AC-P2-03 --days 1: usage: chonoi.headless [-h] --mode {gather,quan,day} --seed SEED --ticks TICKS
+                       --out OUT [--scenario SCENARIO] [--inputs INPUTS]
+                       [--inventory INVENTORY] [--inventory-out INVENTORY_OUT]
+                       [--snapshot-every SNAPSHOT_EVERY]
+lỗi: unrecognized arguments: --days 1
+
+
+======================================================================
+FAIL: test_ac_p2_04_nut_moi (test_qa_p2.P2_Cli.test_ac_p2_04_nut_moi)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 187, in test_ac_p2_04_nut_moi
+    self.assertEqual(run("day", inputs=fr, ticks=2)["code"], 0, f"AC-P2-04 {name}")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : AC-P2-04 pause
+
+======================================================================
+FAIL: test_ac_p2_05_scenario_v11 (test_qa_p2.P2_Cli.test_ac_p2_05_scenario_v11)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 195, in test_ac_p2_05_scenario_v11
+    self.assertEqual(run("day", raw_scenario=ex, ticks=2)["code"], 0, "AC-P2-05: ví dụ của ticket")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : AC-P2-05: ví dụ của ticket
+
+======================================================================
+FAIL: test_ac_p2_01_khoa_v11 (test_qa_p2.P2_Contract.test_ac_p2_01_khoa_v11)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 56, in test_ac_p2_01_khoa_v11
+    self.assertEqual(CONTRACT["contract_version"], "1.1")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '1.0' != '1.1'
+- 1.0
+?   ^
++ 1.1
+?   ^
+
+
+======================================================================
+FAIL: test_ac_p2_06_07_snapshot_gather_tick_0 (test_qa_p2.P2_Contract.test_ac_p2_06_07_snapshot_gather_tick_0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 154, in test_ac_p2_06_07_snapshot_gather_tick_0
+    self.assertEqual([n["id"] for n in s["nodes"]], ["N1", "N2", "N3", "N4", "N5", "N6"], "AC-P2-06")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['N1', 'N2', 'N3', 'N4'] != ['N1', 'N2', 'N3', 'N4', 'N5', 'N6']
+
+Second list contains 2 additional elements.
+First extra element 4:
+'N5'
+
+- ['N1', 'N2', 'N3', 'N4']
++ ['N1', 'N2', 'N3', 'N4', 'N5', 'N6']
+?                        ++++++++++++
+ : AC-P2-06
+
+======================================================================
+FAIL: test_ac_p2_15_22_quai_va_snapshot (test_qa_p2.P2_Contract.test_ac_p2_15_22_quai_va_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 165, in test_ac_p2_15_22_quai_va_snapshot
+    self.assertIn("monsters", s, "AC-P2-22")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'monsters' not found in {'type': 'snapshot', 'tick': 0, 'sim_tick': 0, 'mode': 'gather', 'phase': 'gather', 'phase_tick': 0, 'state': 'playing', 'time_left_ticks': 10800, 'money': 0, 'earned': 0, 'reputation': 3.0, 'score': 300, 'player': {'pos': [2.0, 0.0], 'vel': [0.0, 0.0], 'heading_deg': 0.0, 'oxygen_ticks': 1800, 'oxygen_max_ticks': 1800, 'hp': 3, 'hp_max': 3, 'zero_oxy_ticks': 0, 'invuln_ticks': 0, 'catch_cd_ticks': 0, 'at_surface': True}, 'hold': [], 'hold_count': 0, 'hold_capacity': 12, 'nodes': [{'id': 'N1', 'pos': [12.0, 0.0], 'kind': 'bong_dien_dien', 'ready': True, 'regrow_ticks': 0}, {'id': 'N2', 'pos': [28.0, 0.0], 'kind': 'bong_dien_dien', 'ready': True, 'regrow_ticks': 0}, {'id': 'N3', 'pos': [44.0, 0.0], 'kind': 'bong_sung', 'ready': True, 'regrow_ticks': 0}, {'id': 'N4', 'pos': [60.0, 0.0], 'kind': 'bong_sung', 'ready': True, 'regrow_ticks': 0}], 'fish': [{'id': 'F1', 'pos': [15.0, 5.0], 'kind': 'ca_linh', 'heading_deg': 0}, {'id': 'F2', 'pos': [30.0, 10.0], 'kind': 'ca_loc', 'heading_deg': 0}, {'id': 'F3', 'pos': [45.0, 10.0], 'kind': 'ca_linh', 'heading_deg': 0}, {'id': 'F4', 'pos': [60.0, 16.0], 'kind': 'ca_loc', 'heading_deg': 0}, {'id': 'F5', 'pos': [75.0, 5.0], 'kind': 'ca_linh', 'heading_deg': 0}, {'id': 'F6', 'pos': [90.0, 16.0], 'kind': 'ca_loc', 'heading_deg': 0}]} : AC-P2-22
+
+======================================================================
+FAIL: test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi (test_qa_p2.P2_Contract.test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 115, in test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi
+    self.assertEqual([(e["data"]["stove_id"], e["data"]["order_id"]) for e in cooks], [("B1", "C2")])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != [('B1', 'C2')]
+
+Second list contains 1 additional elements.
+First extra element 0:
+('B1', 'C2')
+
+- []
++ [('B1', 'C2')]
+
+======================================================================
+FAIL: test_ac_p2_27_nau_mon_moi_o_bep_b2 (test_qa_p2.P2_Contract.test_ac_p2_27_nau_mon_moi_o_bep_b2) (dish_id='canh_chua_ca_loc')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 146, in test_ac_p2_27_nau_mon_moi_o_bep_b2
+    self.assertEqual([(e["name"], e["tick"]) for e in events],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     [("cook_started", 1), ("dish_ready", 1 + 60 * seconds)])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != [('cook_started', 1), ('dish_ready', 481)]
+
+Second list contains 2 additional elements.
+First extra element 0:
+('cook_started', 1)
+
+- []
++ [('cook_started', 1), ('dish_ready', 481)]
+
+======================================================================
+FAIL: test_ac_p2_27_nau_mon_moi_o_bep_b2 (test_qa_p2.P2_Contract.test_ac_p2_27_nau_mon_moi_o_bep_b2) (dish_id='ca_keo_nuong')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 146, in test_ac_p2_27_nau_mon_moi_o_bep_b2
+    self.assertEqual([(e["name"], e["tick"]) for e in events],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     [("cook_started", 1), ("dish_ready", 1 + 60 * seconds)])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != [('cook_started', 1), ('dish_ready', 361)]
+
+Second list contains 2 additional elements.
+First extra element 0:
+('cook_started', 1)
+
+- []
++ [('cook_started', 1), ('dish_ready', 361)]
+
+======================================================================
+FAIL: test_ac_p2_27_nau_mon_moi_o_bep_b2 (test_qa_p2.P2_Contract.test_ac_p2_27_nau_mon_moi_o_bep_b2) (dish_id='lau_mam')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 146, in test_ac_p2_27_nau_mon_moi_o_bep_b2
+    self.assertEqual([(e["name"], e["tick"]) for e in events],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     [("cook_started", 1), ("dish_ready", 1 + 60 * seconds)])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != [('cook_started', 1), ('dish_ready', 721)]
+
+Second list contains 2 additional elements.
+First extra element 0:
+('cook_started', 1)
+
+- []
++ [('cook_started', 1), ('dish_ready', 721)]
+
+======================================================================
+FAIL: test_ac_p2_29_38_cong_bo_ke_hoach_ngay_1 (test_qa_p2.P2_Day.test_ac_p2_29_38_cong_bo_ke_hoach_ngay_1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 216, in test_ac_p2_29_38_cong_bo_ke_hoach_ngay_1
+    self.assertEqual(r["code"], 0, r["err"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : đầu vào sai: --mode day chưa hỗ trợ ở contract v1.0 (có từ v1.1)
+
+
+======================================================================
+FAIL: test_ac_p2_39_pause (test_qa_p2.P2_Day.test_ac_p2_39_pause)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 230, in test_ac_p2_39_pause
+    self.assertEqual(r["code"], 0, r["err"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : đầu vào sai: frame 1 có trường lạ/chưa hỗ trợ: ['pause']
+
+
+======================================================================
+FAIL: test_ac_p2_40_41_byte_giong_nhau_va_hieu_nang (test_qa_p2.P2_Day.test_ac_p2_40_41_byte_giong_nhau_va_hieu_nang)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p2.py", line 250, in test_ac_p2_40_41_byte_giong_nhau_va_hieu_nang
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : usage: chonoi.headless [-h] --mode {gather,quan,day} --seed SEED --ticks TICKS
+                       --out OUT [--scenario SCENARIO] [--inputs INPUTS]
+                       [--inventory INVENTORY] [--inventory-out INVENTORY_OUT]
+                       [--snapshot-every SNAPSHOT_EVERY]
+lỗi: unrecognized arguments: --days 1
+
+
+======================================================================
+FAIL: test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot (test_qa_quan.AC_Bep.test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_quan.py", line 119, in test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot
+    self.assertEqual(len(ev(rows, "served")), 1, "AC-P1-35: bàn gần hơn thì phục vụ")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : AC-P1-35: bàn gần hơn thì phục vụ
+
+======================================================================
+FAIL: test_ac_p1_36_bep_idle_bat_dau_nau (test_qa_quan.AC_Bep.test_ac_p1_36_bep_idle_bat_dau_nau)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_quan.py", line 126, in test_ac_p1_36_bep_idle_bat_dau_nau
+    self.assertEqual(len(cs), 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_ac_p1_37_nau_xong_thanh_ready (test_qa_quan.AC_Bep.test_ac_p1_37_nau_xong_thanh_ready)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_quan.py", line 142, in test_ac_p1_37_nau_xong_thanh_ready
+    self.assertEqual([(e["tick"], e["data"]) for e in dr],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     [(361, {"stove_id": "B1", "order_id": "C1", "dish_id": "ca_loc_nuong_trui"})], "AC-P1-37")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != [(361, {'stove_id': 'B1', 'order_id': 'C1', 'dish_id': 'ca_loc_nuong_trui'})]
+
+Second list contains 1 additional elements.
+First extra element 0:
+(361, {'stove_id': 'B1', 'order_id': 'C1', 'dish_id': 'ca_loc_nuong_trui'})
+
+- []
++ [(361, {'dish_id': 'ca_loc_nuong_trui', 'order_id': 'C1', 'stove_id': 'B1'})] : AC-P1-37
+
+======================================================================
+FAIL: test_ac_p1_38_lay_mon_tu_bep (test_qa_quan.AC_Bep.test_ac_p1_38_lay_mon_tu_bep)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_quan.py", line 153, in test_ac_p1_38_lay_mon_tu_bep
+    self.assertEqual([(e["tick"], e["data"]) for e in dp], [(1, {"stove_id": "B1", "order_id": "C1", "dish_id": "ca_loc_nuong_trui"})], "AC-P1-38")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != [(1, {'stove_id': 'B1', 'order_id': 'C1', 'dish_id': 'ca_loc_nuong_trui'})]
+
+Second list contains 1 additional elements.
+First extra element 0:
+(1, {'stove_id': 'B1', 'order_id': 'C1', 'dish_id': 'ca_loc_nuong_trui'})
+
+- []
++ [(1, {'dish_id': 'ca_loc_nuong_trui', 'order_id': 'C1', 'stove_id': 'B1'})] : AC-P1-38
+
+======================================================================
+FAIL: test_ac_p1_39_phuc_vu_va_boa (test_qa_quan.AC_Bep.test_ac_p1_39_phuc_vu_va_boa)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_quan.py", line 166, in test_ac_p1_39_phuc_vu_va_boa
+    self.assertEqual(len(sv), 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_ac_p1_40_an_xong_tra_tien (test_qa_quan.AC_Bep.test_ac_p1_40_an_xong_tra_tien)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_quan.py", line 187, in test_ac_p1_40_an_xong_tra_tien
+    self.assertEqual(len(paid), 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_ac_p1_42_het_ca (test_qa_quan.AC_Bep.test_ac_p1_42_het_ca)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\admin\Desktop\lab\lab 12\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_quan.py", line 218, in test_ac_p1_42_het_ca
+    self.assertEqual(ev_at(rows, 5), ["paid", "quan_end"], "AC-P1-42: khách đang ăn trả ngay rồi mới quan_end")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['quan_end'] != ['paid', 'quan_end']
+
+First differing element 0:
+'quan_end'
+'paid'
+
+Second list contains 1 additional elements.
+First extra element 1:
+'quan_end'
+
+- ['quan_end']
++ ['paid', 'quan_end']
+?  ++++++++
+ : AC-P1-42: khách đang ăn trả ngay rồi mới quan_end
+
+----------------------------------------------------------------------
+Ran 72 tests in 25.872s
+
+FAILED (failures=28, errors=2)

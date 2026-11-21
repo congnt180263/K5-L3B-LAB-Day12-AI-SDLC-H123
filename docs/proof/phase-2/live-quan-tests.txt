@@ -1,0 +1,63 @@
+test_dock_open_quan_and_serve_the_catch (test_live.LiveServerTest.test_dock_open_quan_and_serve_the_catch) ... ok
+test_state_input_and_clean_stop (test_live.LiveServerTest.test_state_input_and_clean_stop) ... ok
+test_fixture_defaults_and_random_disabled (test_quan_customers.QuanCustomersTest.test_fixture_defaults_and_random_disabled) ... ok
+test_no_dish_on_each_scheduled_attempt_and_none_at_closing (test_quan_customers.QuanCustomersTest.test_no_dish_on_each_scheduled_attempt_and_none_at_closing) ... ok
+test_patience_discards_assigned_dish_without_refund (test_quan_customers.QuanCustomersTest.test_patience_discards_assigned_dish_without_refund) ... ok
+test_reject_conflicting_fixtures_before_output (test_quan_customers.QuanCustomersTest.test_reject_conflicting_fixtures_before_output) ... ok
+test_release_reservation_before_arrival_in_same_tick (test_quan_customers.QuanCustomersTest.test_release_reservation_before_arrival_in_same_tick) ... ok
+test_reserved_stock_blocks_another_table_from_ordering_same_ingredient (test_quan_customers.QuanCustomersTest.test_reserved_stock_blocks_another_table_from_ordering_same_ingredient) ... ok
+test_schedule_menu_selection_and_determinism (test_quan_customers.QuanCustomersTest.test_schedule_menu_selection_and_determinism) ... ok
+test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot (test_qa_quan.AC_Bep.test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot) ... ok
+test_ac_p1_36_bep_idle_bat_dau_nau (test_qa_quan.AC_Bep.test_ac_p1_36_bep_idle_bat_dau_nau) ... ok
+test_ac_p1_37_nau_xong_thanh_ready (test_qa_quan.AC_Bep.test_ac_p1_37_nau_xong_thanh_ready) ... ok
+test_ac_p1_38_lay_mon_tu_bep (test_qa_quan.AC_Bep.test_ac_p1_38_lay_mon_tu_bep) ... ok
+test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan (test_qa_quan.AC_Bep.test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan) ... ok
+test_ac_p1_39_phuc_vu_va_boa (test_qa_quan.AC_Bep.test_ac_p1_39_phuc_vu_va_boa) ... ok
+test_ac_p1_40_an_xong_tra_tien (test_qa_quan.AC_Bep.test_ac_p1_40_an_xong_tra_tien) ... ok
+test_ac_p1_41_khach_roi_bo_mon_khong_hoan_nguyen_lieu (test_qa_quan.AC_Bep.test_ac_p1_41_khach_roi_bo_mon_khong_hoan_nguyen_lieu) ... ok
+test_ac_p1_42_het_ca (test_qa_quan.AC_Bep.test_ac_p1_42_het_ca) ... ok
+test_ac_p1_43_mau_thuan_o_scenario_thoat_2 (test_qa_quan.AC_Bep.test_ac_p1_43_mau_thuan_o_scenario_thoat_2) ... ok
+test_ac_p1_29_snapshot_tick_0 (test_qa_quan.AC_Khach.test_ac_p1_29_snapshot_tick_0) ... ok
+test_ac_p1_30_lich_khach_theo_phase_tick (test_qa_quan.AC_Khach.test_ac_p1_30_lich_khach_theo_phase_tick) ... ok
+test_ac_p1_30_tat_khach_tu_sinh_va_ca_rut_ngan (test_qa_quan.AC_Khach.test_ac_p1_30_tat_khach_tu_sinh_va_ca_rut_ngan) ... ok
+test_ac_p1_31_ban_dang_co_khach_thi_bo_luot (test_qa_quan.AC_Khach.test_ac_p1_31_ban_dang_co_khach_thi_bo_luot) ... ok
+test_ac_p1_32_chon_mon_giu_cho_va_no_dish (test_qa_quan.AC_Khach.test_ac_p1_32_chon_mon_giu_cho_va_no_dish) ... ok
+test_ac_p1_33_het_kien_nhan_thi_roi_tru_uy_tin (test_qa_quan.AC_Khach.test_ac_p1_33_het_kien_nhan_thi_roi_tru_uy_tin) ... ok
+test_ac_p1_34_khach_roi_nha_cho_va_tra_ban (test_qa_quan.AC_Khach.test_ac_p1_34_khach_roi_nha_cho_va_tra_ban) ... ok
+test_con_01_ticks_zero_and_end_line (test_smoke_p1.Contract.test_con_01_ticks_zero_and_end_line) ... ok
+test_con_02_deterministic_bytes (test_smoke_p1.Contract.test_con_02_deterministic_bytes) ... ok
+test_con_03_bad_input_exit_2 (test_smoke_p1.Contract.test_con_03_bad_input_exit_2) ... ok
+test_con_03_old_and_future_modes_rejected (test_smoke_p1.Contract.test_con_03_old_and_future_modes_rejected) ... ok
+test_gather_snapshot_has_gather_fields (test_smoke_p1.Contract.test_gather_snapshot_has_gather_fields) ... ok
+test_scenario_out_of_domain_exit_2 (test_smoke_p1.Contract.test_scenario_out_of_domain_exit_2) ... ok
+test_inv_01_gather_writes_inventory_quan_reads_it (test_smoke_p1.Integration.test_inv_01_gather_writes_inventory_quan_reads_it)
+Ví dụ smoke test trong PRD-0 mục G: cập bến ở tick 0, quán đọc kho đúng nội dung. ... ok
+test_inv_01_not_written_when_tick_limit_first (test_smoke_p1.Integration.test_inv_01_not_written_when_tick_limit_first) ... ok
+test_inv_bad_schema_exit_2 (test_smoke_p1.Integration.test_inv_bad_schema_exit_2) ... ok
+test_inventory_and_scenario_stock_conflict (test_smoke_p1.Integration.test_inventory_and_scenario_stock_conflict) ... ok
+test_inventory_flags_mode_mismatch_exit_2 (test_smoke_p1.Integration.test_inventory_flags_mode_mismatch_exit_2) ... ok
+test_move_01_swim_speed_after_ramp (test_smoke_p1.Movement.test_move_01_swim_speed_after_ramp)
+Bỏ 6 tick tăng tốc rồi đo 60 tick: quãng ≈ swim_speed × 1 s (±0.1). Ngang, xuống, chéo (không nhanh hơn). ... ok
+test_move_02_heading_positive_is_down (test_smoke_p1.Movement.test_move_02_heading_positive_is_down) ... ok
+test_move_03_edge_clamp (test_smoke_p1.Movement.test_move_03_edge_clamp)
+Chặn từng mép của vùng nước, kể cả d không âm (không bay lên khỏi mặt nước) và đáy d = 30. ... ok
+test_move_mep_vel_ve_0 (test_smoke_p1.Movement.test_move_mep_vel_ve_0) ... ok
+test_move_ramp_doi_huong_trong_tran (test_smoke_p1.Movement.test_move_ramp_doi_huong_trong_tran)
+Đảo từ +speed sang -speed: vận tốc chạm mục tiêu sau tối đa ramp_max_ticks tick kể từ lúc đổi input. ... ok
+test_time_ends_gather_and_keeps_hold (test_smoke_p1.Movement.test_time_ends_gather_and_keeps_hold) ... ok
+test_khoi_sai_mode_exit_2 (test_smoke_p1.ScenarioModes.test_khoi_sai_mode_exit_2) ... ok
+test_quan_fixture_khong_hop_le_exit_2 (test_smoke_p1.ScenarioModes.test_quan_fixture_khong_hop_le_exit_2) ... ok
+test_quan_player_vel_hop_le (test_smoke_p1.ScenarioModes.test_quan_player_vel_hop_le) ... ok
+test_ac_p2_31_chon_mon_trong_ke_hoach_va_khong_gioi_han_suat (test_qa_p2.P2_QuanPlan.test_ac_p2_31_chon_mon_trong_ke_hoach_va_khong_gioi_han_suat) ... ok
+test_ac_p2_31_fixture_ngoai_ke_hoach (test_qa_p2.P2_QuanPlan.test_ac_p2_31_fixture_ngoai_ke_hoach) ... ok
+test_ac_p2_02_sau_mon (test_qa_p2.P2_Contract.test_ac_p2_02_sau_mon) ... ok
+test_ac_p2_23_quan_2_bep_4_ban (test_qa_p2.P2_Contract.test_ac_p2_23_quan_2_bep_4_ban) ... ok
+test_ac_p2_24_khach_den_theo_lich_va_lay_ban_trong_nho_nhat (test_qa_p2.P2_Contract.test_ac_p2_24_khach_den_theo_lich_va_lay_ban_trong_nho_nhat) ... ok
+test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi (test_qa_p2.P2_Contract.test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi) ... ok
+test_ac_p2_27_kho_va_giu_cho_mon_moi (test_qa_p2.P2_Contract.test_ac_p2_27_kho_va_giu_cho_mon_moi) ... ok
+test_ac_p2_27_nau_mon_moi_o_bep_b2 (test_qa_p2.P2_Contract.test_ac_p2_27_nau_mon_moi_o_bep_b2) ... ok
+
+----------------------------------------------------------------------
+Ran 54 tests in 19.877s
+
+OK

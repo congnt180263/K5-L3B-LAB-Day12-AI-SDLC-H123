@@ -13,6 +13,11 @@ from .errors import BadInput
 KINDS_P1 = ("ca_loc", "ca_linh", "bong_dien_dien", "bong_sung")
 
 
+def menu_ingredients(menu):
+    """Các loại nguyên liệu quán hỗ trợ theo cấu hình menu đang chạy."""
+    return frozenset(kind for dish in menu.values() for kind in dish["recipe"])
+
+
 def validate_items(items, kinds=KINDS_P1):
     if not isinstance(items, dict):
         raise BadInput("items phải là object")

@@ -43,8 +43,9 @@ class QuanCustomersTest(unittest.TestCase):
             self.run_quan(w, {"stock": stock}, self.first + self.interval, name="repeat")
             self.assertEqual(Path(w.path("first.jsonl")).read_bytes(), Path(w.path("repeat.jsonl")).read_bytes())
         arrivals = events(rows, "customer_arrived")
-        self.assertEqual(len(arrivals), 1, "bàn đang có khách thì bỏ lượt kế tiếp")
         at_tick = {s["tick"]: s for s in snapshots(rows)}
+        expected_count = min(2, len(self.quan["tables"]))
+        self.assertEqual(len(arrivals), expected_count)
         self.assertEqual(at_tick[self.first - 1]["customers"], [])
         self.assertEqual(arrivals[0]["tick"], self.first)
         order = at_tick[self.first]["customers"][0]
@@ -138,8 +139,7 @@ class QuanCustomersTest(unittest.TestCase):
                 self.assertFalse(os.path.exists(out))
 
     def test_reserved_stock_blocks_another_table_from_ordering_same_ingredient(self):
-        # Test ở mức sim vì contract Phase 1 chỉ có một bàn.
-        self.quan["tables"] += [{"id": "T2", "pos": [11, 2]}]
+        self.quan["tables"] = [{"id": "T1", "pos": [9, 2]}, {"id": "T2", "pos": [11, 2]}]
         self.quan["first_customer_tick"] = 1
         fixture = customer()
         scenario = {"stock": {"ca_loc": 1}, "customers": [fixture]}

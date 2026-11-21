@@ -12,6 +12,11 @@ import unittest
 
 from helpers import Workdir, frames, read_jsonl, run_headless, write_json
 from qa_util import ev, ev_at, run, snap
+from chonoi.errors import BadInput
+from chonoi.ids import IdAllocator
+from chonoi.inputs import LiveInputs
+from chonoi.rng import Streams
+from chonoi.sim.quan import QuanSim
 
 with open("game.contract.json", encoding="utf-8") as _f:
     CONTRACT = json.load(_f)
@@ -87,6 +92,62 @@ class P2_Contract(unittest.TestCase):
         self.assertEqual({x["id"]: x["pos"] for x in s["stoves"]}, {"B1": [2, 8], "B2": [5, 8]}, "AC-P2-23")
         self.assertEqual({x["id"]: x["pos"] for x in s["tables"]},
                          {"T1": [9, 2], "T2": [13, 2], "T3": [9, 6], "T4": [13, 6]}, "AC-P2-23")
+
+    def test_ac_p2_24_khach_den_theo_lich_va_lay_ban_trong_nho_nhat(self):
+        result = run("quan", {"stock": {"ca_loc": 5}}, ticks=3720, every=120)
+        self.assertEqual(result["code"], 0, result["err"])
+        arrivals = ev(result["rows"], "customer_arrived")
+        self.assertEqual([(e["tick"], e["data"]["table_id"]) for e in arrivals],
+                         [(120, "T1"), (1020, "T2"), (1920, "T3"), (2820, "T4"), (3720, "T1")])
+        self.assertEqual(ev_at(result["rows"], 3720), ["customer_left", "customer_arrived"])
+
+    def test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi(self):
+        scenario = {
+            "player": {"pos": [3.5, 8]}, "stock": {"ca_loc": 2}, "random_customers": False,
+            "customers": [
+                {"id": "C1", "table_id": "T1", "dish_id": "ca_loc_nuong_trui", "order_tick": 1},
+                {"id": "C2", "table_id": "T2", "dish_id": "ca_loc_nuong_trui", "order_tick": 0},
+            ],
+        }
+        result = run("quan", scenario, [{"tick": 0, "interact": True}], ticks=1)
+        self.assertEqual(result["code"], 0, result["err"])
+        cooks = ev(result["rows"], "cook_started")
+        self.assertEqual([(e["data"]["stove_id"], e["data"]["order_id"]) for e in cooks], [("B1", "C2")])
+        self.assertEqual(snap(result["rows"], 1)["stock"], {"ca_loc": 1})
+
+    def test_ac_p2_27_kho_va_giu_cho_mon_moi(self):
+        for dish_id in ("canh_chua_ca_loc", "ca_keo_nuong", "lau_mam"):
+            with self.subTest(dish_id=dish_id), Workdir() as w:
+                recipe = MENU[dish_id][0]
+                inventory = write_json(w.path("inv.json"), {"items": recipe})
+                scenario = write_json(w.path("fixture.json"), {"quan": {
+                    "customers": [{"id": "C1", "table_id": "T1", "dish_id": dish_id, "reserved": recipe}],
+                    "random_customers": False,
+                }})
+                out = w.path("quan.jsonl")
+                code, err = run_headless("--mode", "quan", "--seed", "1", "--ticks", "0",
+                                         "--inventory", inventory, "--scenario", scenario, "--out", out)
+                self.assertEqual(code, 0, err)
+                start = read_jsonl(out)[0]
+                self.assertEqual(start["stock"], recipe)
+                self.assertEqual(start["customers"][0]["reserved"], recipe)
+
+    def test_ac_p2_27_nau_mon_moi_o_bep_b2(self):
+        for dish_id in ("canh_chua_ca_loc", "ca_keo_nuong", "lau_mam"):
+            with self.subTest(dish_id=dish_id):
+                recipe, seconds, price = MENU[dish_id]
+                scenario = {
+                    "player": {"pos": [5, 8]}, "stock": recipe, "random_customers": False,
+                    "customers": [{"id": "C1", "table_id": "T1", "dish_id": dish_id}],
+                }
+                result = run("quan", scenario, [{"tick": 0, "interact": True}], ticks=1 + 60 * seconds, every=60)
+                self.assertEqual(result["code"], 0, result["err"])
+                events = ev(result["rows"])
+                self.assertEqual([(e["name"], e["tick"]) for e in events],
+                                 [("cook_started", 1), ("dish_ready", 1 + 60 * seconds)])
+                self.assertEqual(events[0]["data"]["base_price"], price)
+                self.assertEqual(events[0]["data"]["stove_id"], "B2")
+                self.assertEqual(result["rows"][-2]["stock"], {})
 
     def test_ac_p2_06_07_snapshot_gather_tick_0(self):
         s = run("gather", ticks=0)["rows"][0]
@@ -191,6 +252,33 @@ class P2_Day(unittest.TestCase):
                     outs.append(f.read())
         self.assertEqual(outs[0], outs[1], "AC-P2-40: byte giống nhau")
         self.assertLessEqual(min(times), 20, f"AC-P2-41: một Ngày ≤ 20 s (đo {times})")
+
+
+class P2_QuanPlan(unittest.TestCase):
+    def test_ac_p2_31_chon_mon_trong_ke_hoach_va_khong_gioi_han_suat(self):
+        dish = "ca_loc_nuong_trui"
+        plan = {"day": 1, "dishes": {dish: 1}, "ingredients": {"ca_loc": 1}}
+        tuning = {**TUNING, "quan": {**TUNING["quan"], "first_customer_tick": 1,
+                                    "customer_interval_s": 1, "patience_s": 1}}
+
+        def run_orders(stock, day_plan):
+            sim = QuanSim(tuning, {}, Streams(1), IdAllocator(), inventory=stock, day_plan=day_plan)
+            inp = LiveInputs()
+            return [event for _ in range(61) for event in sim.step(inp.advance())]
+
+        events = run_orders({"bong_sung": 2, "ca_loc": 2}, plan)
+        self.assertEqual([data["dish_id"] for name, data in events if name == "customer_arrived"], [dish, dish])
+        self.assertEqual(run_orders({"bong_sung": 2}, plan), [("no_dish", {}), ("no_dish", {})])
+        self.assertEqual([data["dish_id"] for name, data in run_orders({"bong_sung": 2}, None)
+                          if name == "customer_arrived"], ["goi_bong_sung", "goi_bong_sung"])
+
+    def test_ac_p2_31_fixture_ngoai_ke_hoach(self):
+        plan = {"day": 1, "dishes": {"ca_loc_nuong_trui": 1}, "ingredients": {"ca_loc": 1}}
+        scenario = {"customers": [
+            {"id": "C1", "table_id": "T1", "dish_id": "goi_bong_sung"}
+        ]}
+        with self.assertRaisesRegex(BadInput, "ngoài kế hoạch ngày"):
+            QuanSim(TUNING, scenario, Streams(1), IdAllocator(), inventory={"bong_sung": 2}, day_plan=plan)
 
 
 if __name__ == "__main__":
