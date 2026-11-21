@@ -1,7 +1,6 @@
-# Nguyễn Tấn Dũng · dungtran16042003-afk
+# dungtran16042003-afk — phản tư cá nhân (≤ 200 từ)
 
-Hồ sơ đã được nhóm duyệt.
-
-- Phần công việc có bằng chứng Git gồm test hộp đen Phase 1, Phase 2 và bộ QA cho kho cá thể và phát hành. Commit `8b03386`, `edf0b4d`, `f6a7a98` và `adce42a`.
-- Phần hỗ trợ tích hợp là ma trận truy vết và skill chạy lại kết quả theo AC. Commit `4b384bf` và `f240fff`.
-- Phản tư từ ca QA: benchmark do AI bổ sung từng chờ Page API đến hết giờ. Chạy trình duyệt thật và kiểm báo cáo JSON cho thấy cần bật Page domain trước khi đợi tải trang. Khi hợp đồng kho đổi, chạy fixture kho đếm và kho cá thể ở hai cấu hình giúp truy nguyên lỗi. [Nhật ký AI](../ai-usage-log.md) · [Log kiểm thử](../proof/phase-4/verify.txt)
+- **Tôi đã làm (kèm link commit):** vai QA/Scrum. Bảng truy vết và bộ test hộp đen cho gather ([cd65e84](https://github.com/congnt180263/K5-L3B-LAB-Day12-AI-SDLC-H123/commit/cd65e84)), contract và quán ([8b03386](https://github.com/congnt180263/K5-L3B-LAB-Day12-AI-SDLC-H123/commit/8b03386)), ma trận 48 AC Phase 1 ([4b384bf](https://github.com/congnt180263/K5-L3B-LAB-Day12-AI-SDLC-H123/commit/4b384bf)), test và kế hoạch Phase 2 ([edf0b4d](https://github.com/congnt180263/K5-L3B-LAB-Day12-AI-SDLC-H123/commit/edf0b4d)), skill `qa-run-matrix` ([f240fff](https://github.com/congnt180263/K5-L3B-LAB-Day12-AI-SDLC-H123/commit/f240fff)); kế hoạch, bảng AC và test Phase 3–4 cùng lớp tương thích hồi quy kho cá thể trên nhánh `qa/phase-3`.
+- **Tôi đã giúp / review:** gỡ handle dán nhầm trong ô của Cường ([6c3a0f6](https://github.com/congnt180263/K5-L3B-LAB-Day12-AI-SDLC-H123/commit/6c3a0f6)); báo Công payload gather lệch PRD-0; xem diff khi Quyến sửa test QA.
+- **AI sai ở đâu và tôi phát hiện thế nào:** AI báo handle của Quyến và Cường "bị lệch" do nhầm tên git với tài khoản GitHub; tôi tra GitHub API và đính chính. AI cũng viết sai kỳ vọng hồi chiêu khi bắt cá thiếu chỗ; đối chiếu TICKET-02 ("hồi chiêu tính từ lần bắt thành công") thì test phải đổi.
+- **Điều tôi học được:** kiểm chứng bằng dữ liệu thật trước khi báo; kỳ vọng test lấy từ đề; test đổi vì luật mới thì ghi lý do.
