@@ -1,0 +1,351 @@
+# Hồi quy toàn bộ test trên nhánh qa/phase-3 @ 9cab406 (gộp main eb95014, contract 1.3) - 2026-11-21 23:27
+# Lệnh: PYTHONPATH=tests:. python -X utf8 -m unittest discover -s tests -v
+# Test QA (test_qa_*, test_smoke_p1) xanh trừ AC-P4-25 (thiếu tag phase-2/3). Đỏ còn lại: test riêng của TV1 (test_gather_rules, test_gather_p2) và TV2 (test_quan_customers) còn fixture kho đếm.
+
+test_catch_uses_pre_swim_position (test_gather_p2.GatherV11AndDayTest.test_catch_uses_pre_swim_position) ... ok
+test_day_shop_upgrades_and_next_day (test_gather_p2.GatherV11AndDayTest.test_day_shop_upgrades_and_next_day) ... ok
+test_fish_swim_reflect_and_spawn (test_gather_p2.GatherV11AndDayTest.test_fish_swim_reflect_and_spawn) ... ok
+test_monster_chase_hit_recoil_and_faint (test_gather_p2.GatherV11AndDayTest.test_monster_chase_hit_recoil_and_faint) ... ERROR
+test_random_fish_false_disables_swim_and_spawn (test_gather_p2.GatherV11AndDayTest.test_random_fish_false_disables_swim_and_spawn) ... ok
+test_catch_fish_cooldown_and_surface_guard (test_gather_rules.GatherRulesTest.test_catch_fish_cooldown_and_surface_guard) ... FAIL
+test_dive_surface_and_oxygen_refill (test_gather_rules.GatherRulesTest.test_dive_surface_and_oxygen_refill) ... ok
+test_gather_node_tiebreak_regrow_and_hold_full (test_gather_rules.GatherRulesTest.test_gather_node_tiebreak_regrow_and_hold_full) ... FAIL
+test_oxygen_empty_choke_and_faint_clears_hold (test_gather_rules.GatherRulesTest.test_oxygen_empty_choke_and_faint_clears_hold) ... ERROR
+test_dock_open_quan_and_serve_the_catch (test_live.LiveServerTest.test_dock_open_quan_and_serve_the_catch) ... ok
+test_state_input_and_clean_stop (test_live.LiveServerTest.test_state_input_and_clean_stop) ... ok
+test_bad_frames_raise (test_python_starter_units.Units.test_bad_frames_raise) ... ok
+test_catch_is_a_v10_button_and_attack_is_not (test_python_starter_units.Units.test_catch_is_a_v10_button_and_attack_is_not) ... ok
+test_id_allocator_continues_after_max (test_python_starter_units.Units.test_id_allocator_continues_after_max) ... ok
+test_id_sorting (test_python_starter_units.Units.test_id_sorting) ... ok
+test_input_edges_and_inherit (test_python_starter_units.Units.test_input_edges_and_inherit) ... ok
+test_live_inputs_keep_fast_tap_edge (test_python_starter_units.Units.test_live_inputs_keep_fast_tap_edge) ... ok
+test_session_steps_gather_and_dock (test_python_starter_units.Units.test_session_steps_gather_and_dock) ... ok
+test_ac_p1_01_ticks_0_chi_dung_fixture (test_qa_contract.AC_01_06.test_ac_p1_01_ticks_0_chi_dung_fixture) ... ok
+test_ac_p1_02_cung_dau_vao_cung_byte (test_qa_contract.AC_01_06.test_ac_p1_02_cung_dau_vao_cung_byte) ... ok
+test_ac_p1_03_duong_dan_vao_ra_phai_khac_nhau (test_qa_contract.AC_01_06.test_ac_p1_03_duong_dan_vao_ra_phai_khac_nhau) ... ok
+test_ac_p1_03_tham_so_va_inputs_sai_thoat_2_truoc_khi_ghi (test_qa_contract.AC_01_06.test_ac_p1_03_tham_so_va_inputs_sai_thoat_2_truoc_khi_ghi) ... ok
+test_ac_p1_04_scenario_sai_thoat_2 (test_qa_contract.AC_01_06.test_ac_p1_04_scenario_sai_thoat_2) ... ok
+test_ac_p1_04_truong_chua_ho_tro_invuln_ticks (test_qa_contract.AC_01_06.test_ac_p1_04_truong_chua_ho_tro_invuln_ticks) ... ok
+test_ac_p1_05_frame_chi_cap_nhat_truong_co_mat (test_qa_contract.AC_01_06.test_ac_p1_05_frame_chi_cap_nhat_truong_co_mat) ... ok
+test_ac_p1_05_nut_chi_tac_dong_o_canh_len (test_qa_contract.AC_01_06.test_ac_p1_05_nut_chi_tac_dong_o_canh_len) ... ok
+test_ac_p1_06_end_va_thu_tu_su_kien_truoc_snapshot (test_qa_contract.AC_01_06.test_ac_p1_06_end_va_thu_tu_su_kien_truoc_snapshot) ... ok
+test_ac_p1_06_snapshot_va_end (test_qa_contract.AC_01_06.test_ac_p1_06_snapshot_va_end) ... ok
+test_ac_p1_26_dinh_dang_file_kho (test_qa_contract.AC_Kho.test_ac_p1_26_dinh_dang_file_kho) ... ok
+test_ac_p1_27_kho_hop_le_va_mac_dinh (test_qa_contract.AC_Kho.test_ac_p1_27_kho_hop_le_va_mac_dinh) ... ok
+test_ac_p1_27_quan_tu_choi_kho_sai (test_qa_contract.AC_Kho.test_ac_p1_27_quan_tu_choi_kho_sai) ... ok
+test_ac_p1_28_smoke_hai_tien_trinh_theo_prd (test_qa_contract.AC_Kho.test_ac_p1_28_smoke_hai_tien_trinh_theo_prd) ... ok
+test_ac_p1_20_bat_ca_yield_xoa_dan_va_hoi_chieu (test_qa_gather.AC_Bat.test_ac_p1_20_bat_ca_yield_xoa_dan_va_hoi_chieu) ... ok
+test_ac_p1_20_dang_hoi_chieu_thi_bo_qua_sau_hoi_thi_bat_duoc (test_qa_gather.AC_Bat.test_ac_p1_20_dang_hoi_chieu_thi_bo_qua_sau_hoi_thi_bat_duoc) ... ok
+test_ac_p1_20_o_mat_nuoc_khong_bat (test_qa_gather.AC_Bat.test_ac_p1_20_o_mat_nuoc_khong_bat) ... ok
+test_ac_p1_21_khong_co_dan_trong_tam_thi_khong_su_kien_khong_hoi_chieu (test_qa_gather.AC_Bat.test_ac_p1_21_khong_co_dan_trong_tam_thi_khong_su_kien_khong_hoi_chieu) ... ok
+test_ac_p1_21_thieu_cho_hold_full_giu_dan_va_hoi_chieu (test_qa_gather.AC_Bat.test_ac_p1_21_thieu_cho_hold_full_giu_dan_va_hoi_chieu) ... ok
+test_ac_p1_17_chon_nut_gan_nhat_hoa_theo_id (test_qa_gather.AC_Hai.test_ac_p1_17_chon_nut_gan_nhat_hoa_theo_id) ... ok
+test_ac_p1_17_hai_o_mep_ban_kinh_va_lifo (test_qa_gather.AC_Hai.test_ac_p1_17_hai_o_mep_ban_kinh_va_lifo) ... ok
+test_ac_p1_17_ngoai_ban_kinh_hoac_duoi_nuoc_khong_hai (test_qa_gather.AC_Hai.test_ac_p1_17_ngoai_ban_kinh_hoac_duoi_nuoc_khong_hai) ... ok
+test_ac_p1_18_nut_moc_lai_va_hai_ngay (test_qa_gather.AC_Hai.test_ac_p1_18_nut_moc_lai_va_hai_ngay) ... ok
+test_ac_p1_19_gio_day_hold_full_giu_nut (test_qa_gather.AC_Hai.test_ac_p1_19_gio_day_hold_full_giu_nut) ... ok
+test_ac_p1_22_ben_xet_truoc_hai (test_qa_gather.AC_Hai.test_ac_p1_22_ben_xet_truoc_hai) ... ok
+test_ac_p1_23_hai_hop_le_o_buoc_cuoi_van_vao_kho (test_qa_gather.AC_KetThuc.test_ac_p1_23_hai_hop_le_o_buoc_cuoi_van_vao_kho) ... ok
+test_ac_p1_23_het_gio_giu_gio_o_moi_do_sau (test_qa_gather.AC_KetThuc.test_ac_p1_23_het_gio_giu_gio_o_moi_do_sau) ... ok
+test_ac_p1_23_interact_dung_mep_ben_o_buoc_cuoi_van_docked (test_qa_gather.AC_KetThuc.test_ac_p1_23_interact_dung_mep_ben_o_buoc_cuoi_van_docked) ... ok
+test_ac_p1_25_kho_chi_ghi_khi_gather_end (test_qa_gather.AC_KetThuc.test_ac_p1_25_kho_chi_ghi_khi_gather_end) ... ok
+test_ac_p1_11_dive_surface_chi_khi_doi_phia_bien (test_qa_gather.AC_Oxy.test_ac_p1_11_dive_surface_chi_khi_doi_phia_bien) ... ok
+test_ac_p1_11_khong_dive_khi_dung_yen_o_mat_nuoc (test_qa_gather.AC_Oxy.test_ac_p1_11_khong_dive_khi_dung_yen_o_mat_nuoc) ... ok
+test_ac_p1_12_oxy_hoi_6_o_mat_nuoc_va_ket_max (test_qa_gather.AC_Oxy.test_ac_p1_12_oxy_hoi_6_o_mat_nuoc_va_ket_max) ... ok
+test_ac_p1_12_oxy_tru_1_duoi_nuoc (test_qa_gather.AC_Oxy.test_ac_p1_12_oxy_tru_1_duoi_nuoc) ... ok
+test_ac_p1_13_oxygen_empty_khi_tu_duong_xuong_0 (test_qa_gather.AC_Oxy.test_ac_p1_13_oxygen_empty_khi_tu_duong_xuong_0) ... ok
+test_ac_p1_14_choke_dau_o_t_cong_59_roi_moi_60_buoc (test_qa_gather.AC_Oxy.test_ac_p1_14_choke_dau_o_t_cong_59_roi_moi_60_buoc) ... ok
+test_ac_p1_15_noi_len_dung_buoc_dang_ngat_thi_khong_ngat (test_qa_gather.AC_Oxy.test_ac_p1_15_noi_len_dung_buoc_dang_ngat_thi_khong_ngat) ... ok
+test_ac_p1_16_ngat_mat_gio_lifo_va_kho_rong (test_qa_gather.AC_Oxy.test_ac_p1_16_ngat_mat_gio_lifo_va_kho_rong) ... ok
+test_ac_p2_03_days (test_qa_p2.P2_Cli.test_ac_p2_03_days) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_04_nut_moi (test_qa_p2.P2_Cli.test_ac_p2_04_nut_moi) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_05_scenario_v11 (test_qa_p2.P2_Cli.test_ac_p2_05_scenario_v11) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_01_khoa_v11 (test_qa_p2.P2_Contract.test_ac_p2_01_khoa_v11) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_02_sau_mon (test_qa_p2.P2_Contract.test_ac_p2_02_sau_mon) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_06_07_snapshot_gather_tick_0 (test_qa_p2.P2_Contract.test_ac_p2_06_07_snapshot_gather_tick_0) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_15_22_quai_va_snapshot (test_qa_p2.P2_Contract.test_ac_p2_15_22_quai_va_snapshot) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_23_quan_2_bep_4_ban (test_qa_p2.P2_Contract.test_ac_p2_23_quan_2_bep_4_ban) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_24_khach_den_theo_lich_va_lay_ban_trong_nho_nhat (test_qa_p2.P2_Contract.test_ac_p2_24_khach_den_theo_lich_va_lay_ban_trong_nho_nhat) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi (test_qa_p2.P2_Contract.test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_27_kho_va_giu_cho_mon_moi (test_qa_p2.P2_Contract.test_ac_p2_27_kho_va_giu_cho_mon_moi) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_27_nau_mon_moi_o_bep_b2 (test_qa_p2.P2_Contract.test_ac_p2_27_nau_mon_moi_o_bep_b2) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_29_ke_hoach_d1_d5 (test_qa_p2.P2_Contract.test_ac_p2_29_ke_hoach_d1_d5) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_29_38_cong_bo_ke_hoach_ngay_1 (test_qa_p2.P2_Day.test_ac_p2_29_38_cong_bo_ke_hoach_ngay_1) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_39_pause (test_qa_p2.P2_Day.test_ac_p2_39_pause) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_40_41_byte_giong_nhau_va_hieu_nang (test_qa_p2.P2_Day.test_ac_p2_40_41_byte_giong_nhau_va_hieu_nang) ... skipped 'contract chưa lên 1.1 (đặt QA_P2=1 để chạy thử)'
+test_ac_p2_31_chon_mon_trong_ke_hoach_va_khong_gioi_han_suat (test_qa_p2.P2_QuanPlan.test_ac_p2_31_chon_mon_trong_ke_hoach_va_khong_gioi_han_suat) ... ok
+test_ac_p2_31_fixture_ngoai_ke_hoach (test_qa_p2.P2_QuanPlan.test_ac_p2_31_fixture_ngoai_ke_hoach) ... ok
+test_ac_p3_10_hao_gio_05_moi_giay_va_kep_day (test_qa_p3.P3_Do_tuoi.test_ac_p3_10_hao_gio_05_moi_giay_va_kep_day) ... ok
+test_ac_p3_10_hao_kho_quan_025_ca_hang_dang_giu_cho (test_qa_p3.P3_Do_tuoi.test_ac_p3_10_hao_kho_quan_025_ca_hang_dang_giu_cho) ... ok
+test_ac_p3_10_pause_dung_hao_tuoi (test_qa_p3.P3_Do_tuoi.test_ac_p3_10_pause_dung_hao_tuoi) ... ok
+test_ac_p3_11_12_spoiled_dung_mot_lan_theo_ticket (test_qa_p3.P3_Do_tuoi.test_ac_p3_11_12_spoiled_dung_mot_lan_theo_ticket) ... ok
+test_ac_p3_11_nguong_so_truoc_lam_tron_va_thu_tu_id (test_qa_p3.P3_Do_tuoi.test_ac_p3_11_nguong_so_truoc_lam_tron_va_thu_tu_id) ... ok
+test_ac_p3_11_spoiled_o_kho_quan (test_qa_p3.P3_Do_tuoi.test_ac_p3_11_spoiled_o_kho_quan) ... ok
+test_ac_p3_13_hang_uon_khong_dung_de_nau (test_qa_p3.P3_Do_tuoi.test_ac_p3_13_hang_uon_khong_dung_de_nau) ... ok
+test_ac_p3_14_21_giu_tuoi_nhat_hoa_theo_id (test_qa_p3.P3_Giu_cho_va_gia.test_ac_p3_14_21_giu_tuoi_nhat_hoa_theo_id) ... ok
+test_ac_p3_15_giu_vua_uon_thu_giu_lai_mot_lan (test_qa_p3.P3_Giu_cho_va_gia.test_ac_p3_15_giu_vua_uon_thu_giu_lai_mot_lan) ... ok
+test_ac_p3_16_gia_theo_tuoi (test_qa_p3.P3_Giu_cho_va_gia.test_ac_p3_16_gia_theo_tuoi) ... ok
+test_ac_p3_17_items_sap_theo_kind_roi_id_va_gia_trung_binh (test_qa_p3.P3_Giu_cho_va_gia.test_ac_p3_17_items_sap_theo_kind_roi_id_va_gia_trung_binh) ... ok
+test_ac_p3_18_lost_va_faint_la_mang_ca_the_lifo (test_qa_p3.P3_Giu_cho_va_gia.test_ac_p3_18_lost_va_faint_la_mang_ca_the_lifo) ... ok
+test_ac_p3_19_20_scenario_sai_ma_2 (test_qa_p3.P3_Giu_cho_va_gia.test_ac_p3_19_20_scenario_sai_ma_2) ... ok
+test_ac_p3_26_snapshot_theo_schema_moi (test_qa_p3.P3_Giu_cho_va_gia.test_ac_p3_26_snapshot_theo_schema_moi) ... ok
+test_ac_p3_01_contract_va_freshness (test_qa_p3.P3_Hop_dong_va_kho.test_ac_p3_01_contract_va_freshness) ... ok
+test_ac_p3_02_doc_kho_ca_the (test_qa_p3.P3_Hop_dong_va_kho.test_ac_p3_02_doc_kho_ca_the) ... ok
+test_ac_p3_03_tu_choi_kho_sai_ma_2 (test_qa_p3.P3_Hop_dong_va_kho.test_ac_p3_03_tu_choi_kho_sai_ma_2) ... ok
+test_ac_p3_04_bat_ca_cap_id_lien_tiep (test_qa_p3.P3_Hop_dong_va_kho.test_ac_p3_04_bat_ca_cap_id_lien_tiep) ... ok
+test_ac_p3_04_cap_id_tiep_theo_hau_to_lon_nhat (test_qa_p3.P3_Hop_dong_va_kho.test_ac_p3_04_cap_id_tiep_theo_hau_to_lon_nhat) ... ok
+test_ac_p3_05_ghi_kho_ca_the_sau_hao_tuoi (test_qa_p3.P3_Hop_dong_va_kho.test_ac_p3_05_ghi_kho_ca_the_sau_hao_tuoi) ... ok
+test_ac_p3_05_ngat_ghi_kho_rong (test_qa_p3.P3_Hop_dong_va_kho.test_ac_p3_05_ngat_ghi_kho_rong) ... ok
+test_ac_p3_06_kho_quan_nhan_ca_hang_uon_va_vuot_suc_chua (test_qa_p3.P3_Hop_dong_va_kho.test_ac_p3_06_kho_quan_nhan_ca_hang_uon_va_vuot_suc_chua) ... ok
+test_ac_p3_07_smoke_ban_giao_theo_ticket (test_qa_p3.P3_Hop_dong_va_kho.test_ac_p3_07_smoke_ban_giao_theo_ticket) ... ok
+test_ac_p4_02_03_bench_json (test_qa_p4.P4_Bench.test_ac_p4_02_03_bench_json) ... ok
+test_ac_p4_11_readme (test_qa_p4.P4_Ho_so.test_ac_p4_11_readme) ... ok
+test_ac_p4_13_changelog (test_qa_p4.P4_Ho_so.test_ac_p4_13_changelog) ... ok
+test_ac_p4_14_license_va_credits (test_qa_p4.P4_Ho_so.test_ac_p4_14_license_va_credits) ... ok
+test_ac_p4_21_nhat_ky (test_qa_p4.P4_Ho_so.test_ac_p4_21_nhat_ky) ... ok
+test_ac_p4_22_retro (test_qa_p4.P4_Ho_so.test_ac_p4_22_retro) ... ok
+test_ac_p4_23_phan_tu_ca_nhan (test_qa_p4.P4_Ho_so.test_ac_p4_23_phan_tu_ca_nhan) ... ok
+test_ac_p4_25_tag_cac_phase (test_qa_p4.P4_Ho_so.test_ac_p4_25_tag_cac_phase) ... FAIL
+test_ac_p4_28_leaderboard_cap_co (test_qa_p4.P4_Ho_so.test_ac_p4_28_leaderboard_cap_co) ... ok
+test_ac_p4_01_contract_va_lenh (test_qa_p4.P4_Hop_dong.test_ac_p4_01_contract_va_lenh) ... ok
+test_ac_p4_15_cau_truc_soak (test_qa_p4.P4_Soak.test_ac_p4_15_cau_truc_soak) ... ok
+test_ac_p4_16_soak_10_ngay (test_qa_p4.P4_Soak.test_ac_p4_16_soak_10_ngay) ... skipped 'đặt QA_P4_FULL=1 để chạy 10 Ngày'
+test_ac_p4_17_soak_tat_dinh (test_qa_p4.P4_Soak.test_ac_p4_17_soak_tat_dinh) ... ok
+test_ac_p4_18_xuyen_ngay (test_qa_p4.P4_Soak.test_ac_p4_18_xuyen_ngay) ... ok
+test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot (test_qa_quan.AC_Bep.test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot) ... ok
+test_ac_p1_36_bep_idle_bat_dau_nau (test_qa_quan.AC_Bep.test_ac_p1_36_bep_idle_bat_dau_nau) ... ok
+test_ac_p1_37_nau_xong_thanh_ready (test_qa_quan.AC_Bep.test_ac_p1_37_nau_xong_thanh_ready) ... ok
+test_ac_p1_38_lay_mon_tu_bep (test_qa_quan.AC_Bep.test_ac_p1_38_lay_mon_tu_bep) ... ok
+test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan (test_qa_quan.AC_Bep.test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan) ... ok
+test_ac_p1_39_phuc_vu_va_boa (test_qa_quan.AC_Bep.test_ac_p1_39_phuc_vu_va_boa) ... ok
+test_ac_p1_40_an_xong_tra_tien (test_qa_quan.AC_Bep.test_ac_p1_40_an_xong_tra_tien) ... ok
+test_ac_p1_41_khach_roi_bo_mon_khong_hoan_nguyen_lieu (test_qa_quan.AC_Bep.test_ac_p1_41_khach_roi_bo_mon_khong_hoan_nguyen_lieu) ... ok
+test_ac_p1_42_het_ca (test_qa_quan.AC_Bep.test_ac_p1_42_het_ca) ... ok
+test_ac_p1_43_mau_thuan_o_scenario_thoat_2 (test_qa_quan.AC_Bep.test_ac_p1_43_mau_thuan_o_scenario_thoat_2) ... ok
+test_ac_p1_29_snapshot_tick_0 (test_qa_quan.AC_Khach.test_ac_p1_29_snapshot_tick_0) ... ok
+test_ac_p1_30_lich_khach_theo_phase_tick (test_qa_quan.AC_Khach.test_ac_p1_30_lich_khach_theo_phase_tick) ... ok
+test_ac_p1_30_tat_khach_tu_sinh_va_ca_rut_ngan (test_qa_quan.AC_Khach.test_ac_p1_30_tat_khach_tu_sinh_va_ca_rut_ngan) ... ok
+test_ac_p1_31_ban_dang_co_khach_thi_bo_luot (test_qa_quan.AC_Khach.test_ac_p1_31_ban_dang_co_khach_thi_bo_luot) ... ok
+test_ac_p1_32_chon_mon_giu_cho_va_no_dish (test_qa_quan.AC_Khach.test_ac_p1_32_chon_mon_giu_cho_va_no_dish) ... ok
+test_ac_p1_33_het_kien_nhan_thi_roi_tru_uy_tin (test_qa_quan.AC_Khach.test_ac_p1_33_het_kien_nhan_thi_roi_tru_uy_tin) ... ok
+test_ac_p1_34_khach_roi_nha_cho_va_tra_ban (test_qa_quan.AC_Khach.test_ac_p1_34_khach_roi_nha_cho_va_tra_ban) ... ok
+test_fixture_defaults_and_random_disabled (test_quan_customers.QuanCustomersTest.test_fixture_defaults_and_random_disabled) ... FAIL
+test_no_dish_on_each_scheduled_attempt_and_none_at_closing (test_quan_customers.QuanCustomersTest.test_no_dish_on_each_scheduled_attempt_and_none_at_closing) ... FAIL
+test_patience_discards_assigned_dish_without_refund (test_quan_customers.QuanCustomersTest.test_patience_discards_assigned_dish_without_refund) ... 
+  test_patience_discards_assigned_dish_without_refund (test_quan_customers.QuanCustomersTest.test_patience_discards_assigned_dish_without_refund) (location={'hand': {'order_id': 'C7', 'dish_id': 'ca_loc_nuong_trui', 'base_price': 60}}) ... FAIL
+  test_patience_discards_assigned_dish_without_refund (test_quan_customers.QuanCustomersTest.test_patience_discards_assigned_dish_without_refund) (location={'stoves': [{'id': 'B1', 'state': 'cooking', 'dish': {'order_id': 'C7', 'dish_id': 'ca_loc_nuong_trui', 'base_price': 60}, 'cook_ticks_left': 6}]}) ... FAIL
+  test_patience_discards_assigned_dish_without_refund (test_quan_customers.QuanCustomersTest.test_patience_discards_assigned_dish_without_refund) (location={'stoves': [{'id': 'B1', 'state': 'ready', 'dish': {'order_id': 'C7', 'dish_id': 'ca_loc_nuong_trui', 'base_price': 60}, 'ready_ticks': 2}]}) ... FAIL
+test_reject_conflicting_fixtures_before_output (test_quan_customers.QuanCustomersTest.test_reject_conflicting_fixtures_before_output) ... ok
+test_release_reservation_before_arrival_in_same_tick (test_quan_customers.QuanCustomersTest.test_release_reservation_before_arrival_in_same_tick) ... FAIL
+test_reserved_stock_blocks_another_table_from_ordering_same_ingredient (test_quan_customers.QuanCustomersTest.test_reserved_stock_blocks_another_table_from_ordering_same_ingredient) ... ERROR
+test_schedule_menu_selection_and_determinism (test_quan_customers.QuanCustomersTest.test_schedule_menu_selection_and_determinism) ... FAIL
+test_ac_p3_05_file_preserves_spoil_boundary (test_release_flow.ReleaseFlowTest.test_ac_p3_05_file_preserves_spoil_boundary) ... ok
+test_ac_p3_08_day_handoff_and_fresh_ids (test_release_flow.ReleaseFlowTest.test_ac_p3_08_day_handoff_and_fresh_ids) ... ok
+test_ac_p3_20_invalid_day_fixture_does_not_publish_partial_log (test_release_flow.ReleaseFlowTest.test_ac_p3_20_invalid_day_fixture_does_not_publish_partial_log) ... ok
+test_ac_p3_25_delivery_on_closing_tick_gets_paid (test_release_flow.ReleaseFlowTest.test_ac_p3_25_delivery_on_closing_tick_gets_paid) ... ok
+test_ac_p4_28_leaderboard_keeps_stable_top_ten (test_release_flow.ReleaseFlowTest.test_ac_p4_28_leaderboard_keeps_stable_top_ten) ... ok
+test_con_01_ticks_zero_and_end_line (test_smoke_p1.Contract.test_con_01_ticks_zero_and_end_line) ... ok
+test_con_02_deterministic_bytes (test_smoke_p1.Contract.test_con_02_deterministic_bytes) ... ok
+test_con_03_bad_input_exit_2 (test_smoke_p1.Contract.test_con_03_bad_input_exit_2) ... ok
+test_con_03_old_and_future_modes_rejected (test_smoke_p1.Contract.test_con_03_old_and_future_modes_rejected) ... ok
+test_gather_snapshot_has_gather_fields (test_smoke_p1.Contract.test_gather_snapshot_has_gather_fields) ... ok
+test_scenario_out_of_domain_exit_2 (test_smoke_p1.Contract.test_scenario_out_of_domain_exit_2) ... ok
+test_inv_01_gather_writes_inventory_quan_reads_it (test_smoke_p1.Integration.test_inv_01_gather_writes_inventory_quan_reads_it)
+Ví dụ smoke test trong PRD-0 mục G: cập bến ở tick 0, quán đọc kho đúng nội dung. ... ok
+test_inv_01_not_written_when_tick_limit_first (test_smoke_p1.Integration.test_inv_01_not_written_when_tick_limit_first) ... ok
+test_inv_bad_schema_exit_2 (test_smoke_p1.Integration.test_inv_bad_schema_exit_2) ... ok
+test_inventory_and_scenario_stock_conflict (test_smoke_p1.Integration.test_inventory_and_scenario_stock_conflict) ... ok
+test_inventory_flags_mode_mismatch_exit_2 (test_smoke_p1.Integration.test_inventory_flags_mode_mismatch_exit_2) ... ok
+test_move_01_swim_speed_after_ramp (test_smoke_p1.Movement.test_move_01_swim_speed_after_ramp)
+Bỏ 6 tick tăng tốc rồi đo 60 tick: quãng ≈ swim_speed × 1 s (±0.1). Ngang, xuống, chéo (không nhanh hơn). ... ok
+test_move_02_heading_positive_is_down (test_smoke_p1.Movement.test_move_02_heading_positive_is_down) ... ok
+test_move_03_edge_clamp (test_smoke_p1.Movement.test_move_03_edge_clamp)
+Chặn từng mép của vùng nước, kể cả d không âm (không bay lên khỏi mặt nước) và đáy d = 30. ... ok
+test_move_mep_vel_ve_0 (test_smoke_p1.Movement.test_move_mep_vel_ve_0) ... ok
+test_move_ramp_doi_huong_trong_tran (test_smoke_p1.Movement.test_move_ramp_doi_huong_trong_tran)
+Đảo từ +speed sang -speed: vận tốc chạm mục tiêu sau tối đa ramp_max_ticks tick kể từ lúc đổi input. ... ok
+test_time_ends_gather_and_keeps_hold (test_smoke_p1.Movement.test_time_ends_gather_and_keeps_hold) ... ok
+test_khoi_sai_mode_exit_2 (test_smoke_p1.ScenarioModes.test_khoi_sai_mode_exit_2) ... ok
+test_quan_fixture_khong_hop_le_exit_2 (test_smoke_p1.ScenarioModes.test_quan_fixture_khong_hop_le_exit_2) ... ok
+test_quan_player_vel_hop_le (test_smoke_p1.ScenarioModes.test_quan_player_vel_hop_le) ... ok
+test_good (test_team_check.TeamCheck.test_good) ... ok
+test_template_is_rejected (test_team_check.TeamCheck.test_template_is_rejected) ... ok
+test_too_few_members (test_team_check.TeamCheck.test_too_few_members) ... ok
+test_wrong_size_duplicate_and_outsider (test_team_check.TeamCheck.test_wrong_size_duplicate_and_outsider) ... ok
+
+======================================================================
+ERROR: test_monster_chase_hit_recoil_and_faint (test_gather_p2.GatherV11AndDayTest.test_monster_chase_hit_recoil_and_faint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_gather_p2.py", line 69, in test_monster_chase_hit_recoil_and_faint
+    s = Session("gather", self.tuning, sc, seed=1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\runner.py", line 43, in __init__
+    self.sim = build_sim(mode, tuning, scenario, seed, inventory, days=days)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\runner.py", line 23, in build_sim
+    return GatherSim(tuning, scenario, streams, ids)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\sim\gather.py", line 59, in __init__
+    self.hold = individual_items(self.hold)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\inventory.py", line 45, in individual_items
+    raise BadInput("cá thể phải có id, kind và fresh")
+chonoi.errors.BadInput: cá thể phải có id, kind và fresh
+
+======================================================================
+ERROR: test_oxygen_empty_choke_and_faint_clears_hold (test_gather_rules.GatherRulesTest.test_oxygen_empty_choke_and_faint_clears_hold)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_gather_rules.py", line 47, in test_oxygen_empty_choke_and_faint_clears_hold
+    s = Session("gather", self.tuning, sc, seed=1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\runner.py", line 43, in __init__
+    self.sim = build_sim(mode, tuning, scenario, seed, inventory, days=days)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\runner.py", line 23, in build_sim
+    return GatherSim(tuning, scenario, streams, ids)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\sim\gather.py", line 59, in __init__
+    self.hold = individual_items(self.hold)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\inventory.py", line 45, in individual_items
+    raise BadInput("cá thể phải có id, kind và fresh")
+chonoi.errors.BadInput: cá thể phải có id, kind và fresh
+
+======================================================================
+ERROR: test_reserved_stock_blocks_another_table_from_ordering_same_ingredient (test_quan_customers.QuanCustomersTest.test_reserved_stock_blocks_another_table_from_ordering_same_ingredient)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 146, in test_reserved_stock_blocks_another_table_from_ordering_same_ingredient
+    session = Session("quan", self.tuning, scenario, 1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\runner.py", line 43, in __init__
+    self.sim = build_sim(mode, tuning, scenario, seed, inventory, days=days)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\runner.py", line 24, in build_sim
+    return QuanSim(tuning, scenario, streams, ids, inventory=inventory)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\sim\quan.py", line 79, in __init__
+    self.stock = {item["id"]: item for item in individual_items(items, self.ingredients)}
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\chonoi\inventory.py", line 41, in individual_items
+    raise BadInput("items phải là mảng cá thể")
+chonoi.errors.BadInput: items phải là mảng cá thể
+
+======================================================================
+FAIL: test_catch_fish_cooldown_and_surface_guard (test_gather_rules.GatherRulesTest.test_catch_fish_cooldown_and_surface_guard)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_gather_rules.py", line 116, in test_catch_fish_cooldown_and_surface_guard
+    self.assertEqual(s.snapshot()["hold"], ["ca_loc"])
+AssertionError: Lists differ: [{'id': 'I1', 'kind': 'ca_loc', 'fresh': 99.98333333333333}] != ['ca_loc']
+
+First differing element 0:
+{'id': 'I1', 'kind': 'ca_loc', 'fresh': 99.98333333333333}
+'ca_loc'
+
+- [{'fresh': 99.98333333333333, 'id': 'I1', 'kind': 'ca_loc'}]
++ ['ca_loc']
+
+======================================================================
+FAIL: test_gather_node_tiebreak_regrow_and_hold_full (test_gather_rules.GatherRulesTest.test_gather_node_tiebreak_regrow_and_hold_full)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_gather_rules.py", line 78, in test_gather_node_tiebreak_regrow_and_hold_full
+    self.assertEqual(s.snapshot()["hold"], ["bong_dien_dien"])
+AssertionError: Lists differ: [{'id': 'I1', 'kind': 'bong_dien_dien', 'fresh': 100.0}] != ['bong_dien_dien']
+
+First differing element 0:
+{'id': 'I1', 'kind': 'bong_dien_dien', 'fresh': 100.0}
+'bong_dien_dien'
+
+- [{'fresh': 100.0, 'id': 'I1', 'kind': 'bong_dien_dien'}]
++ ['bong_dien_dien']
+
+======================================================================
+FAIL: test_ac_p4_25_tag_cac_phase (test_qa_p4.P4_Ho_so.test_ac_p4_25_tag_cac_phase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_qa_p4.py", line 174, in test_ac_p4_25_tag_cac_phase
+    self.assertEqual({f"phase-{i}" for i in range(1, 4)} - tags, set(), f"AC-P4-25: thiếu tag (có: {sorted(tags)})")
+AssertionError: Items in the first set but not the second:
+'phase-2'
+'phase-3' : AC-P4-25: thiếu tag (có: ['phase-1'])
+
+======================================================================
+FAIL: test_fixture_defaults_and_random_disabled (test_quan_customers.QuanCustomersTest.test_fixture_defaults_and_random_disabled)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 74, in test_fixture_defaults_and_random_disabled
+    rows = self.run_quan(w, block, self.first)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 36, in run_quan
+    self.assertEqual(code, 0, err)
+AssertionError: 2 != 0 : đầu vào sai: items phải là mảng cá thể
+
+
+======================================================================
+FAIL: test_no_dish_on_each_scheduled_attempt_and_none_at_closing (test_quan_customers.QuanCustomersTest.test_no_dish_on_each_scheduled_attempt_and_none_at_closing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 63, in test_no_dish_on_each_scheduled_attempt_and_none_at_closing
+    rows = self.run_quan(w, {"stock": {"bong_sung": 1}}, self.first + self.interval)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 36, in run_quan
+    self.assertEqual(code, 0, err)
+AssertionError: 2 != 0 : đầu vào sai: items phải là mảng cá thể
+
+
+======================================================================
+FAIL: test_patience_discards_assigned_dish_without_refund (test_quan_customers.QuanCustomersTest.test_patience_discards_assigned_dish_without_refund) (location={'hand': {'order_id': 'C7', 'dish_id': 'ca_loc_nuong_trui', 'base_price': 60}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 115, in test_patience_discards_assigned_dish_without_refund
+    self.assertEqual(last["stock"], {})
+AssertionError: [] != {}
+
+======================================================================
+FAIL: test_patience_discards_assigned_dish_without_refund (test_quan_customers.QuanCustomersTest.test_patience_discards_assigned_dish_without_refund) (location={'stoves': [{'id': 'B1', 'state': 'cooking', 'dish': {'order_id': 'C7', 'dish_id': 'ca_loc_nuong_trui', 'base_price': 60}, 'cook_ticks_left': 6}]})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 115, in test_patience_discards_assigned_dish_without_refund
+    self.assertEqual(last["stock"], {})
+AssertionError: [] != {}
+
+======================================================================
+FAIL: test_patience_discards_assigned_dish_without_refund (test_quan_customers.QuanCustomersTest.test_patience_discards_assigned_dish_without_refund) (location={'stoves': [{'id': 'B1', 'state': 'ready', 'dish': {'order_id': 'C7', 'dish_id': 'ca_loc_nuong_trui', 'base_price': 60}, 'ready_ticks': 2}]})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 115, in test_patience_discards_assigned_dish_without_refund
+    self.assertEqual(last["stock"], {})
+AssertionError: [] != {}
+
+======================================================================
+FAIL: test_release_reservation_before_arrival_in_same_tick (test_quan_customers.QuanCustomersTest.test_release_reservation_before_arrival_in_same_tick)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 88, in test_release_reservation_before_arrival_in_same_tick
+    rows = self.run_quan(w, block, self.first + 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 36, in run_quan
+    self.assertEqual(code, 0, err)
+AssertionError: 2 != 0 : đầu vào sai: items phải là mảng cá thể
+
+
+======================================================================
+FAIL: test_schedule_menu_selection_and_determinism (test_quan_customers.QuanCustomersTest.test_schedule_menu_selection_and_determinism)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 42, in test_schedule_menu_selection_and_determinism
+    rows = self.run_quan(w, {"stock": stock}, self.first + self.interval, name="first")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\File Download Google\VIN\21-11\K5-L3B-LAB-Day12-AI-SDLC-H123\tests\test_quan_customers.py", line 36, in run_quan
+    self.assertEqual(code, 0, err)
+AssertionError: 2 != 0 : đầu vào sai: items phải là mảng cá thể
+
+
+----------------------------------------------------------------------
+Ran 163 tests in 39.449s
+
+FAILED (failures=10, errors=3, skipped=17)

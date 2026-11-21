@@ -7,7 +7,7 @@ Mốc tick: bước k đọc frame tick k và ghi event tại k+1.
 
 import unittest
 
-from qa_util import ev, ev_at, run, snap
+from qa_util import QUAN_TICK_DECAY, ev, ev_at, price_after, run_compat as run, snap  # hồi quy qua lớp tương thích kho
 
 RICH = {"ca_loc": 9, "bong_sung": 9, "ca_linh": 9, "bong_dien_dien": 9}
 P = {"order_id": "C1", "dish_id": "ca_loc_nuong_trui", "base_price": 60}  # payload món
@@ -127,7 +127,8 @@ class AC_Bep(unittest.TestCase):
         self.assertEqual(cs[0]["tick"], 1)
         with self.subTest("payload theo PRD mục E"):
             self.assertEqual(cs[0]["data"], {"stove_id": "B1", "order_id": "C1", "dish_id": "ca_loc_nuong_trui",
-                                             "items": ["ca_loc"], "base_price": 60}, "AC-P1-36")
+                                             "items": ["ca_loc"], "base_price": price_after(60, 100 - QUAN_TICK_DECAY)},
+                             "AC-P1-36 (v1.2: giá chốt theo độ tươi, hàng đã hao 1 bước nên 60 thành 59)")
         s1 = snap(rows, 1)
         self.assertEqual((s1["stoves"][0]["state"], s1["stoves"][0]["cook_ticks_left"]), ("cooking", 360), "AC-P1-36")
         self.assertEqual(s1["stock"], {}, "AC-P1-36: tiêu đúng nguyên liệu giữ")

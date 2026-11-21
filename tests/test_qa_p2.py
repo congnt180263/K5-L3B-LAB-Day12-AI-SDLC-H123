@@ -11,7 +11,7 @@ import time
 import unittest
 
 from helpers import Workdir, frames, read_jsonl, run_headless, write_json
-from qa_util import ev, ev_at, run, snap
+from qa_util import ev, ev_at, fx_stock, run_compat as run, snap  # hồi quy qua lớp tương thích kho
 from chonoi.errors import BadInput
 from chonoi.ids import IdAllocator
 from chonoi.inputs import LiveInputs
@@ -262,7 +262,7 @@ class P2_QuanPlan(unittest.TestCase):
                                     "customer_interval_s": 1, "patience_s": 1}}
 
         def run_orders(stock, day_plan):
-            sim = QuanSim(tuning, {}, Streams(1), IdAllocator(), inventory=stock, day_plan=day_plan)
+            sim = QuanSim(tuning, {}, Streams(1), IdAllocator(), inventory=fx_stock(stock), day_plan=day_plan)
             inp = LiveInputs()
             return [event for _ in range(61) for event in sim.step(inp.advance())]
 
@@ -278,7 +278,7 @@ class P2_QuanPlan(unittest.TestCase):
             {"id": "C1", "table_id": "T1", "dish_id": "goi_bong_sung"}
         ]}
         with self.assertRaisesRegex(BadInput, "ngoài kế hoạch ngày"):
-            QuanSim(TUNING, scenario, Streams(1), IdAllocator(), inventory={"bong_sung": 2}, day_plan=plan)
+            QuanSim(TUNING, scenario, Streams(1), IdAllocator(), inventory=fx_stock({"bong_sung": 2}), day_plan=plan)
 
 
 if __name__ == "__main__":

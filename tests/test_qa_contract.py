@@ -8,7 +8,7 @@ import os
 import unittest
 
 from helpers import Workdir, frames, read_jsonl, run_headless, write_json
-from qa_util import ev, ev_at, run, snap
+from qa_util import V12, counts, ev, ev_at, fx_block, run_compat as run, snap  # hồi quy qua lớp tương thích kho
 
 DUR = 10800  # 180 s x 60
 
@@ -41,7 +41,7 @@ class AC_01_06(unittest.TestCase):
                     with Workdir() as w:
                         a = ["--mode", mode, "--seed", str(seed), "--ticks", str(ticks), "--out", w.path("o.jsonl")]
                         if sc:
-                            a += ["--scenario", write_json(w.path("sc.json"), {mode: sc})]
+                            a += ["--scenario", write_json(w.path("sc.json"), {mode: fx_block(mode, sc)})]
                         if inp:
                             a += ["--inputs", write_json(w.path("in.json"), frames(*inp))]
                         code, err = run_headless(*a)
@@ -188,6 +188,8 @@ class AC_Kho(unittest.TestCase):
         bad = {"khoa_goc_la": {"items": {}, "x": 1}, "thieu_items": {}, "items_la_mang": {"items": []},
                "goc_la_mang": [], "kind_la": {"items": {"ca_la_lung": 1}}, "am": {"items": {"ca_loc": -1}},
                "so_thuc": {"items": {"ca_loc": 1.5}}, "bool": {"items": {"ca_loc": True}}, "chuoi": {"items": {"ca_loc": "1"}}}
+        if V12:
+            bad.pop("items_la_mang")  # từ v1.2 kho rỗng chính là {"items": []} nên hợp lệ (TICKET-03)
         for name, inv in bad.items():
             r = run("quan", ticks=0, inventory=inv)
             self.assertEqual(r["code"], 2, f"AC-P1-27 {name}")
@@ -204,7 +206,7 @@ class AC_Kho(unittest.TestCase):
 
     def test_ac_p1_28_smoke_hai_tien_trinh_theo_prd(self):
         with Workdir() as w:
-            sc = write_json(w.path("dock.json"), {"gather": {"hold": ["ca_loc", "bong_sung", "bong_sung"]}})
+            sc = write_json(w.path("dock.json"), {"gather": fx_block("gather", {"hold": ["ca_loc", "bong_sung", "bong_sung"]})})
             inp = write_json(w.path("dock-inputs.json"), {"frames": [{"tick": 0, "interact": True}]})
             c1, e1 = run_headless("--mode", "gather", "--seed", "42", "--scenario", sc, "--inputs", inp, "--ticks", "1",
                                   "--out", w.path("gather.jsonl"), "--inventory-out", w.path("catch.json"))
@@ -212,7 +214,7 @@ class AC_Kho(unittest.TestCase):
                                   "--out", w.path("quan.jsonl"))
             self.assertEqual((c1, c2), (0, 0), e1 + e2)
             first = read_jsonl(w.path("quan.jsonl"))[0]
-            self.assertEqual(first["stock"], {"bong_sung": 2, "ca_loc": 1}, "AC-P1-28")
+            self.assertEqual(counts(first["stock"]), {"bong_sung": 2, "ca_loc": 1}, "AC-P1-28")
             end = ev(read_jsonl(w.path("gather.jsonl")), "gather_end")[0]["data"]
             self.assertEqual(end["reason"], "docked")
 

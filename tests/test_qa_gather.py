@@ -9,7 +9,8 @@ Chạy: PYTHONPATH=tests:. python3 -m unittest tests.test_qa_gather -v   (hoặc
 import json
 import unittest
 
-from helpers import Workdir, events, frames, read_jsonl, run_headless, snapshots, write_json
+from helpers import events, snapshots
+from qa_util import run_compat  # hồi quy qua lớp tương thích kho
 
 
 def tuning():
@@ -18,27 +19,10 @@ def tuning():
 
 
 def go(scenario=None, inputs=None, ticks=60, seed=1, inv=False, every=1):
-    """Chạy gather; trả (rows, tệp kho hoặc None). scenario là khối `gather`."""
-    with Workdir() as w:
-        args = ["--mode", "gather", "--seed", str(seed), "--ticks", str(ticks),
-                "--snapshot-every", str(every), "--out", w.path("o.jsonl")]
-        if scenario is not None:
-            args += ["--scenario", write_json(w.path("sc.json"), {"gather": scenario})]
-        if inputs:
-            args += ["--inputs", write_json(w.path("in.json"), frames(*inputs))]
-        if inv:
-            args += ["--inventory-out", w.path("inv.json")]
-        code, err = run_headless(*args)
-        assert code == 0, err
-        rows = read_jsonl(w.path("o.jsonl"))
-        saved = None
-        if inv:
-            try:
-                with open(w.path("inv.json"), encoding="utf-8") as f:
-                    saved = json.load(f)
-            except OSError:
-                saved = None
-        return rows, saved
+    """Chạy gather; trả (rows, tệp kho hoặc None). scenario là khối `gather` viết dạng đếm (hồi quy qua lớp tương thích kho)."""
+    r = run_compat("gather", scenario, inputs, ticks=ticks, seed=seed, every=every, inv_out=inv)
+    assert r["code"] == 0, r["err"]
+    return r["rows"], r["saved"]
 
 
 def snap(rows, tick):
