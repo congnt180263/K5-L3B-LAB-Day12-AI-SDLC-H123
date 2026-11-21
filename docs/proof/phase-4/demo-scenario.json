@@ -1,0 +1,16 @@
+{
+  "gather": {
+    "hold": [
+      {
+        "id": "I1",
+        "kind": "ca_loc",
+        "fresh": 100
+      }
+    ],
+    "random_fish": false,
+    "monsters": []
+  },
+  "quan": {
+    "time_left_ticks": 1200
+  }
+}

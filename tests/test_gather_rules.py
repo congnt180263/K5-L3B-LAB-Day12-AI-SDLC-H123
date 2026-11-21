@@ -133,7 +133,7 @@ class GatherRulesTest(unittest.TestCase):
         evs_surf = step_n(s_surf, [{"tick": 0, "catch": True}], 1)
         self.assertEqual(evs_surf, [])
 
-        # Bắt cá khi thiếu chỗ: phát hold_full, giữ đàn cá, giữ giỏ, đặt cooldown
+        # TICKET-02 mục 1.1 chỉ đặt cooldown khi bắt thành công.
         cap = self.tuning["gather"]["hold_capacity"]
         sc_tight = {
             "player": {"pos": [20, 5]},
@@ -146,7 +146,7 @@ class GatherRulesTest(unittest.TestCase):
         self.assertEqual(evs_tight[0]["data"], {"action": "catch", "fish_id": "F1", "required": 3, "free": 1})
         self.assertEqual(len(s_tight.snapshot()["fish"]), 1)
         self.assertEqual(s_tight.snapshot()["hold_count"], cap - 1)
-        self.assertEqual(s_tight.snapshot()["player"]["catch_cd_ticks"], cd)
+        self.assertEqual(s_tight.snapshot()["player"]["catch_cd_ticks"], 0)
 
         # Bắt hụt (không có đàn trong tầm): không đặt cooldown
         sc_miss = {

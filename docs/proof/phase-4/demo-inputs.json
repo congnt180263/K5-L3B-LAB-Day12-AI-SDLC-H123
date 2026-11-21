@@ -1,0 +1,59 @@
+{
+  "frames": [
+    {
+      "tick": 0,
+      "interact": true
+    },
+    {
+      "tick": 1,
+      "interact": false,
+      "move": [
+        -1,
+        1
+      ]
+    },
+    {
+      "tick": 65,
+      "move": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 121,
+      "interact": true
+    },
+    {
+      "tick": 122,
+      "interact": false
+    },
+    {
+      "tick": 481,
+      "interact": true
+    },
+    {
+      "tick": 482,
+      "interact": false,
+      "move": [
+        0.6666666666666666,
+        -1
+      ]
+    },
+    {
+      "tick": 590,
+      "interact": true,
+      "move": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 591,
+      "interact": false
+    },
+    {
+      "tick": 1201,
+      "shop_done": true
+    }
+  ]
+}

@@ -15,6 +15,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       # Nhắc điền TEAM.md (cảnh báo, không chặn). Bỏ qua ở repo gốc của giảng viên (TEAM.md ở đó là bản mẫu).
       - name: Kiểm danh sách thành viên (cảnh báo)
         continue-on-error: true
@@ -24,4 +27,4 @@ jobs:
       - name: Build (build_cmd trong game.contract.json)
         run: bash -c "$(python3 -c 'import json;print(json.load(open("game.contract.json"))["build_cmd"])')"
       - name: Test (hộp đen qua headless_cmd + unit của nhóm)
-        run: PYTHONPATH=tests:. python3 -m unittest discover -s tests -v
+        run: python3 tools/verify.py

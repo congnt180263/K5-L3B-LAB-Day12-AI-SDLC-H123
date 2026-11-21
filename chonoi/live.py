@@ -26,6 +26,7 @@ from .contract import load_contract
 from .errors import BadInput
 from .inputs import LiveInputs
 from .inventory import menu_ingredients, read_inventory
+from .leaderboard import DEFAULT_STORE, export
 from .runner import Session
 from .scenario import load_scenario
 
@@ -97,7 +98,8 @@ class LiveGame:
             if (s.mode == "gather" and s.sim.reason in ("docked", "time", "fainted")
                     and self.inputs.advance().pressed("interact")):
                 _, _, _, seed, _ = self._args
-                self.session = Session("quan", self.tuning, {}, seed, inventory=s.sim.inventory_items())
+                inventory = s.sim.hold if "freshness" in self.tuning else s.sim.inventory_items()
+                self.session = Session("quan", self.tuning, {}, seed, inventory=inventory)
                 self.inputs = LiveInputs()
                 self.events.clear()
             return
@@ -116,7 +118,7 @@ class LiveGame:
             elif name == "paid":
                 self.stats["tips"] += data.get("tip", 0)
                 self.day_stats["tips"] += data.get("tip", 0)
-            elif name == "phase_start" and data.get("phase") == "shop":
+            elif name == "phase_start" and row["phase"] == "shop":
                 self.last_day_result = {**self.day_stats, "earned": s.sim.earned - self.day_stats["earned_start"],
                                         "reputation_change": round(s.sim.reputation - self.day_stats["reputation_start"], 2)}
             elif name == "day_start":
@@ -138,6 +140,7 @@ class LiveGame:
         with self._lock:
             snap = self.session.snapshot()
             snap["meta"] = self.tuning.get(self.session.mode, {})
+            snap["freshness"] = self.tuning.get("freshness")
             if self.session.mode == "day":
                 snap["meta"] = self.tuning.get(self.session.sim.phase, {})
                 snap["shop_catalog"] = self.tuning["shop"]["upgrades"]
@@ -297,8 +300,18 @@ def main(argv=None) -> int:
     p.add_argument("--scenario")
     p.add_argument("--inventory", help="chỉ với quan: nạp kho từ file")
     p.add_argument("--inventory-out", dest="inventory_out", help="chỉ với gather: ghi kho khi kết thúc buổi")
+    p.add_argument("--leaderboard", help="file bảng xếp hạng cục bộ")
+    p.add_argument("--export-leaderboard", help="xuất bảng xếp hạng ra JSON rồi thoát")
     a = p.parse_args(argv)
     try:
+        if a.export_leaderboard:
+            store = a.leaderboard or DEFAULT_STORE
+            if os.path.abspath(store) == os.path.abspath(a.export_leaderboard):
+                raise BadInput("file xuất phải khác file lưu bảng xếp hạng")
+            export(store, a.export_leaderboard)
+            return 0
+        if a.leaderboard:
+            raise BadInput("--leaderboard cần --export-leaderboard ở giao diện")
         if a.inventory and a.mode != "quan":
             raise BadInput("--inventory chỉ dùng với quan")
         if a.inventory_out and a.mode != "gather":
@@ -307,7 +320,8 @@ def main(argv=None) -> int:
             raise BadInput("--days phải trong [1, 5]")
         tuning = load_contract()["tuning"]
         scenario = load_scenario(a.scenario, a.mode, tuning)
-        inventory = read_inventory(a.inventory, menu_ingredients(tuning["menu"])) if a.inventory else None
+        inventory = (read_inventory(a.inventory, menu_ingredients(tuning["menu"]),
+                                    individual="freshness" in tuning) if a.inventory else None)
         if inventory is not None and "stock" in scenario:
             raise BadInput("vừa có quan.stock vừa có --inventory")
         game = LiveGame(a.mode, tuning, scenario, a.seed, inventory, a.inventory_out, days=a.days)

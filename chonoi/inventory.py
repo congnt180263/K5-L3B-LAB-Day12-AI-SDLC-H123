@@ -5,10 +5,13 @@ Ghi: bỏ mục bằng 0, qua file tạm cùng thư mục rồi thay thế, byte
 """
 
 import json
+import math
 import os
 import tempfile
+from fractions import Fraction
 
 from .errors import BadInput
+from .ids import sort_by_id
 
 KINDS_P1 = ("ca_loc", "ca_linh", "bong_dien_dien", "bong_sung")
 KINDS_V11 = ("ca_loc", "ca_linh", "ca_keo", "bong_dien_dien", "bong_sung", "keo_neo")
@@ -33,7 +36,51 @@ def validate_items(items, kinds=KINDS_P1):
     return out
 
 
-def read_inventory(path: str, kinds=KINDS_V11) -> dict:
+def individual_items(items, kinds=KINDS_V11):
+    if not isinstance(items, list):
+        raise BadInput("items phải là mảng cá thể")
+    result, ids = [], set()
+    for item in items:
+        if not isinstance(item, dict) or set(item) != {"id", "kind", "fresh"}:
+            raise BadInput("cá thể phải có id, kind và fresh")
+        ident, kind, fresh = item["id"], item["kind"], item["fresh"]
+        if not isinstance(ident, str) or not ident or ident in ids:
+            raise BadInput("id cá thể trùng hoặc không hợp lệ")
+        if not isinstance(kind, str) or kind not in kinds:
+            raise BadInput(f"nguyên liệu lạ: {kind}")
+        if isinstance(fresh, bool) or not isinstance(fresh, (int, float, Fraction)) or not 0 <= fresh <= 100:
+            raise BadInput("fresh phải là số hữu hạn trong [0, 100]")
+        ids.add(ident)
+        result.append(dict(item, fresh=Fraction(str(fresh))))
+    return result
+
+
+def item_rows(items, threshold=None):
+    rows = []
+    for item in items:
+        fresh = item["fresh"]
+        value = float(fresh)
+        if value == threshold and fresh < threshold:
+            value = math.nextafter(value, -math.inf)
+        rows.append(dict(item, fresh=value))
+    return rows
+
+
+def age_items(items, decay, threshold, location, events):
+    spoiled = []
+    for item in items:
+        before = item["fresh"]
+        if before == 0:
+            continue
+        item["fresh"] = max(Fraction(0), before - decay)
+        if before >= threshold > item["fresh"]:
+            spoiled.append(item)
+    for item in sort_by_id(spoiled):
+        events.append(("spoiled", {"item_id": item["id"], "kind": item["kind"], "location": location}))
+    return {item["id"] for item in spoiled}
+
+
+def read_inventory(path: str, kinds=KINDS_V11, *, individual=False):
     try:
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
@@ -41,7 +88,8 @@ def read_inventory(path: str, kinds=KINDS_V11) -> dict:
         raise BadInput(f"không đọc được file kho {path}: {e}")
     if not isinstance(data, dict) or set(data.keys()) != {"items"}:
         raise BadInput("file kho chỉ được có khóa gốc 'items'")
-    return validate_items(data["items"], kinds)
+    validate = individual_items if individual else validate_items
+    return validate(data["items"], kinds)
 
 
 def hold_to_items(hold: list) -> dict:
@@ -52,8 +100,11 @@ def hold_to_items(hold: list) -> dict:
     return {k: counts[k] for k in sorted(counts)}
 
 
-def write_inventory(path: str, items: dict):
-    items = {k: items[k] for k in sorted(items) if items[k] > 0}
+def write_inventory(path: str, items):
+    if isinstance(items, list):
+        items = item_rows(sort_by_id(items))
+    else:
+        items = {k: items[k] for k in sorted(items) if items[k] > 0}
     d = os.path.dirname(os.path.abspath(path))
     fd, tmp = tempfile.mkstemp(prefix=".inv-", suffix=".tmp", dir=d)
     try:

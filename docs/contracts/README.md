@@ -1,3 +1,9 @@
+# Hợp đồng phát hành (v1.3)
+
+Quy ước v1.3 giữ gameplay và schema kho v1.2. File kho có đúng khóa `items` chứa mảng cá thể `{id,kind,fresh}`, ví dụ [inventory.sample.json](inventory.sample.json). Mảng rỗng là `{"items":[]}`. Hai tiến trình headless trao kho qua file, còn chế độ `day` trao cùng tick qua bộ nhớ. Một lần `gather_end` ghi file nguyên tử đúng một lần.
+
+Snapshot dùng `gather.hold`, `quan.stock` và `shop.stock` theo mảng cá thể. `customers[].reserved` chứa ID nguyên liệu. `cook_started.items` chứa cá thể đã dùng, `spoiled` phát đúng khi độ tươi đi qua ngưỡng. Vòng đời khách, món và giá dùng cùng một lớp mô phỏng ở live và headless. [Quyết định đổi kho](../adr/0001-kho-ca-the.md)
+
 # Hợp đồng tích hợp (Phase 1 — baseline từ starter, đối chiếu thêm PRD-0)
 
 ## 1. Schema file kho (Contract G)
@@ -8,7 +14,7 @@
 - Khóa gốc duy nhất: `"items"` (object ánh xạ `kind -> số nguyên > 0`).
 - Nguyên liệu hợp lệ P1 (`chonoi/inventory.py`, `KINDS_P1`): `ca_loc`, `ca_linh`, `bong_dien_dien`, `bong_sung`.
 - Quy tắc ghi: `chonoi.runner.Session.write_inventory_if_done` chỉ ghi **một lần** khi có `gather_end` (nếu hết `--ticks` trước khi kết thúc buổi thì không tạo/ghi đè file kho). Nếu ngất (`reason: "fainted"`), giỏ bị xóa sạch nên file kho là `{"items":{}}`.
-- Mẫu hợp lệ: [inventory.sample.json](inventory.sample.json).
+- Ví dụ ở trên ghi theo hợp đồng kho đếm v1.0.
 
 ## 2. Giao diện giữa `sim/*` và `client/ui`
 - **Chiều đọc (`GET /state` hoặc `Session.snapshot()`):**

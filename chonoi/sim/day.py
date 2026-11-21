@@ -23,11 +23,12 @@ class DaySim:
         self.money = int(day_sc.get("money", 0))
         self.earned = int(day_sc.get("earned", 0))
         self.reputation = float(day_sc.get("reputation", tuning["quan"]["reputation_initial"]))
-        self.upgrades = dict(day_sc.get("upgrades", {"oxygen": 0, "hp": 0}))
-        self.upgrades.setdefault("oxygen", 0)
-        self.upgrades.setdefault("hp", 0)
+        self.upgrades = dict(day_sc.get("upgrades", {}))
         self.active_upgrades = dict(self.upgrades)
-        self._plans = day_sc.get("day_plan") or tuning["day_plan"]
+        self._plans = {entry["day"]: entry for entry in tuning["day_plan"]}
+        self._plans.update({entry["day"]: entry for entry in day_sc.get("day_plan", [])})
+        self.item_ids = IdAllocator()
+        self.individual = "freshness" in tuning
 
         self.done = False
         self.reason = None
@@ -39,33 +40,34 @@ class DaySim:
         self._start_day(initial=True)
 
     def _current_plan(self):
-        for entry in self._plans:
-            if entry["day"] == self.day:
-                return {"dishes": dict(entry["dishes"]), "ingredients": dict(entry["ingredients"])}
-        entry = self._plans[(self.day - 1) % len(self._plans)]
+        day_count = len(self.tuning["day_plan"])
+        entry = self._plans[(self.day - 1) % day_count + 1]
         return {"dishes": dict(entry["dishes"]), "ingredients": dict(entry["ingredients"])}
 
     def _start_day(self, initial=False):
         self.active_upgrades = dict(self.upgrades)
         self.phase = "gather"
         self.phase_tick = 0
-        g_sc = self.raw_scenario.get("gather", {}) if self.day == 1 else {}
+        g_sc = dict(self.raw_scenario.get("gather", {}))
+        if self.individual and self.day > 1 and "hold" in g_sc:
+            g_sc["hold"] = [dict(item, id=self.item_ids.new("I")) for item in g_sc["hold"]]
         streams = Streams(f"{self.seed}:D{self.day}:gather")
         ids = IdAllocator()
-        self.sim = GatherSim(self.tuning, g_sc, streams, ids, day=self.day, active_upgrades=self.active_upgrades)
+        self.sim = GatherSim(self.tuning, g_sc, streams, ids, day=self.day,
+                             active_upgrades=self.active_upgrades, item_ids=self.item_ids)
         self.time_left_ticks = self.sim.time_left_ticks
         if initial:
             plan = self._current_plan()
             self.pending_init_events = [
-                ("day_start", {"day": self.day}, self.day, "gather"),
+                ("day_start", {}, self.day, "gather"),
                 ("day_plan", plan, self.day, "gather"),
-                ("phase_start", {"phase": "gather"}, self.day, "gather"),
+                ("phase_start", {}, self.day, "gather"),
             ]
 
-    def _start_quan(self, inventory_items: dict, events: list):
+    def _start_quan(self, inventory_items, events: list):
         self.phase = "quan"
         self.phase_tick = 0
-        q_sc = self.raw_scenario.get("quan", {}) if self.day == 1 else {}
+        q_sc = self.raw_scenario.get("quan", {})
         streams = Streams(f"{self.seed}:D{self.day}:quan")
         ids = IdAllocator()
         self.sim = QuanSim(
@@ -80,14 +82,15 @@ class DaySim:
             reputation=self.reputation,
         )
         self.time_left_ticks = self.sim.time_left_ticks
-        events.append(("phase_start", {"phase": "quan"}))
+        events.append(("phase_start", {}))
 
     def _start_shop(self, events: list):
+        self.shop_stock = self.sim.snapshot()["stock"]
         self.phase = "shop"
         self.phase_tick = 0
         self.shop_ticks_left = int(self.tuning["shop"]["max_ticks"])
         self.time_left_ticks = self.shop_ticks_left
-        events.append(("phase_start", {"phase": "shop"}))
+        events.append(("phase_start", {}))
 
     def snapshot(self) -> dict:
         plan = self._current_plan()
@@ -102,6 +105,7 @@ class DaySim:
             base.update(self.sim.snapshot())
         else:
             base["shop_ticks_left"] = self.shop_ticks_left
+            base["stock"] = self.shop_stock
         return base
 
     def step(self, inp):
@@ -112,7 +116,7 @@ class DaySim:
             self.time_left_ticks = self.sim.time_left_ticks
             events.extend(ev)
             if self.sim.done:
-                inv = {} if self.sim.reason == "fainted" else self.sim.inventory_items()
+                inv = self.sim.hold if self.individual else self.sim.inventory_items()
                 self._start_quan(inv, events)
             return events
 
@@ -157,8 +161,7 @@ class DaySim:
             return
         self.money -= price
         self.upgrades[item] = cur_lvl + 1
-        events.append({"upgrade": item, "level": cur_lvl + 1, "price": price, "money": self.money}
-                      if False else ("bought", {"upgrade": item, "level": cur_lvl + 1, "price": price, "money": self.money}))
+        events.append(("bought", {"upgrade": item, "level": cur_lvl + 1, "price": price, "money": self.money}))
 
     def _finish_shop(self, reason: str, events: list):
         events.append(("shop_end", {"reason": reason}))
@@ -170,6 +173,6 @@ class DaySim:
         self.day += 1
         self._start_day(initial=False)
         plan = self._current_plan()
-        events.append(("day_start", {"day": self.day}))
+        events.append(("day_start", {}))
         events.append(("day_plan", plan))
-        events.append(("phase_start", {"phase": "gather"}))
+        events.append(("phase_start", {}))

@@ -1,0 +1,26 @@
+{
+  "os": "Windows",
+  "python": "3.14.9",
+  "artifact": "cho-noi-v1.0.0.zip",
+  "checks": [
+    "ZIP integrity",
+    "clean extraction",
+    "MIT LICENSE and release notes",
+    "Test Contract v1.3",
+    "live canvas, asset, main menu and start",
+    "one complete headless day from the unpacked ZIP"
+  ],
+  "demo_end": {
+    "type": "end",
+    "ticks": 1202,
+    "sim_tick": 1202,
+    "mode": "day",
+    "state": "finished",
+    "reason": "days_complete",
+    "money": 70,
+    "earned": 70,
+    "reputation": 3.2,
+    "score": 370,
+    "days_completed": 1
+  }
+}

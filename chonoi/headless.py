@@ -4,6 +4,7 @@ Mã thoát: 0 bình thường; 2 tham số/đầu vào sai (kiểm TRƯỚC khi 
 """
 
 import argparse
+import math
 import os
 import sys
 
@@ -11,6 +12,7 @@ from .contract import load_contract
 from .errors import BadInput
 from .inputs import load_frames
 from .inventory import menu_ingredients, read_inventory
+from .leaderboard import record
 from .runner import run
 from .scenario import load_scenario
 
@@ -43,6 +45,8 @@ def main(argv=None) -> int:
     p.add_argument("--inventory")
     p.add_argument("--inventory-out", dest="inventory_out")
     p.add_argument("--snapshot-every", dest="snapshot_every", type=_int("snapshot-every"), default=10)
+    p.add_argument("--leaderboard")
+    p.add_argument("--player-name")
     a = p.parse_args(argv)
     try:
         if a.days is not None:
@@ -59,24 +63,34 @@ def main(argv=None) -> int:
             raise BadInput("--inventory chỉ dùng với quan")
         if a.inventory_out and a.mode != "gather":
             raise BadInput("--inventory-out chỉ dùng với gather")
-        outs = [x for x in (a.out, a.inventory_out) if x]
+        if (a.leaderboard is None) != (a.player_name is None):
+            raise BadInput("--leaderboard và --player-name phải đi cùng nhau")
+        if a.leaderboard is not None and (a.mode != "day" or not a.player_name.strip()):
+            raise BadInput("bảng xếp hạng cần mode day và tên người chơi")
+        outs = [x for x in (a.out, a.inventory_out, a.leaderboard) if x]
         ins = [x for x in (a.scenario, a.inputs, a.inventory) if x]
         paths = [os.path.abspath(x) for x in outs + ins]
         if len(set(paths)) != len(paths):
             raise BadInput("các đường dẫn đầu vào/đầu ra phải khác nhau")
         contract = load_contract()
+        if a.leaderboard is not None and "leaderboard" not in contract.get("extensions", []):
+            raise BadInput("bảng xếp hạng chưa bật trong manifest")
         tuning = contract["tuning"]
         scenario = load_scenario(a.scenario, a.mode, tuning)
         frames = load_frames(a.inputs)
-        inventory = read_inventory(a.inventory, menu_ingredients(tuning["menu"])) if a.inventory else None
+        inventory = (read_inventory(a.inventory, menu_ingredients(tuning["menu"]),
+                                    individual="freshness" in tuning) if a.inventory else None)
         if inventory is not None and "stock" in scenario:
             raise BadInput("vừa có quan.stock vừa có --inventory")
     except BadInput as e:
         sys.stderr.write(f"đầu vào sai: {e}\n")
         return 2
     try:
-        run(a.mode, tuning, scenario, a.seed, frames, a.ticks, a.out, a.snapshot_every,
-            inventory=inventory, inventory_out=a.inventory_out, days=days)
+        sim = run(a.mode, tuning, scenario, a.seed, frames, a.ticks, a.out, a.snapshot_every,
+                  inventory=inventory, inventory_out=a.inventory_out, days=days)
+        if a.leaderboard and a.scenario is None and days == 5 and sim.reason == "days_complete":
+            score = sim.earned + tuning["score"]["reputation_multiplier"] * math.floor(sim.reputation)
+            record(a.leaderboard, name=a.player_name, score=score, seed=a.seed)
     except BadInput as e:  # lỗi mức luật phát hiện lúc dựng sim
         sys.stderr.write(f"đầu vào sai: {e}\n")
         return 2

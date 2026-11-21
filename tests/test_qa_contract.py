@@ -3,6 +3,7 @@
 Kỳ vọng lấy từ PRD-0, không từ code. Test đỏ = lệch PRD: báo chủ lát, không sửa test cho xanh.
 """
 
+import json
 import os
 import unittest
 
@@ -124,13 +125,17 @@ class AC_01_06(unittest.TestCase):
             self.assertEqual(run("quan", block, ticks=0)["code"], 2, f"AC-P1-04 quan {name}")
 
     def test_ac_p1_04_truong_chua_ho_tro_invuln_ticks(self):
-        # PRD mục D liệt kê gather.player: pos, vel, heading_deg, oxygen_ticks, hp, zero_oxy_ticks, catch_cd_ticks.
+        # PRD-0 mục D (v1.0) không có invuln_ticks nên phải thoát mã 2; TICKET-02 mục 4.3 (v1.1) thêm trường này vào
+        # gather.player nên từ v1.1 phải hợp lệ. Kỳ vọng đổi theo contract_version (lý do: luật mới của Phase 2).
+        with open("game.contract.json", encoding="utf-8") as f:
+            version = json.load(f)["contract_version"]
         r = run("gather", {"player": {"invuln_ticks": 5}}, ticks=0)
-        self.assertEqual(r["code"], 2, "AC-P1-04: trường chưa hỗ trợ (invuln_ticks) phải thoát mã 2")
+        want = 2 if version == "1.0" else 0
+        self.assertEqual(r["code"], want, f"AC-P1-04: invuln_ticks với contract {version} phải thoát mã {want}")
 
     def test_ac_p1_05_nut_chi_tac_dong_o_canh_len(self):
         fish = [{"id": f"F{i}", "kind": "ca_loc", "pos": [20 + i * 0.2, 5 + i * 0.1]} for i in range(1, 4)]
-        sc = {"player": {"pos": [20, 5]}, "fish": fish}
+        sc = {"player": {"pos": [20, 5]}, "fish": fish, "random_fish": False}  # v1.1: cá fixture chỉ đứng yên khi tắt random_fish
         held = run("gather", sc, [{"tick": 0, "catch": True}], ticks=150)
         self.assertEqual(len(ev(held["rows"], "fish_caught")), 1, "AC-P1-05: giữ phím không bắn lại")
         again = run("gather", sc, [{"tick": 0, "catch": True}, {"tick": 50, "catch": False}, {"tick": 60, "catch": True}], ticks=150)
