@@ -1,5 +1,14 @@
 # Clarify — câu hỏi và câu trả lời (PO ghi, cả nhóm dùng chung)
 
+## Phase 3 và Phase 4
+
+| # | Câu hỏi | Trả lời | Nguồn |
+|---|---|---|---|
+| P3-01 | Ngưỡng 30 tính trước hay sau khi xuất số? | Hàng có fresh đúng 30 còn dùng được. Hàng chuyển sang ươn ở bước đầu làm fresh thấp hơn 30. | TICKET-03 mục 1 |
+| P3-02 | Khi kế hoạch lặp hoặc dùng fixture có cấp lại ID? | Giữ ID fixture ở Ngày 1. Các lần tạo sau dùng ID mới tiếp nối ngay cả khi hàng cũ đã bị dùng hoặc bỏ. | TICKET-03 mục 1 |
+| P4-01 | Số FPS có chặn phát hành ở bài chấm? | Chấm benchmark chạy được và có JSON đúng cấu trúc. Các ngưỡng FPS và thời gian tải dùng để báo cáo. | TICKET-04 mục 1 |
+| P4-02 | Giấy phép và trạng thái phát hành? | Mã nguồn MIT, tài sản SVG CC0. Nhóm đã duyệt bản v1.0.0, gói ZIP và ghi chú phát hành đã hoàn thiện. Tag và GitHub Release chưa công bố. | PO xác nhận nhóm đã duyệt |
+
 Cập nhật ngày 2026-11-21 theo [PRD-0](../PRD-0.md), Test Contract v1.0.
 
 | #   | Ngày giờ         | Câu hỏi                                                                                                              | Trả lời / giả định                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Ai quyết |

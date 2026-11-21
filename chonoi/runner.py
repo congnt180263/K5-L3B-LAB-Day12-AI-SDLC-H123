@@ -102,7 +102,7 @@ class Session:
                     row["phase"] = self.sim.phase
                 elif name == "phase_start":
                     row["day"] = self.sim.day
-                    row["phase"] = data["phase"]
+                    row["phase"] = self.sim.phase
                 else:
                     row["day"] = day_before
             out.append(row)
@@ -146,7 +146,10 @@ def run(mode, tuning, scenario, seed, frames, ticks, out_path, snapshot_every, i
         if last_snapped != sess.tick:
             w.write(sess.snapshot())
         w.write(sess.end_row())
-    finally:
+    except BaseException:
+        w.close(commit=False)
+        raise
+    else:
         w.close()
     sess.write_inventory_if_done(inventory_out)
     return sess.sim

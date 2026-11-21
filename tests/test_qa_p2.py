@@ -54,7 +54,7 @@ class P2_Contract(unittest.TestCase):
     def test_ac_p2_01_khoa_v11(self):
         g = TUNING["gather"]
         self.assertEqual(CONTRACT["contract_version"], "1.1")
-        self.assertEqual(len(g["fish_initial"]), 8, "AC-P2-01: fish_initial là 8")
+        self.assertEqual(g["fish_initial"], 8, "AC-P2-01: TICKET-02 mục 4.1 dùng số 8")
         for k, want in (("fish_speed", 1.5), ("fish_turn_ticks", 120), ("fish_max", 12), ("fish_spawn_ticks", 360),
                         ("fish_spawn_clearance", 1)):
             self.assertEqual(g.get(k), want, f"AC-P2-01: {k}")

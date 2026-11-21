@@ -8,7 +8,7 @@ phải có đúng một món, khách eating thiếu giá/tip...) — xem PRD-0 m
 import json
 
 from .errors import BadInput
-from .inventory import KINDS_P1, KINDS_V11, menu_ingredients, validate_items
+from .inventory import KINDS_P1, KINDS_V11, individual_items, menu_ingredients, validate_items
 
 GATHER_KEYS = {"player", "hold", "nodes", "fish", "monsters", "random_fish", "time_left_ticks"}
 GATHER_PLAYER_KEYS = {"pos", "vel", "heading_deg", "hp", "oxygen_ticks", "zero_oxy_ticks",
@@ -110,7 +110,9 @@ def _validate_gather(b, tuning):
         raise BadInput("random_fish phải là boolean")
     if "hold" in b:
         h = b["hold"]
-        if not isinstance(h, list) or any(k not in KINDS_V11 for k in h):
+        if "freshness" in tuning:
+            individual_items(h)
+        elif not isinstance(h, list) or any(k not in KINDS_V11 for k in h):
             raise BadInput("hold phải là mảng id nguyên liệu hợp lệ")
         if len(h) > g["hold_capacity"]:
             raise BadInput("hold vượt sức chứa")
@@ -189,16 +191,27 @@ def _validate_day(d, tuning):
         raise BadInput("day.money không được lớn hơn day.earned")
     if "day_plan" in d:
         menu = tuning["menu"]
+        days = set()
+        if not isinstance(d["day_plan"], list):
+            raise BadInput("day_plan phải là mảng kế hoạch theo ngày")
         for entry in d["day_plan"]:
-            dishes = entry.get("dishes", {})
+            if not isinstance(entry, dict):
+                raise BadInput("mỗi kế hoạch phải là object")
+            day, dishes = entry.get("day"), entry.get("dishes")
+            if type(day) is not int or not 1 <= day <= len(tuning["day_plan"]) or day in days:
+                raise BadInput("ngày trong day_plan ngoài miền hoặc bị trùng")
+            days.add(day)
+            if not isinstance(dishes, dict) or not dishes:
+                raise BadInput("mỗi kế hoạch cần ít nhất một món")
             expected = {}
             for dish_id, qty in dishes.items():
-                if dish_id not in menu:
+                if dish_id not in menu or type(qty) is not int or qty <= 0:
                     raise BadInput(f"day_plan: món lạ {dish_id}")
                 for ing, amt in menu[dish_id]["recipe"].items():
                     expected[ing] = expected.get(ing, 0) + amt * qty
-            if entry.get("ingredients") != expected:
+            if "ingredients" in entry and entry["ingredients"] != expected:
                 raise BadInput(f"day_plan ngày {entry.get('day')}: ingredients không khớp công thức")
+            entry["ingredients"] = expected
 
 
 def _validate_quan(b, tuning):
@@ -206,7 +219,8 @@ def _validate_quan(b, tuning):
         if arr in b:
             _check_ids(arr, b[arr])
     if "stock" in b:
-        validate_items(b["stock"], menu_ingredients(tuning["menu"]))
+        validate = individual_items if "freshness" in tuning else validate_items
+        validate(b["stock"], menu_ingredients(tuning["menu"]))
     p = b.get("player", {})
     if not isinstance(p, dict) or set(p) - QUAN_PLAYER_KEYS:
         raise BadInput("quan.player chỉ có pos và vel")

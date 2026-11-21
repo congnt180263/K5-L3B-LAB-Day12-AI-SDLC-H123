@@ -14,6 +14,8 @@ import sys
 import tempfile
 import unittest
 
+from helpers import expand_python
+
 sys.path.insert(0, "tools")
 import check_team  # noqa: E402  (đọc bảng TEAM.md bằng đúng code của lab)
 
@@ -34,7 +36,7 @@ def read(path):
 
 def need_cmd(tc, key):
     tc.assertIn(key, CONTRACT, f"game.contract.json chưa khai {key}")
-    return shlex.split(CONTRACT[key])
+    return expand_python(shlex.split(CONTRACT[key]))
 
 
 def run_cmd(args, timeout):

@@ -1,0 +1,12 @@
+{
+  "gather_jsonl_sha256": "04a14e6186df16c7135a4e887417073867421f4f4959918f681da3a4c4c9a4a6",
+  "inventory_sha256": "558904976360279e742b888783c3e9ebe634cadf10a825b4b7ae6e80a6aad2b4",
+  "quan_stock": [
+    {
+      "id": "I1",
+      "kind": "ca_loc",
+      "fresh": 99.99166666666666
+    }
+  ],
+  "equal_per_byte": true
+}

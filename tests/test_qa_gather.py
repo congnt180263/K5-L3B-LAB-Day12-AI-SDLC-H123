@@ -240,7 +240,7 @@ class AC_Bat(unittest.TestCase):
         s1 = snap(rows, 1)
         self.assertEqual(s1["hold_count"], cap - 1, "AC-P1-21: giỏ không đổi")
         self.assertEqual([f["id"] for f in s1["fish"]], ["F1", "F2"], "AC-P1-21: giữ đàn")
-        self.assertEqual(s1["player"]["catch_cd_ticks"], int(g["catch_cooldown_s"] * 60), "AC-P1-21: giữ hồi chiêu")
+        self.assertEqual(s1["player"]["catch_cd_ticks"], 0, "AC-P1-21: lần bắt thiếu chỗ không đặt hồi chiêu")
 
     def test_ac_p1_21_khong_co_dan_trong_tam_thi_khong_su_kien_khong_hoi_chieu(self):
         sc = {"player": {"pos": [20, 5]}, "fish": [self.fish("F1", "ca_loc", 25, 5)]}

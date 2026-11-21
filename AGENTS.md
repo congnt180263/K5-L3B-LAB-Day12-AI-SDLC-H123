@@ -4,10 +4,11 @@
 
 ## Lệnh
 - Kiểm tra thành viên: `python tools/check_team.py` (CI/Linux: `python3 tools/check_team.py`)
-- Test (Linux/CI): `PYTHONPATH=tests:. python3 -m unittest discover -s tests -v`
-- Test nhanh trên Windows (PowerShell): `$env:PYTHONPATH="tests;."; python -m unittest tests/test_gather_rules.py tests/test_python_starter_units.py tests/test_team_check.py -v`
-- Headless: `python -m chonoi.headless --mode gather|quan --seed 1 --ticks 600 --out out.jsonl`
-- Chơi thử trên trình duyệt: `python -m chonoi.live --mode gather|quan` (mở địa chỉ in ra; WASD, E, Space, R)
+- Test (Linux/CI): `python3 tools/verify.py` (v1.3 và hồi quy v1.1 trong bản sao tạm)
+- Test trên Windows (PowerShell): `python -X utf8 tools/verify.py` (thêm `--profile legacy` để chạy riêng hồi quy v1.1)
+- Headless: `python -m chonoi.headless --mode day --days 1 --seed 1 --ticks 22200 --out out.jsonl`
+- Bench/soak: `python -m chonoi.bench --seed 42 --duration 30 --out bench.json` và `python -m chonoi.soak --seed 7 --days 10 --out soak.json`
+- Chơi thử trên trình duyệt: `python -m chonoi.live` (mở địa chỉ in ra; WASD, E, Space, H)
 
 ## Cấu trúc & quy ước
 - (Starter Python là TÙY CHỌN; nhóm có thể dùng ngôn ngữ khác nếu giữ Test Contract.) Khung do giảng viên cấp: `chonoi/{headless,inputs,scenario,contract,rng,ids,jsonl,inventory,runner,live}.py` và `chonoi/web/`. Hạn chế sửa; nếu phải sửa thì báo cả nhóm và ghi lại lý do.

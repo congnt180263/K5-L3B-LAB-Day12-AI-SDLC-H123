@@ -23,7 +23,17 @@ def load_contract(path=DEFAULT_PATH) -> dict:
             c = json.load(f)
     except (OSError, ValueError) as e:
         raise BadInput(f"không đọc được {path}: {e}")
-    validate_tuning(c.get("tuning"))
+    if not isinstance(c, dict) or c.get("contract_version") not in ("1.0", "1.1", "1.2", "1.3"):
+        raise BadInput("contract_version không được hỗ trợ")
+    tuning = c.get("tuning")
+    validate_tuning(tuning)
+    if c["contract_version"] in ("1.2", "1.3"):
+        if not isinstance(tuning.get("freshness"), dict):
+            raise BadInput("thiếu tuning.freshness")
+        for key in ("initial", "gather_decay_per_s", "quan_decay_per_s", "spoiled_below"):
+            _between(f"freshness.{key}", tuning["freshness"].get(key), 0, 100)
+    elif "freshness" in tuning:
+        raise BadInput("freshness yêu cầu contract v1.2 trở lên")
     return c
 
 
@@ -95,6 +105,11 @@ def _validate_gather(g):
     if not {"bong_dien_dien", "bong_sung"} <= kinds:
         raise BadInput("tuning.gather.nodes phải có ít nhất bong_dien_dien và bong_sung")
     fish = g.get("fish_initial")
+    if type(fish) is int:
+        _int_between("gather.fish_initial", fish, 8, 8)
+        if not all(key in g for key in ("fish_spawn_x", "fish_spawn_depths", "fish_weights")):
+            raise BadInput("fish_initial dạng số cần dữ liệu sinh cá")
+        return
     if not isinstance(fish, list) or len(fish) not in (6, 8):
         raise BadInput("tuning.gather.fish_initial phải là danh sách 6 hoặc 8 đàn")
     seen = set()

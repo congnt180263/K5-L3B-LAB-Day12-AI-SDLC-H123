@@ -14,7 +14,7 @@ from qa_util import ev, ev_at, run, snap
 
 with open("game.contract.json", encoding="utf-8") as _f:
     CONTRACT = json.load(_f)
-ACTIVE = CONTRACT.get("contract_version") == "1.2" or bool(os.environ.get("QA_P3"))
+ACTIVE = CONTRACT.get("contract_version") in ("1.2", "1.3") or bool(os.environ.get("QA_P3"))
 needs_v12 = unittest.skipUnless(ACTIVE, "contract chưa lên 1.2 (đặt QA_P3=1 để chạy thử)")
 
 G_TICK = 0.5 / 60  # hao mỗi tick ở giỏ
@@ -49,7 +49,7 @@ NOFISH = {"random_fish": False}
 @needs_v12
 class P3_Hop_dong_va_kho(unittest.TestCase):
     def test_ac_p3_01_contract_va_freshness(self):
-        self.assertEqual(CONTRACT["contract_version"], "1.2")
+        self.assertIn(CONTRACT["contract_version"], ("1.2", "1.3"))
         self.assertEqual(CONTRACT["tuning"].get("freshness"),
                          {"initial": 100, "gather_decay_per_s": 0.5, "quan_decay_per_s": 0.25, "spoiled_below": 30}, "AC-P3-01")
 

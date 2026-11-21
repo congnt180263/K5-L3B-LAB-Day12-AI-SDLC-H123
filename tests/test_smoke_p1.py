@@ -42,7 +42,8 @@ class Contract(unittest.TestCase):
             for key in ("oxygen_ticks", "hp", "oxygen_max_ticks", "hp_max", "at_surface"):
                 self.assertIn(key, s["player"])
             self.assertEqual(s["hold_capacity"], tuning_gather()["hold_capacity"])
-            self.assertEqual(len(s["fish"]), len(tuning_gather()["fish_initial"]))  # 6 ở v1.0, 8 ở v1.1
+            initial = tuning_gather()["fish_initial"]
+            self.assertEqual(len(s["fish"]), initial if isinstance(initial, int) else len(initial))
             self.assertTrue(all(n["pos"][1] == 0 for n in s["nodes"]))
 
     def test_con_02_deterministic_bytes(self):

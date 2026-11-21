@@ -15,17 +15,44 @@ Cách làm việc kỹ thuật là **tự do** (push thẳng, nhánh + PR, pair,
 
 ## Bắt đầu nhanh
 
+Máy cần Python 3.10 trở lên và trình duyệt. Bản chơi dùng thư viện chuẩn Python.
+
 ```bash
-git clone <fork-của-nhóm> && cd <fork-của-nhóm>
-PYTHONPATH=tests:. python3 -m unittest discover -s tests -v        # smoke test
-python3 -m chonoi.live --mode gather                                # chơi thử trên trình duyệt (tùy chọn)
+git clone https://github.com/congnt180263/K5-L3B-LAB-Day12-AI-SDLC-H123.git
+cd K5-L3B-LAB-Day12-AI-SDLC-H123
+python3 -m chonoi.live
 ```
 
-Game cần chế độ **headless** theo Test Contract (`python3 -m chonoi.headless --mode gather|quan …`) để được chạy và chấm tự động. **Công nghệ không ràng buộc**: khung Python trong `chonoi/` chỉ là gợi ý, chi tiết ở [`docs/STARTER.md`](docs/STARTER.md).
+Mở địa chỉ terminal in ra và chọn **Chơi 5 ngày**. Dùng WASD hoặc mũi tên để di chuyển, E để hái, cập bến, nấu và phục vụ, Space để bắt cá, Esc để tạm dừng và H để bật tương phản cao. Trong quán, nấu ở bếp, lấy món khi chín và giao đúng bàn. Shop mở cuối Ngày. Điểm bằng tổng thu cộng 100 lần phần nguyên của uy tín.
 
-## Tự do sáng tạo
+### Kiểm chứng và đóng gói
+
+```bash
+python3 tools/verify.py
+python3 -m chonoi.headless --mode day --days 1 --seed 42 --ticks 22200 --out day.jsonl
+python3 -m chonoi.bench --seed 42 --duration 30 --out bench.json
+python3 -m chonoi.soak --seed 7 --days 10 --out soak.json
+python3 tools/package_release.py --out dist/cho-noi-v1.0.0.zip
+```
+
+Benchmark và bộ kiểm chứng đầy đủ cần Node.js 22 trở lên và Chrome, Chromium hoặc Edge. Đặt `CHONOI_BROWSER` nếu trình duyệt nằm ngoài vị trí mặc định. Bản phát hành `v1.0.0` dùng Test Contract v1.3. Ví dụ kho cá thể nằm trong [tài liệu hợp đồng](docs/contracts/README.md). [Ghi chú phát hành](RELEASE_NOTES.md)
+
+### Bảng xếp hạng cục bộ
+
+```bash
+python3 -m chonoi.headless --mode day --days 5 --seed 42 --ticks 111000 --out day.jsonl --leaderboard leaderboard.json --player-name "Út Sen"
+python3 -m chonoi.live --export-leaderboard scores.json --leaderboard leaderboard.json
+```
+
+## Sáng tạo của nhóm
 
 Ngoài phần đề yêu cầu, nhóm được **thêm** nhân vật, loài cá/cây, sinh vật, món, bản đồ, cơ chế, câu chuyện, đồ họa, âm nhạc… với ba điều kiện: **không phá phần cố định** (tắt ở headless), ghi mục **"Sáng tạo của nhóm"** trong README của nhóm, và **làm lõi đúng trước**.
+
+Giao diện trình duyệt có menu Chơi/Thoát, bảng kế hoạch của Má Tư, màn chuyển buổi, kết quả ngày, Shop, tổng kết, pause và chế độ tương phản cao. SVG cá kèo, kèo nèo, cá sấu và món ăn được bổ sung; cá, cây, bọt nước và Út Sen có chuyển động nhẹ trên canvas. Phần đồ họa chỉ đọc snapshot, không thay đổi kết quả headless.
+
+Bảng xếp hạng là mở rộng được khai trong manifest. Bài kiểm tra xác nhận tối đa 10 mục và giữ thứ tự ghi khi đồng điểm. [Bằng chứng Phase 4](docs/verification/phase-4.md)
+
+Điều khiển: WASD hoặc phím mũi tên để đi/bơi, `E` hái/cập bến/nấu/bưng, `Space` bắt cá, `Esc`/`P` tạm dừng. Shop dùng nút Mua và Kết thúc ngày. Chạy riêng một buổi bằng `python3 -m chonoi.live --mode gather` hoặc `--mode quan`.
 
 ## Lịch 3 giờ
 
