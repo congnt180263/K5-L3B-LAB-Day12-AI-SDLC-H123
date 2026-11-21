@@ -1,0 +1,289 @@
+{
+  "palette": {
+    "silt": "#B98A4E",
+    "mid": "#8C6431",
+    "deep": "#4A3219",
+    "floor": "#2E1F10",
+    "bubble": "#BFE6F2",
+    "lamp": "#FFE3A3",
+    "khan": "#C8102E",
+    "ao": "#4FA36B",
+    "skin": "#E3B48A",
+    "ink": "#211C16",
+    "green": "#3E7B3A",
+    "reed": "#728951",
+    "wood": "#8C5A35",
+    "hair": "#322921",
+    "pants": "#273C36",
+    "dawn": "#F6B07A",
+    "gold": "#F4C430",
+    "light": "#FFF7E8",
+    "mud": "#60462D",
+    "pink": "#F2A0B8",
+    "orange": "#E8863A"
+  },
+  "scale": {
+    "gather_px_per_m": 16,
+    "gather_surface_y_px": 80,
+    "quan_px_per_m": 80
+  },
+  "assets": [
+    {
+      "id": "bg_gather",
+      "file": "backgrounds/bg_gather.svg",
+      "width": 1600,
+      "height": 560,
+      "desc": "Nền buổi sáng: mặt cắt sông 100 m × 30 m, 16 px/m, mặt nước ở y = 80"
+    },
+    {
+      "id": "bg_quan",
+      "file": "backgrounds/bg_quan.svg",
+      "width": 1280,
+      "height": 800,
+      "desc": "Nền buổi tối: nhà bè 16 m × 10 m, 80 px/m (x→phải, z→lên: y = (10−z)×80)"
+    },
+    {
+      "id": "bong_dien_dien",
+      "file": "ingredients/bong_dien_dien.svg",
+      "width": 64,
+      "height": 64,
+      "desc": "Bông điên điển (bong_dien_dien)"
+    },
+    {
+      "id": "bong_sung",
+      "file": "ingredients/bong_sung.svg",
+      "width": 64,
+      "height": 64,
+      "desc": "Bông súng (bong_sung)"
+    },
+    {
+      "id": "bubble",
+      "file": "fx/bubble.svg",
+      "width": 32,
+      "height": 32,
+      "desc": "Bọt khí"
+    },
+    {
+      "id": "ca_linh",
+      "file": "ingredients/ca_linh.svg",
+      "width": 48,
+      "height": 24,
+      "desc": "Cá linh (ca_linh), hướng trái"
+    },
+    {
+      "id": "ca_loc",
+      "file": "ingredients/ca_loc.svg",
+      "width": 96,
+      "height": 48,
+      "desc": "Cá lóc (ca_loc), hướng trái"
+    },
+    {
+      "id": "ca_loc_nuong_trui",
+      "file": "dishes/ca_loc_nuong_trui.svg",
+      "width": 96,
+      "height": 96,
+      "desc": "Món: cá lóc nướng trui"
+    },
+    {
+      "id": "catch_ring",
+      "file": "fx/catch_ring.svg",
+      "width": 64,
+      "height": 64,
+      "desc": "Vòng gợi ý tầm bắt cá"
+    },
+    {
+      "id": "customer_topdown",
+      "file": "characters/customer_topdown.svg",
+      "width": 64,
+      "height": 64,
+      "desc": "Khách đội nón lá nhìn từ trên xuống"
+    },
+    {
+      "id": "dock",
+      "file": "restaurant/dock.svg",
+      "width": 192,
+      "height": 64,
+      "desc": "Bến cập (dock_pos [2,0], dock_radius 3 m)"
+    },
+    {
+      "id": "goi_bong_sung",
+      "file": "dishes/goi_bong_sung.svg",
+      "width": 96,
+      "height": 96,
+      "desc": "Món: gỏi bông súng"
+    },
+    {
+      "id": "icon_basket",
+      "file": "ui/icon_basket.svg",
+      "width": 32,
+      "height": 32,
+      "desc": "Giỏ"
+    },
+    {
+      "id": "icon_clock",
+      "file": "ui/icon_clock.svg",
+      "width": 32,
+      "height": 32,
+      "desc": "Thời gian"
+    },
+    {
+      "id": "icon_hand",
+      "file": "ui/icon_hand.svg",
+      "width": 32,
+      "height": 32,
+      "desc": "Món trên tay"
+    },
+    {
+      "id": "icon_heart",
+      "file": "ui/icon_heart.svg",
+      "width": 32,
+      "height": 32,
+      "desc": "Máu"
+    },
+    {
+      "id": "icon_money",
+      "file": "ui/icon_money.svg",
+      "width": 32,
+      "height": 32,
+      "desc": "Tiền (nghìn đồng)"
+    },
+    {
+      "id": "icon_oxygen",
+      "file": "ui/icon_oxygen.svg",
+      "width": 32,
+      "height": 32,
+      "desc": "Oxy"
+    },
+    {
+      "id": "icon_patience",
+      "file": "ui/icon_patience.svg",
+      "width": 32,
+      "height": 32,
+      "desc": "Kiên nhẫn"
+    },
+    {
+      "id": "icon_star",
+      "file": "ui/icon_star.svg",
+      "width": 32,
+      "height": 32,
+      "desc": "Uy tín"
+    },
+    {
+      "id": "lau_ca_linh_dien_dien",
+      "file": "dishes/lau_ca_linh_dien_dien.svg",
+      "width": 96,
+      "height": 96,
+      "desc": "Món: lẩu cá linh bông điên điển"
+    },
+    {
+      "id": "node_bong_dien_dien",
+      "file": "nodes/node_bong_dien_dien.svg",
+      "width": 80,
+      "height": 80,
+      "desc": "Nút hái: bông điên điển (sẵn sàng)"
+    },
+    {
+      "id": "node_bong_sung",
+      "file": "nodes/node_bong_sung.svg",
+      "width": 80,
+      "height": 80,
+      "desc": "Nút hái: bông súng (sẵn sàng)"
+    },
+    {
+      "id": "node_regrowing",
+      "file": "nodes/node_regrowing.svg",
+      "width": 80,
+      "height": 80,
+      "desc": "Nút đang mọc lại (regrow_ticks > 0)"
+    },
+    {
+      "id": "school_ca_linh",
+      "file": "ingredients/school_ca_linh.svg",
+      "width": 112,
+      "height": 64,
+      "desc": "Đàn cá linh (3 con, khớp yield 3)"
+    },
+    {
+      "id": "school_ca_loc",
+      "file": "ingredients/school_ca_loc.svg",
+      "width": 96,
+      "height": 48,
+      "desc": "Đàn cá lóc (1 con, khớp yield 1)"
+    },
+    {
+      "id": "stove_cooking",
+      "file": "restaurant/stove_cooking.svg",
+      "width": 96,
+      "height": 96,
+      "desc": "Bếp B1 đang nấu (cooking)"
+    },
+    {
+      "id": "stove_idle",
+      "file": "restaurant/stove_idle.svg",
+      "width": 96,
+      "height": 96,
+      "desc": "Bếp B1 rảnh (idle)"
+    },
+    {
+      "id": "stove_ready",
+      "file": "restaurant/stove_ready.svg",
+      "width": 96,
+      "height": 96,
+      "desc": "Bếp B1 món đã sẵn (ready)"
+    },
+    {
+      "id": "table_T1",
+      "file": "restaurant/table_T1.svg",
+      "width": 128,
+      "height": 128,
+      "desc": "Bàn T1 nhìn từ trên xuống kèm 2 ghế"
+    },
+    {
+      "id": "ut_sen_side",
+      "file": "characters/ut_sen_side.svg",
+      "width": 96,
+      "height": 96,
+      "desc": "Út Sen nhìn ngang (hướng phải), cảnh lặn"
+    },
+    {
+      "id": "ut_sen_topdown",
+      "file": "characters/ut_sen_topdown.svg",
+      "width": 64,
+      "height": 64,
+      "desc": "Út Sen nhìn từ trên xuống, cảnh nhà bè"
+    }
+  ],
+  "bindings": {
+    "ingredient": {
+      "ca_loc": "ca_loc",
+      "ca_linh": "ca_linh",
+      "bong_dien_dien": "bong_dien_dien",
+      "bong_sung": "bong_sung"
+    },
+    "dish": {
+      "ca_loc_nuong_trui": "ca_loc_nuong_trui",
+      "goi_bong_sung": "goi_bong_sung",
+      "lau_ca_linh_dien_dien": "lau_ca_linh_dien_dien"
+    },
+    "node": {
+      "bong_dien_dien": "node_bong_dien_dien",
+      "bong_sung": "node_bong_sung",
+      "regrowing": "node_regrowing"
+    },
+    "fish": {
+      "ca_linh": "school_ca_linh",
+      "ca_loc": "school_ca_loc"
+    },
+    "stove_state": {
+      "idle": "stove_idle",
+      "cooking": "stove_cooking",
+      "ready": "stove_ready"
+    },
+    "tables": {
+      "T1": "table_T1"
+    },
+    "stoves": {
+      "B1": "stove_idle"
+    }
+  }
+}

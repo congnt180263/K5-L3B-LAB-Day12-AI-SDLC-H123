@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 560" width="1600" height="560"><title>Nền buổi sáng: mặt cắt sông 100 m × 30 m, 16 px/m, mặt nước ở y = 80</title><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6B07A"/><stop offset="1" stop-color="#FFE3A3"/></linearGradient><linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B98A4E"/><stop offset=".45" stop-color="#8C6431"/><stop offset=".85" stop-color="#4A3219"/><stop offset="1" stop-color="#2E1F10"/></linearGradient></defs>
+<rect width="1600" height="80" fill="url(#sky)"/><circle cx="1300" cy="40" r="26" fill="#FFF7E8" opacity=".9"/>
+<path d="M0 80 Q80 52 160 70 T320 66 T480 72 T640 62 T800 70 T960 64 T1120 72 T1280 64 T1440 70 T1600 66 V80Z" fill="#3E7B3A"/>
+<path d="M0 80 Q100 58 200 74 T400 70 T600 76 T800 68 T1000 76 T1200 70 T1400 74 T1600 70 V80Z" fill="#728951"/>
+<rect y="80" width="1600" height="480" fill="url(#water)"/><rect y="80" width="1600" height="3" fill="#FFE3A3" opacity=".6"/>
+<path d="M0 560 V470 Q200 430 400 480 T800 470 T1200 490 T1600 460 V560Z" fill="#2E1F10" opacity=".85"/>
+<path d="M0 560 V500 Q300 470 600 510 T1200 500 T1600 510 V560Z" fill="#2E1F10"/>
+<g stroke="#3E7B3A" stroke-width="4" fill="none" stroke-linecap="round"><path d="M120 520 Q110 470 130 440"/><path d="M420 530 Q440 480 420 450"/><path d="M780 525 Q770 480 790 450"/><path d="M1150 530 Q1170 480 1150 440"/><path d="M1480 520 Q1470 480 1490 455"/></g></svg>

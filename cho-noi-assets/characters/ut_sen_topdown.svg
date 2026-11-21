@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><title>Út Sen nhìn từ trên xuống, cảnh nhà bè</title>
+<g stroke="#211C16" stroke-width="2">
+<ellipse cx="32" cy="38" rx="20" ry="13" fill="#4FA36B"/>
+<ellipse cx="12" cy="40" rx="5" ry="4" fill="#E3B48A"/><ellipse cx="52" cy="40" rx="5" ry="4" fill="#E3B48A"/>
+<circle cx="32" cy="24" r="13" fill="#322921"/>
+<path d="M20 22 Q32 10 44 22 L44 27 Q32 19 20 27Z" fill="#C8102E"/></g>
+<g fill="#FFF7E8" opacity=".7"><rect x="25" y="17" width="2" height="4"/><rect x="31" y="15" width="2" height="4"/><rect x="37" y="17" width="2" height="4"/></g></svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><title>Khách đội nón lá nhìn từ trên xuống</title>
+<g stroke="#211C16" stroke-width="2">
+<ellipse cx="32" cy="46" rx="18" ry="11" fill="#273C36"/>
+<circle cx="32" cy="30" r="19" fill="#F4C430"/>
+<circle cx="32" cy="30" r="12" fill="#E3B341" fill-opacity=".8"/><circle cx="32" cy="30" r="4" fill="#8C5A35"/></g>
+<path d="M32 30 L32 11 M32 30 L49 38 M32 30 L15 38" stroke="#8C5A35" stroke-width="1" opacity=".6"/></svg>

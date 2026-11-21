@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800"><title>Nền buổi tối: nhà bè 16 m × 10 m, 80 px/m (x→phải, z→lên: y = (10−z)×80)</title><defs><linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8C6431"/><stop offset="1" stop-color="#4A3219"/></linearGradient></defs>
+<rect width="1280" height="800" fill="url(#w)"/>
+<g opacity=".25" stroke="#FFF7E8" stroke-width="2" fill="none"><path d="M-20 60 Q160 40 340 60 T700 60 T1060 60 T1300 60"/><path d="M-20 760 Q160 740 340 760 T700 760 T1060 760 T1300 760"/></g>
+<rect x="40" y="40" width="1200" height="720" rx="18" fill="#8C5A35" stroke="#211C16" stroke-width="6"/>
+<g stroke="#7C5229" stroke-width="3"><path d="M40 100 H1240"/><path d="M40 160 H1240"/><path d="M40 220 H1240"/><path d="M40 280 H1240"/><path d="M40 340 H1240"/><path d="M40 400 H1240"/><path d="M40 460 H1240"/><path d="M40 520 H1240"/><path d="M40 580 H1240"/><path d="M40 640 H1240"/><path d="M40 700 H1240"/></g>
+<g fill="#C8102E" opacity=".9"><circle cx="120" cy="64" r="10"/><circle cx="300" cy="64" r="10"/><circle cx="480" cy="64" r="10"/><circle cx="660" cy="64" r="10"/><circle cx="840" cy="64" r="10"/><circle cx="1020" cy="64" r="10"/><circle cx="1160" cy="64" r="10"/></g>
+<path d="M60 64 Q300 100 660 64 T1220 64" stroke="#211C16" stroke-width="3" fill="none"/>
+<g fill="#FFE3A3" opacity=".18"><circle cx="720" cy="640" r="200"/><circle cx="160" cy="160" r="160"/></g></svg>

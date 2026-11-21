@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96"><title>Út Sen nhìn ngang (hướng phải), cảnh lặn</title>
+<g stroke="#211C16" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+<path d="M30 50 L10 66 L16 72 L36 60Z" fill="#273C36"/><path d="M10 66 L2 62 L4 72 Z" fill="#728951"/>
+<path d="M36 52 L20 74 L28 78 L44 58Z" fill="#273C36"/><path d="M20 74 L10 74 L14 82Z" fill="#728951"/>
+<rect x="18" y="40" width="18" height="30" rx="8" fill="#60462D" transform="rotate(-20 27 55)"/>
+<path d="M36 36 Q60 30 66 44 Q62 58 36 60 Q28 52 36 36Z" fill="#4FA36B"/>
+<path d="M54 44 L74 52 L72 58 L52 52Z" fill="#E3B48A"/>
+<circle cx="66" cy="30" r="13" fill="#E3B48A"/>
+<path d="M53 28 Q58 14 74 18 L76 24 Q62 22 54 32Z" fill="#322921"/>
+<path d="M52 24 Q64 12 78 22 L77 27 Q64 20 53 29Z" fill="#C8102E"/>
+<ellipse cx="74" cy="30" rx="8" ry="7" fill="#BFE6F2"/><circle cx="77" cy="31" r="2" fill="#211C16"/>
+<path d="M70 38 Q74 41 78 38" fill="none"/></g>
+<g fill="#FFE3A3"><circle cx="44" cy="46" r="1.8"/><circle cx="52" cy="48" r="1.8"/></g></svg>
