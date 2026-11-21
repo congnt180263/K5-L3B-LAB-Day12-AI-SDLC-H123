@@ -251,6 +251,62 @@
       "width": 64,
       "height": 64,
       "desc": "Út Sen nhìn từ trên xuống, cảnh nhà bè"
+    },
+    {
+      "id": "school_ca_keo",
+      "file": "ingredients/school_ca_keo.svg",
+      "width": 112,
+      "height": 64,
+      "desc": "Đàn cá kèo"
+    },
+    {
+      "id": "node_keo_neo",
+      "file": "nodes/node_keo_neo.svg",
+      "width": 80,
+      "height": 80,
+      "desc": "Nút kèo nèo"
+    },
+    {
+      "id": "ca_sau",
+      "file": "characters/ca_sau.svg",
+      "width": 160,
+      "height": 70,
+      "desc": "Cá Sấu Năm Chèo"
+    },
+    {
+      "id": "canh_chua_ca_loc",
+      "file": "dishes/canh_chua_ca_loc.svg",
+      "width": 96,
+      "height": 96,
+      "desc": "Canh chua cá lóc"
+    },
+    {
+      "id": "ca_keo_nuong",
+      "file": "dishes/ca_keo_nuong.svg",
+      "width": 96,
+      "height": 96,
+      "desc": "Cá kèo nướng"
+    },
+    {
+      "id": "lau_mam",
+      "file": "dishes/lau_mam.svg",
+      "width": 96,
+      "height": 96,
+      "desc": "Lẩu mắm"
+    },
+    {
+      "id": "ca_keo",
+      "file": "ingredients/ca_keo.svg",
+      "width": 64,
+      "height": 64,
+      "desc": "Cá kèo"
+    },
+    {
+      "id": "keo_neo",
+      "file": "ingredients/keo_neo.svg",
+      "width": 64,
+      "height": 64,
+      "desc": "Kèo nèo"
     }
   ],
   "bindings": {
@@ -258,21 +314,28 @@
       "ca_loc": "ca_loc",
       "ca_linh": "ca_linh",
       "bong_dien_dien": "bong_dien_dien",
-      "bong_sung": "bong_sung"
+      "bong_sung": "bong_sung",
+      "ca_keo": "ca_keo",
+      "keo_neo": "keo_neo"
     },
     "dish": {
       "ca_loc_nuong_trui": "ca_loc_nuong_trui",
       "goi_bong_sung": "goi_bong_sung",
-      "lau_ca_linh_dien_dien": "lau_ca_linh_dien_dien"
+      "lau_ca_linh_dien_dien": "lau_ca_linh_dien_dien",
+      "canh_chua_ca_loc": "canh_chua_ca_loc",
+      "ca_keo_nuong": "ca_keo_nuong",
+      "lau_mam": "lau_mam"
     },
     "node": {
       "bong_dien_dien": "node_bong_dien_dien",
       "bong_sung": "node_bong_sung",
-      "regrowing": "node_regrowing"
+      "regrowing": "node_regrowing",
+      "keo_neo": "node_keo_neo"
     },
     "fish": {
       "ca_linh": "school_ca_linh",
-      "ca_loc": "school_ca_loc"
+      "ca_loc": "school_ca_loc",
+      "ca_keo": "school_ca_keo"
     },
     "stove_state": {
       "idle": "stove_idle",

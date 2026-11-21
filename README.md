@@ -18,7 +18,7 @@ Cách làm việc kỹ thuật là **tự do** (push thẳng, nhánh + PR, pair,
 ```bash
 git clone <fork-của-nhóm> && cd <fork-của-nhóm>
 PYTHONPATH=tests:. python3 -m unittest discover -s tests -v        # smoke test
-python3 -m chonoi.live --mode gather                                # chơi thử trên trình duyệt (tùy chọn)
+python3 -m chonoi.live                                              # chơi 5 ngày trên trình duyệt
 ```
 
 Game cần chế độ **headless** theo Test Contract (`python3 -m chonoi.headless --mode gather|quan …`) để được chạy và chấm tự động. **Công nghệ không ràng buộc**: khung Python trong `chonoi/` chỉ là gợi ý, chi tiết ở [`docs/STARTER.md`](docs/STARTER.md).
@@ -26,6 +26,10 @@ Game cần chế độ **headless** theo Test Contract (`python3 -m chonoi.headl
 ## Tự do sáng tạo
 
 Ngoài phần đề yêu cầu, nhóm được **thêm** nhân vật, loài cá/cây, sinh vật, món, bản đồ, cơ chế, câu chuyện, đồ họa, âm nhạc… với ba điều kiện: **không phá phần cố định** (tắt ở headless), ghi mục **"Sáng tạo của nhóm"** trong README của nhóm, và **làm lõi đúng trước**.
+
+Giao diện trình duyệt có menu Chơi/Thoát, bảng kế hoạch của Má Tư, màn chuyển buổi, kết quả ngày, Shop, tổng kết, pause và chế độ tương phản cao. SVG cá kèo, kèo nèo, cá sấu và món ăn được bổ sung; cá, cây, bọt nước và Út Sen có chuyển động nhẹ trên canvas. Phần đồ họa chỉ đọc snapshot, không thay đổi kết quả headless.
+
+Điều khiển: WASD hoặc phím mũi tên để đi/bơi, `E` hái/cập bến/nấu/bưng, `Space` bắt cá, `Esc`/`P` tạm dừng. Shop dùng nút Mua và Kết thúc ngày. Chạy riêng một buổi bằng `python3 -m chonoi.live --mode gather` hoặc `--mode quan`.
 
 ## Lịch 3 giờ
 
