@@ -32,3 +32,16 @@
 - **So sánh ngưỡng 30 và `floor` giá.** Dùng phép tính chính xác (ví dụ 240 đơn vị mỗi điểm tươi, trừ 2/tick ở gather và 1/tick ở quán) để khỏi sai số số thực; test QA đã dựng fixture đúng ngưỡng.
 - **Hết thời gian cho mở rộng:** làm lõi đúng trước; nếu mở rộng chưa xong, khai trung thực trong README.
 - **Handle/vai trong `TEAM.md` vẫn lệch** (xem `docs/plan/phase-2.md`); sửa để commit được tính.
+
+## Hồi quy P1–P2 khi bật v1.2: test nào giữ, đổi hay thêm (QA, TV5)
+
+| Nhóm test | Giữ nguyên | Phải đổi (lý do: luật mới của TICKET-03) |
+|---|---|---|
+| `test_qa_gather.py` | AC-P1-11..15 (dive/surface, oxy, ngạt, nổi lên), AC-P1-22 (bến trước hái) không dùng giỏ | AC-P1-16..21, 23..25: `hold` chuyển từ mảng kind sang mảng cá thể `{id,kind,fresh}`; `faint.lost` và file kho theo schema mới; `hold_full` giữ nguyên payload |
+| `test_qa_contract.py` | AC-P1-01..03, 05, 06 (cờ, mã thoát, tất định, inputs) | AC-P1-26..28 (file kho đếm trả mã 2 ở v1.2, phải viết lại theo mảng cá thể); AC-P1-04 và AC-P1-06 chỉ đổi kiểu `stock`/`hold` mặc định từ `{}`/`[]` sang `[]` |
+| `test_qa_quan.py` | AC-P1-29..31 (lịch khách), AC-P1-33, 34 (kiên nhẫn) về logic | `stock` và `reserved` đổi sang cá thể/id; **mọi số tiền phải tính lại**: giá theo tươi làm hàng đã hao ít nhất 1 tick cho `base_price` 59 thay vì 60, boa 11 thay vì 12, thu 70 thay vì 72, điểm 370 thay vì 372 (AC-P1-36..42) |
+| `test_qa_p2.py` | toàn bộ AC-P2 về cá bơi, Cá Sấu, pause, `day` không dùng kho | AC-P2-30, 32 (bàn giao kho, giữ qua Ngày) theo schema cá thể |
+| Test giảng viên/nhóm khác (`test_smoke_p1.py`, `test_gather_rules.py`, `test_quan_customers.py`) | phần di chuyển, ramp, mép, mã thoát | kho/`stock`/`hold` và tiền theo schema mới: chủ test (TV1, TV2) cập nhật, QA kiểm lại |
+| **Thêm mới** | `test_qa_p3.py` (21 AC: tươi, ươn, giữ theo id, giá, kho cá thể) | thêm AC-P3-08, 22..25, 27..30 khi code sẵn sàng |
+
+**Cách làm:** thêm hàm tạo fixture theo `contract_version` trong `tests/qa_util.py` (dựng kho dạng đếm ở 1.0/1.1, dạng cá thể ở 1.2) để một bộ test chạy được cả hai phiên bản. Với số tiền, dùng công thức `floor(niêm yết × TB fresh / 100)` thay vì hard-code; mỗi test đổi ghi lý do trong commit.
