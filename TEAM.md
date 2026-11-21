@@ -7,8 +7,8 @@
 | Nguyễn Thành Công | congnt180263         | `sim/gather`                       | Integrator / Release (giữ `docs/contracts/`, gắn tag)                | `sim/quan` (TV2)     |
 | Đồng Văn Quyến   | dvq2609              | `sim/quan`                         | PO (đầu mối hỏi giảng viên, giữ `docs/clarify.md`)              | `sim/gather` (TV1)   |
 | Nguyễn Trung Hải   | nguyentrunghai7      | `sim/quan-interact` + `scenario` | Harness & Docs Lead (giữ `AGENTS.md`, skills, `ai-usage-log.md`)    | `client/ui` (TV4)    |
-| Nguyễn Tấn Dũng   | dungtran16042003-afk | `client/ui`                        | Demo & Creative Lead (UI `chonoi/web`, âm thanh/đồ họa, Demo)      | `qa` (TV5)           |
-| Nguyễn Văn Cường | nvcuong96            | `qa`                               | QA Lead / Scrum (test, `docs/verification/`, `docs/proof/`, standup) | `scenario` (TV3)     |
+| Nguyễn Văn Cường  | nvcuong96                      | `client/ui`                        | Demo & Creative Lead (UI `chonoi/web`, âm thanh/đồ họa, Demo)      | `qa` (TV5)           |
+| Nguyễn Tấn Dũng  | dungtran16042003-afk            | `qa`                               | QA Lead / Scrum (test, `docs/verification/`, `docs/proof/`, standup) | `scenario` (TV3)     |
 
 **Vai quy trình:** PO (đầu mối hỏi giảng viên, giữ `docs/clarify.md`) · Integrator (giữ `docs/contracts/`, gắn tag) · QA lead · Scrum/Release. Có thể kiêm.
 
