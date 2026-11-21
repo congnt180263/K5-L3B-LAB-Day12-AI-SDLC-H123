@@ -23,13 +23,13 @@
 - **`gather` (phát bởi `GatherSim`):**
   - `dive` (`{"pos": [x, d]}`): từ mặt nước (`d <= surface_depth`) xuống dưới nước.
   - `surface` (`{"pos": [x, d]}`): từ dưới nước lên mặt nước.
-  - `oxygen_empty` (`{"pos": [x, d]}`): oxy giảm từ dương xuống `0`.
+  - `oxygen_empty` (`{"oxygen_ticks": 0}`): oxy giảm từ dương xuống `0`.
   - `choke` (`{"hp": int}`): hết chu kỳ ngạt `choke_interval_ticks`, mất `1` Máu.
-  - `faint` (`{"pos": [x, d]}`): Máu về `0`, mất toàn bộ giỏ.
-  - `gather` (`{"node_id": str, "kind": str, "count": int}`): hái nút ở mặt nước.
+  - `faint` (`{"cause": "choke" | "monster", "lost": [...], "hp": 0}`): Máu về `0`, mất toàn bộ giỏ theo thứ tự LIFO.
+  - `gather` (`{"node_id": str, "kind": str, "amount": int}`): hái nút ở mặt nước.
   - `node_regrown` (`{"node_id": str}`): nút mọc lại xong (`regrow_ticks` về `0`).
-  - `fish_caught` (`{"fish_id": str, "kind": str, "count": int}`): bắt đàn cá bằng `catch` dưới nước.
-  - `hold_full` (`{"capacity": int}`): giỏ không đủ chỗ khi hái hoặc bắt cá.
+  - `fish_caught` (`{"fish_id": str, "kind": str, "yield": int}`): bắt đàn cá bằng `catch` dưới nước.
+  - `hold_full` (`{"action": "gather" | "catch", "node_id" | "fish_id": str, "required": int, "free": int}`): giỏ không đủ chỗ khi hái hoặc bắt cá.
   - `gather_end` (`{"reason": "docked" | "time" | "fainted", "inventory": {"items": ...}}`): kết thúc buổi sáng.
 - **`quan` (phát bởi `QuanSim` — chốt chi tiết theo PRD-0 mục E/F):**
   - `customer_arrived`, `no_dish`, `customer_left`, `cook_started`, `dish_ready`, `dish_picked`, `served`, `paid`, `quan_end`.
