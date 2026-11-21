@@ -154,6 +154,20 @@ def _validate_quan(b, tuning):
         _pos("player.pos", p["pos"], qb, axes=("x", "z"))
     if "vel" in p and not (isinstance(p["vel"], list) and len(p["vel"]) == 2 and all(_num(c) for c in p["vel"])):
         raise BadInput("player.vel phải là [x, z]")
+    for kind, fields in (("stoves", {"id", "pos", "state", "dish", "cook_ticks_left", "ready_ticks"}),
+                         ("tables", {"id", "pos"})):
+        known_ids = {obj["id"] for obj in tuning["quan"][kind]}
+        for obj in b.get(kind, []):
+            if obj["id"] not in known_ids or set(obj) - fields:
+                raise BadInput(f"{kind}: id không tồn tại hoặc trường chưa hỗ trợ")
+            if "pos" in obj:
+                _pos(f"{kind}.{obj['id']}.pos", obj["pos"], qb, axes=("x", "z"))
+    if "random_customers" in b and not isinstance(b["random_customers"], bool):
+        raise BadInput("random_customers phải là boolean")
+    if "reputation" in b:
+        reputation = b["reputation"]
+        if not _num(reputation) or not (tuning["quan"]["reputation_min"] <= reputation <= tuning["quan"]["reputation_max"]):
+            raise BadInput("reputation nằm ngoài miền tuning")
     table_ids = [c.get("table_id") for c in b.get("customers", [])]
     known = {t["id"] for t in tuning["quan"]["tables"]} | {t.get("id") for t in b.get("tables", [])}
     for c in b.get("customers", []):

@@ -1,9 +1,10 @@
 """Buổi tối — Mở Quán, với khách, đơn và giữ chỗ nguyên liệu theo PRD-0.
 
-TODO(nhóm, lát 4): nấu và phục vụ (cook_started, dish_ready, dish_picked, served),
-                   trả tiền khi ăn xong hoặc đóng ca (paid), boa và uy tín.
+Lát 4: timer bếp/ăn, tương tác, thu tiền và kết ca theo PRD-0 mục F.
 """
 
+import copy
+import math
 from collections import Counter
 
 from ..errors import BadInput
@@ -29,6 +30,7 @@ class QuanSim:
     phase = "quan"
 
     def __init__(self, tuning, scenario, streams, ids, inventory=None):
+        scenario = copy.deepcopy(scenario)
         t = tuning["quan"]
         self.t = t
         self.tick_hz = tuning["tick_hz"]
@@ -163,16 +165,16 @@ class QuanSim:
         }
 
     def step(self, inp):
+        if self.done:
+            return []
         events = []
         self.phase_tick += 1
         self.time_left_ticks = max(0, self.time_left_ticks - 1)
-        for customer in self.customers:
-            if customer["state"] == "waiting":
-                customer["patience_ticks_left"] = max(0, customer["patience_ticks_left"] - 1)
-        # TODO(nhóm, lát 4): giảm timer nấu/ăn và cập nhật bếp trước tương tác.
+        self._update_timers(events)
         self._move(inp)
-        # TODO(nhóm, lát 4): tương tác một lần, ghép thu tiền vào lượt xử lý theo id bàn.
-        self._resolve_waiting_customers(events)
+        if inp.pressed("interact"):
+            self._interact(events)
+        self._settle_customers(events)
         if self.time_left_ticks == 0:
             self.done = True
             self.reason = "time"
@@ -182,20 +184,113 @@ class QuanSim:
             self._try_customer_arrival(events)
         return events
 
-    def _resolve_waiting_customers(self, events):
-        closing = self.time_left_ticks == 0
-        for customer in sort_by_id(self.customers, key=lambda c: c["table_id"]):
-            if customer["state"] != "waiting" or (not closing and customer["patience_ticks_left"] > 0):
-                continue
-            if not closing:
-                self.reputation = min(self.t["reputation_max"], max(
-                    self.t["reputation_min"], self.reputation + self.t["left_reputation_delta"]
-                ))
-            self._remove_customer(customer)
-            events.append(("customer_left", {
-                "order_id": customer["id"], "table_id": customer["table_id"],
-                "reason": "closing" if closing else "patience", "reputation": self.reputation,
-            }))
+    def _ticks(self, seconds):
+        return int(round(seconds * self.tick_hz))
+
+    def _order_key(self, customer):
+        return customer["order_tick"], id_key(customer["table_id"])
+
+    def _update_timers(self, events):
+        for s in self.stoves:
+            if s["state"] == "ready":
+                s["ready_ticks"] += 1
+            elif s["state"] == "cooking":
+                s["cook_ticks_left"] = max(0, s["cook_ticks_left"] - 1)
+        for c in self.customers:
+            key = "eat_ticks_left" if c["state"] == "eating" else "patience_ticks_left"
+            c[key] = max(0, c[key] - 1)
+        for s in sort_by_id(self.stoves):
+            if s["state"] == "cooking" and s["cook_ticks_left"] == 0:
+                s["state"], s["ready_ticks"] = "ready", 0
+                events.append(("dish_ready", self._dish_event(s)))
+
+    @staticmethod
+    def _dish_event(stove):
+        return {"stove_id": stove["id"], "order_id": stove["dish"]["order_id"],
+                "dish_id": stove["dish"]["dish_id"]}
+
+    def _interact(self, events):
+        candidates = []
+        for priority, collection in enumerate((self.stoves, self.tables)):
+            for obj in sort_by_id(collection):
+                distance = math.dist(self.pos, obj["pos"])
+                if distance <= self.t["interact_radius"]:
+                    candidates.append((distance, priority, id_key(obj["id"]), obj))
+        if not candidates:
+            return
+        _, priority, _, obj = min(candidates, key=lambda entry: entry[:3])
+        if priority == 0:
+            self._interact_stove(obj, events)
+        else:
+            self._interact_table(obj, events)
+
+    def _interact_stove(self, stove, events):
+        if stove["state"] == "ready" and self.hand is None:
+            events.append(("dish_picked", self._dish_event(stove)))
+            self.hand = stove["dish"]
+            self._clear_stove(stove)
+        elif stove["state"] == "idle":
+            orders = [c for c in self.customers if c["order_status"] == "reserved"]
+            if not orders:
+                return
+            c = min(orders, key=self._order_key)
+            recipe = c["reserved"]
+            for kind, amount in recipe.items():
+                self.stock[kind] -= amount
+            dish = {"order_id": c["id"], "dish_id": c["dish_id"],
+                    "base_price": self.menu[c["dish_id"]]["price"]}
+            items = [kind for kind in sorted(recipe) for _ in range(recipe[kind])]
+            c["reserved"], c["order_status"] = {}, "assigned"
+            stove.update(state="cooking", dish=dish,
+                         cook_ticks_left=self._ticks(self.menu[c["dish_id"]]["cook_s"]), ready_ticks=0)
+            events.append(("cook_started", dict(self._dish_event(stove), items=items,
+                                                base_price=dish["base_price"])))
+
+    def _interact_table(self, table, events):
+        if self.hand is None:
+            return
+        c = next((c for c in self.customers if c["table_id"] == table["id"]), None)
+        if c is None or c["state"] != "waiting" or c["id"] != self.hand["order_id"]:
+            return
+        price = self.hand["base_price"]
+        ratio = c["patience_ticks_left"] / self._ticks(self.t["patience_s"])
+        tip = math.floor(price * self.t["tip_rate"]) if ratio >= self.t["tip_min_patience_ratio"] else 0
+        c.update(state="eating", order_status="served", eat_ticks_left=self._ticks(self.t["eat_s"]),
+                 base_price=price, tip=tip)
+        self.hand = None
+        events.append(("served", {"order_id": c["id"], "table_id": c["table_id"],
+                                  "dish_id": c["dish_id"], "patience_ticks_left": c["patience_ticks_left"],
+                                  "base_price": price, "tip": tip}))
+
+    @staticmethod
+    def _clear_stove(stove):
+        stove.update(state="idle", dish=None, cook_ticks_left=0, ready_ticks=0)
+
+    def _change_reputation(self, delta):
+        self.reputation = min(self.t["reputation_max"], max(self.t["reputation_min"],
+                                                         self.reputation + delta))
+
+    def _settle_customers(self, events):
+        for c in sort_by_id(list(self.customers), key=lambda c: c["table_id"]):
+            if c["state"] == "eating" and (c["eat_ticks_left"] == 0 or self.time_left_ticks == 0):
+                amount = c["base_price"] + c["tip"]
+                self.money += amount
+                self.earned += amount
+                self.shift_earned += amount
+                if c["tip"] > 0:
+                    self._change_reputation(self.t["tip_reputation"])
+                reason = "finished_eating" if c["eat_ticks_left"] == 0 else "closing"
+                events.append(("paid", {"order_id": c["id"], "table_id": c["table_id"],
+                                        "base_price": c["base_price"], "tip": c["tip"],
+                                        "amount": amount, "reason": reason}))
+                self._remove_customer(c)
+            elif c["state"] == "waiting" and (c["patience_ticks_left"] == 0 or self.time_left_ticks == 0):
+                reason = "closing" if self.time_left_ticks == 0 else "patience"
+                if reason == "patience":
+                    self._change_reputation(self.t["left_reputation_delta"])
+                self._remove_customer(c)
+                events.append(("customer_left", {"order_id": c["id"], "table_id": c["table_id"],
+                                                 "reason": reason, "reputation": self.reputation}))
 
     def _remove_customer(self, customer):
         order_id = customer["id"]

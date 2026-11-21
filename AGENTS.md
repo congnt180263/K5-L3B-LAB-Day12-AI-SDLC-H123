@@ -30,3 +30,8 @@
 ## Skills / hooks của nhóm
 - `contract-check` (`.agents/skills/contract-check/SKILL.md`): Dùng trước mỗi lần commit/merge để rà quy tắc Test Contract, `Streams`, `sort_by_id`, và chạy kiểm tra thành viên + test.
 - `phase-proof` (`.agents/skills/phase-proof/SKILL.md`): Dùng trước khi gắn tag `phase-1..4` để xuất log headless, kiểm tra tất định và điền `docs/verification/phase-n.md`.
+
+## Tích hợp TV3 Phase 1
+- Lát 4 dùng cấu trúc khách/giữ chỗ và stream `customer_order` của TV2.
+- Test đầy đủ trên PowerShell: `$env:PYTHONUTF8="1"; $env:PYTHONPATH="tests;."; python -m unittest discover -s tests -v`.
+- Kiểm mâu thuẫn món/đơn tại `QuanSim` trước khi ghi output; kiểm miền bàn/bếp tại `scenario.py`.
