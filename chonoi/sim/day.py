@@ -68,10 +68,17 @@ class DaySim:
         q_sc = self.raw_scenario.get("quan", {}) if self.day == 1 else {}
         streams = Streams(f"{self.seed}:D{self.day}:quan")
         ids = IdAllocator()
-        self.sim = QuanSim(self.tuning, q_sc, streams, ids, inventory=inventory_items)
-        self.sim.money = self.money
-        self.sim.earned = self.earned
-        self.sim.reputation = self.reputation
+        self.sim = QuanSim(
+            self.tuning,
+            q_sc,
+            streams,
+            ids,
+            inventory=inventory_items,
+            day_plan=self._current_plan(),
+            money=self.money,
+            earned=self.earned,
+            reputation=self.reputation,
+        )
         self.time_left_ticks = self.sim.time_left_ticks
         events.append(("phase_start", {"phase": "quan"}))
 
