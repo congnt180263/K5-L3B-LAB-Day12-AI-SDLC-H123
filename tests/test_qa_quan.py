@@ -37,7 +37,7 @@ PRESS = [{"tick": 0, "interact": True}]
 class AC_Khach(unittest.TestCase):
     def test_ac_p1_29_snapshot_tick_0(self):
         s = q(ticks=0)[0]
-        self.assertEqual([x["id"] for x in s["stoves"]], ["B1"])
+        self.assertEqual(s["stoves"][0]["id"], "B1")  # Số bếp v1.1 kiểm riêng ở AC-P2-23.
         self.assertEqual(s["stoves"][0]["pos"], [2, 8])
         self.assertEqual(s["stoves"][0]["state"], "idle")
         self.assertEqual((s["tables"][0]["id"], s["tables"][0]["pos"], s["tables"][0]["customer_id"]), ("T1", [9, 2], None))
@@ -51,11 +51,13 @@ class AC_Khach(unittest.TestCase):
         arr = ev(rows, "customer_arrived")
         self.assertEqual(arr[0]["tick"], 120, "AC-P1-30: lượt đầu ở first_customer_tick")
         self.assertEqual(arr[0]["data"]["table_id"], "T1")
-        self.assertIn(arr[0]["data"]["dish_id"], ["ca_loc_nuong_trui", "goi_bong_sung", "lau_ca_linh_dien_dien"])
+        self.assertIn(arr[0]["data"]["dish_id"], ["ca_loc_nuong_trui", "goi_bong_sung",
+                                                 "lau_ca_linh_dien_dien", "canh_chua_ca_loc"])
         self.assertEqual(snap(rows, 120)["customers"][0]["id"], arr[0]["data"]["order_id"], "order_id = id khách")
-        # bàn duy nhất bận đến khi khách bỏ đi lúc 120+3600; cùng bước đó khách rời trước, lượt mới (120+4×900) tới sau
+        # Có một hoặc bốn bàn tùy phase. T1 luôn được giải phóng trước lượt 120+4×900.
         self.assertEqual(ev_at(rows, 3720), ["customer_left", "customer_arrived"], "AC-P1-30: thứ tự rời rồi đến trong cùng bước")
-        self.assertEqual([a["tick"] for a in arr], [120, 3720])
+        table_count = len(snap(rows, 0)["tables"])
+        self.assertEqual([a["tick"] for a in arr], [120 + 900 * k for k in range(table_count)] + [3720])
 
     def test_ac_p1_30_tat_khach_tu_sinh_va_ca_rut_ngan(self):
         rows = q({"stock": RICH, "random_customers": False}, ticks=1500)
@@ -64,8 +66,10 @@ class AC_Khach(unittest.TestCase):
         self.assertEqual([a["tick"] for a in ev(rows, "customer_arrived")], [120], "AC-P1-30: lịch theo phase_tick kể cả ca rút ngắn")
 
     def test_ac_p1_31_ban_dang_co_khach_thi_bo_luot(self):
-        rows = q({"stock": RICH}, ticks=3000)
-        for t in (1020, 1920, 2820):
+        table_ids = [t["id"] for t in q(ticks=0)[0]["tables"]]
+        customers = [cust(id=f"C{k}", table_id=table_id) for k, table_id in enumerate(table_ids, 1)]
+        rows = q({"stock": RICH, "customers": customers}, ticks=3000)
+        for t in (120, 1020, 1920, 2820):
             self.assertEqual(ev_at(rows, t), [], f"AC-P1-31: tick {t} bàn bận nên bỏ lượt (không đến, không no_dish)")
 
     def test_ac_p1_32_chon_mon_giu_cho_va_no_dish(self):
