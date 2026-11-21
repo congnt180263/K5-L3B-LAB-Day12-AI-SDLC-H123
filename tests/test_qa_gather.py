@@ -213,8 +213,8 @@ class AC_Bat(unittest.TestCase):
         self.assertEqual(s1["player"]["catch_cd_ticks"], int(g["catch_cooldown_s"] * 60))
 
     def test_ac_p1_20_dang_hoi_chieu_thi_bo_qua_sau_hoi_thi_bat_duoc(self):
-        sc = {"player": {"pos": [20, 5]}, "fish": [self.fish("F1", "ca_loc", 21, 5), self.fish("F2", "ca_loc", 21, 6),
-                                                    self.fish("F3", "ca_loc", 20, 7)]}
+        sc = {"player": {"pos": [20, 5]}, "random_fish": False,  # v1.1: cá bơi nên phải tắt random_fish để đàn đứng yên
+              "fish": [self.fish("F1", "ca_loc", 21, 5), self.fish("F2", "ca_loc", 21, 6), self.fish("F3", "ca_loc", 20, 7)]}
         rows, _ = go(sc, [{"tick": 0, "catch": True}, {"tick": 1, "catch": False}, {"tick": 10, "catch": True},
                           {"tick": 11, "catch": False}, {"tick": 60, "catch": True}], ticks=62)
         self.assertEqual([e["tick"] for e in ev(rows, "fish_caught")], [1, 61],
