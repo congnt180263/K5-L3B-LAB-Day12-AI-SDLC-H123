@@ -9,6 +9,7 @@ Máy chủ HTTP nhỏ (ThreadingHTTPServer) phục vụ `chonoi/web/index.html` 
 
 Mô phỏng chạy 60 tick/s trong một luồng nền, dùng CÙNG lớp sim như headless (qua `runner.Session`).
 Client chỉ ĐỌC snapshot và tự bỏ qua trường chưa có, nên luật do nhóm viết thêm trường nào cũng không vỡ.
+Kết thúc gather, bấm E thêm một lần để mở quán với nguyên liệu vừa mang về.
 Ngẫu nhiên vẫn đi qua `Streams` (seed); chỉ nhịp chạy theo đồng hồ thật, không đi vào luật.
 """
 
@@ -24,11 +25,12 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from .contract import load_contract
 from .errors import BadInput
 from .inputs import LiveInputs
-from .inventory import read_inventory
+from .inventory import menu_ingredients, read_inventory
 from .runner import Session
 from .scenario import load_scenario
 
 WEB_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web")
+ASSET_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cho-noi-assets")
 TICK_S = 1.0 / 60.0
 MAX_BODY = 4096
 RECENT_EVENTS = 40
@@ -39,7 +41,6 @@ class LiveGame:
 
     def __init__(self, mode, tuning, scenario, seed, inventory=None, inventory_out=None):
         self._args = (mode, tuning, scenario, seed, inventory)
-        self.mode = mode
         self.tuning = tuning
         self.inventory_out = inventory_out
         self._lock = threading.Lock()
@@ -85,6 +86,12 @@ class LiveGame:
     def _tick_once(self):
         s = self.session
         if s.done:
+            if (s.mode == "gather" and s.sim.reason in ("docked", "time", "fainted")
+                    and self.inputs.advance().pressed("interact")):
+                _, _, _, seed, _ = self._args
+                self.session = Session("quan", self.tuning, {}, seed, inventory=s.sim.inventory_items())
+                self.inputs = LiveInputs()
+                self.events.clear()
             return
         for row in s.step(self.inputs.advance()):
             self.events.append(row)
@@ -101,7 +108,7 @@ class LiveGame:
     def state_json(self) -> bytes:
         with self._lock:
             snap = self.session.snapshot()
-            snap["meta"] = self.tuning[self.mode]
+            snap["meta"] = self.tuning[self.session.mode]
             snap["events"] = list(self.events)
             snap["finished"] = self.session.done
             snap["reason"] = self.session.sim.reason if self.session.done else None
@@ -154,6 +161,20 @@ class _Handler(BaseHTTPRequestHandler):
                     self._send(200, f.read(), "text/html; charset=utf-8")
             except OSError:
                 self._send(404, b'{"error":"thieu index.html"}')
+        elif path.startswith("/assets/"):
+            rel = path[len("/assets/"):].replace("/", os.sep)
+            asset_root = os.path.abspath(ASSET_DIR)
+            asset_path = os.path.abspath(os.path.join(asset_root, rel))
+            if os.path.commonpath([asset_root, asset_path]) != asset_root:
+                self._send(403, b'{"error":"duong dan khong hop le"}')
+                return
+            try:
+                with open(asset_path, "rb") as f:
+                    body = f.read()
+                ctype = "image/svg+xml" if asset_path.lower().endswith(".svg") else "application/octet-stream"
+                self._send(200, body, ctype)
+            except (OSError, ValueError):
+                self._send(404, b'{"error":"khong tim thay asset"}')
         else:
             self._send(404, b'{"error":"khong co"}')
 
@@ -230,7 +251,7 @@ def main(argv=None) -> int:
             raise BadInput("--inventory-out chỉ dùng với gather")
         tuning = load_contract()["tuning"]
         scenario = load_scenario(a.scenario, a.mode, tuning)
-        inventory = read_inventory(a.inventory) if a.inventory else None
+        inventory = read_inventory(a.inventory, menu_ingredients(tuning["menu"])) if a.inventory else None
         if inventory is not None and "stock" in scenario:
             raise BadInput("vừa có quan.stock vừa có --inventory")
         game = LiveGame(a.mode, tuning, scenario, a.seed, inventory, a.inventory_out)

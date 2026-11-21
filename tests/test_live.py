@@ -57,6 +57,52 @@ class LiveServerTest(unittest.TestCase):
         self.assertFalse(server.game._thread.is_alive())
         self.assertFalse(server._thread.is_alive())
 
+    def test_dock_open_quan_and_serve_the_catch(self):
+        tuning = load_contract()["tuning"]
+        game = LiveGame("gather", tuning, {"hold": ["ca_loc"]}, 1)
+
+        def step(ticks=1, **controls):
+            game.set_input(controls)
+            for _ in range(ticks):
+                game._tick_once()
+
+        def state():
+            return json.loads(game.state_json())
+
+        step(interact=True)
+        step()
+        self.assertEqual((state()["mode"], state()["reason"]), ("gather", "docked"))
+
+        step(interact=False)
+        step(interact=True)
+        self.assertEqual((state()["mode"], state()["tick"], state()["stock"]), ("quan", 0, {"ca_loc": 1}))
+        self.assertEqual(state()["meta"]["bounds"], tuning["quan"]["bounds"])
+
+        step(64, move=[-1, 1], interact=False)
+        step(tuning["quan"]["first_customer_tick"] - 64, move=[0, 0])
+        self.assertEqual(state()["customers"][0]["dish_id"], "ca_loc_nuong_trui")
+        step(interact=True)
+        self.assertEqual(state()["stock"], {})
+        cook_ticks = round(tuning["menu"]["ca_loc_nuong_trui"]["cook_s"] * tuning["tick_hz"])
+        step(cook_ticks, interact=False)
+        self.assertEqual(state()["stoves"][1]["state"], "ready")
+        step(interact=True)
+        self.assertEqual(state()["hand"]["dish_id"], "ca_loc_nuong_trui")
+
+        step(108, move=[2 / 3, -1], interact=False)
+        step(interact=True, move=[0, 0])
+        self.assertEqual(state()["customers"][0]["state"], "eating")
+        self.assertIsNone(state()["hand"])
+        step(round(tuning["quan"]["eat_s"] * tuning["tick_hz"]), interact=False)
+        self.assertEqual(state()["customers"], [])
+        self.assertEqual(state()["money"], 72)
+        self.assertEqual([e["name"] for e in state()["events"]],
+                         ["customer_arrived", "cook_started", "dish_ready", "dish_picked", "served",
+                          "no_dish", "paid"])
+
+        game.restart()
+        self.assertEqual((state()["mode"], state()["hold"]), ("gather", ["ca_loc"]))
+
 
 if __name__ == "__main__":
     unittest.main()

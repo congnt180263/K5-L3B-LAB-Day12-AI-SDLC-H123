@@ -49,8 +49,12 @@ class GatherRulesTest(unittest.TestCase):
         evs = step_n(s, [], choke_ticks + 5)
         names = [e["name"] for e in evs]
         self.assertIn("oxygen_empty", names)
+        oxy_ev = next(e for e in evs if e["name"] == "oxygen_empty")
+        self.assertEqual(oxy_ev["data"], {"oxygen_ticks": 0})
         self.assertIn("choke", names)
         self.assertIn("faint", names)
+        faint_ev = next(e for e in evs if e["name"] == "faint")
+        self.assertEqual(faint_ev["data"], {"cause": "choke", "lost": ["bong_sung", "ca_loc"], "hp": 0})
         self.assertEqual(names[-1], "gather_end")
         end_ev = evs[-1]["data"]
         self.assertEqual(end_ev["reason"], "fainted")
@@ -70,7 +74,7 @@ class GatherRulesTest(unittest.TestCase):
         s = Session("gather", self.tuning, sc, seed=1)
         evs = step_n(s, [{"tick": 0, "interact": True}], 1)
         self.assertEqual(evs[0]["name"], "gather")
-        self.assertEqual(evs[0]["data"]["node_id"], "N2")
+        self.assertEqual(evs[0]["data"], {"node_id": "N2", "kind": "bong_dien_dien", "amount": 1})
         self.assertEqual(s.snapshot()["hold"], ["bong_dien_dien"])
 
         # Kiểm tra nút mọc lại đúng regrow_s * 60 tick
@@ -128,6 +132,31 @@ class GatherRulesTest(unittest.TestCase):
         s_surf = Session("gather", self.tuning, sc_surf, seed=1)
         evs_surf = step_n(s_surf, [{"tick": 0, "catch": True}], 1)
         self.assertEqual(evs_surf, [])
+
+        # Bắt cá khi thiếu chỗ: phát hold_full, giữ đàn cá, giữ giỏ, đặt cooldown
+        cap = self.tuning["gather"]["hold_capacity"]
+        sc_tight = {
+            "player": {"pos": [20, 5]},
+            "hold": ["ca_loc"] * (cap - 1),
+            "fish": [{"id": "F1", "kind": "ca_linh", "pos": [20, 5]}],
+        }
+        s_tight = Session("gather", self.tuning, sc_tight, seed=1)
+        evs_tight = step_n(s_tight, [{"tick": 0, "catch": True}], 1)
+        self.assertEqual(evs_tight[0]["name"], "hold_full")
+        self.assertEqual(evs_tight[0]["data"], {"action": "catch", "fish_id": "F1", "required": 3, "free": 1})
+        self.assertEqual(len(s_tight.snapshot()["fish"]), 1)
+        self.assertEqual(s_tight.snapshot()["hold_count"], cap - 1)
+        self.assertEqual(s_tight.snapshot()["player"]["catch_cd_ticks"], cd)
+
+        # Bắt hụt (không có đàn trong tầm): không đặt cooldown
+        sc_miss = {
+            "player": {"pos": [20, 5]},
+            "fish": [{"id": "F1", "kind": "ca_loc", "pos": [30, 5]}],
+        }
+        s_miss = Session("gather", self.tuning, sc_miss, seed=1)
+        evs_miss = step_n(s_miss, [{"tick": 0, "catch": True}], 1)
+        self.assertEqual(evs_miss, [])
+        self.assertEqual(s_miss.snapshot()["player"]["catch_cd_ticks"], 0)
 
 
 if __name__ == "__main__":

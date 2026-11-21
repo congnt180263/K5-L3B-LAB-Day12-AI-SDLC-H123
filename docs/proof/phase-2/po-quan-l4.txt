@@ -1,0 +1,30 @@
+test_ac_p2_02_sau_mon (test_qa_p2.P2_Contract.test_ac_p2_02_sau_mon) ... ok
+test_ac_p2_23_quan_2_bep_4_ban (test_qa_p2.P2_Contract.test_ac_p2_23_quan_2_bep_4_ban) ... ok
+test_ac_p2_24_khach_den_theo_lich_va_lay_ban_trong_nho_nhat (test_qa_p2.P2_Contract.test_ac_p2_24_khach_den_theo_lich_va_lay_ban_trong_nho_nhat) ... ok
+test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi (test_qa_p2.P2_Contract.test_ac_p2_25_chon_bep_theo_id_va_don_theo_tuoi) ... ok
+test_ac_p2_27_kho_va_giu_cho_mon_moi (test_qa_p2.P2_Contract.test_ac_p2_27_kho_va_giu_cho_mon_moi) ... ok
+test_ac_p2_27_nau_mon_moi_o_bep_b2 (test_qa_p2.P2_Contract.test_ac_p2_27_nau_mon_moi_o_bep_b2) ... ok
+test_ac_p2_31_chon_mon_trong_ke_hoach_va_khong_gioi_han_suat (test_qa_p2.P2_QuanPlan.test_ac_p2_31_chon_mon_trong_ke_hoach_va_khong_gioi_han_suat) ... ok
+test_ac_p2_31_fixture_ngoai_ke_hoach (test_qa_p2.P2_QuanPlan.test_ac_p2_31_fixture_ngoai_ke_hoach) ... ok
+test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot (test_qa_quan.AC_Bep.test_ac_p1_35_chi_mot_interact_chon_doi_tuong_gan_nhat_khong_tuong_tac_thi_bo_luot) ... ok
+test_ac_p1_36_bep_idle_bat_dau_nau (test_qa_quan.AC_Bep.test_ac_p1_36_bep_idle_bat_dau_nau) ... ok
+test_ac_p1_37_nau_xong_thanh_ready (test_qa_quan.AC_Bep.test_ac_p1_37_nau_xong_thanh_ready) ... ok
+test_ac_p1_38_lay_mon_tu_bep (test_qa_quan.AC_Bep.test_ac_p1_38_lay_mon_tu_bep) ... ok
+test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan (test_qa_quan.AC_Bep.test_ac_p1_39_nguong_boa_va_phuc_vu_dung_tick_het_kien_nhan) ... ok
+test_ac_p1_39_phuc_vu_va_boa (test_qa_quan.AC_Bep.test_ac_p1_39_phuc_vu_va_boa) ... ok
+test_ac_p1_40_an_xong_tra_tien (test_qa_quan.AC_Bep.test_ac_p1_40_an_xong_tra_tien) ... ok
+test_ac_p1_41_khach_roi_bo_mon_khong_hoan_nguyen_lieu (test_qa_quan.AC_Bep.test_ac_p1_41_khach_roi_bo_mon_khong_hoan_nguyen_lieu) ... ok
+test_ac_p1_42_het_ca (test_qa_quan.AC_Bep.test_ac_p1_42_het_ca) ... ok
+test_ac_p1_43_mau_thuan_o_scenario_thoat_2 (test_qa_quan.AC_Bep.test_ac_p1_43_mau_thuan_o_scenario_thoat_2) ... ok
+test_ac_p1_29_snapshot_tick_0 (test_qa_quan.AC_Khach.test_ac_p1_29_snapshot_tick_0) ... ok
+test_ac_p1_30_lich_khach_theo_phase_tick (test_qa_quan.AC_Khach.test_ac_p1_30_lich_khach_theo_phase_tick) ... ok
+test_ac_p1_30_tat_khach_tu_sinh_va_ca_rut_ngan (test_qa_quan.AC_Khach.test_ac_p1_30_tat_khach_tu_sinh_va_ca_rut_ngan) ... ok
+test_ac_p1_31_ban_dang_co_khach_thi_bo_luot (test_qa_quan.AC_Khach.test_ac_p1_31_ban_dang_co_khach_thi_bo_luot) ... ok
+test_ac_p1_32_chon_mon_giu_cho_va_no_dish (test_qa_quan.AC_Khach.test_ac_p1_32_chon_mon_giu_cho_va_no_dish) ... ok
+test_ac_p1_33_het_kien_nhan_thi_roi_tru_uy_tin (test_qa_quan.AC_Khach.test_ac_p1_33_het_kien_nhan_thi_roi_tru_uy_tin) ... ok
+test_ac_p1_34_khach_roi_nha_cho_va_tra_ban (test_qa_quan.AC_Khach.test_ac_p1_34_khach_roi_nha_cho_va_tra_ban) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 8.626s
+
+OK
