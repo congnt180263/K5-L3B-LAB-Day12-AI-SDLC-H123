@@ -1,1 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 64"><defs><linearGradient id="g" x2="0" y2="1"><stop stop-color="#f5cf84"/><stop offset="1" stop-color="#a85b32"/></linearGradient></defs><g fill="url(#g)" stroke="#422d27" stroke-width="2"><path d="M39 22Q22 7 10 22l-8-8v17l8-7q13 15 29-2Z"/><path d="M105 42Q88 26 72 42l-8-8v17l8-7q16 15 33-2Z"/></g><g fill="#1c2927"><circle cx="29" cy="20" r="2"/><circle cx="94" cy="40" r="2"/></g><path d="M39 22q16-12 26-4M105 42q8-8 13-6" fill="none" stroke="#fbe6ad" stroke-width="3" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 62"><title>Cá kèo</title><g transform="translate(0 0) scale(0.79)"><g stroke="#35303b" stroke-width="2.8" stroke-linejoin="round">
+ <path d="M27 30Q15 18 4 18Q1 25 9 31Q1 40 3 46Q16 44 28 36Z" fill="#cb8257"/>
+ <path d="M29 23Q36 9 39 19Q46 5 52 19L60 22" fill="#cb8257"/>
+ <path d="M19 32Q29 17 54 17Q78 14 88 27Q94 35 83 41Q58 53 32 41Z" fill="#cb8257"/>
+ <path d="M28 35Q52 46 84 35Q72 49 45 43Z" fill="#ffe7aa" stroke="none"/>
+ <path d="M45 33q-8-3-15 1 3 7 14 6" fill="#ffe7aa"/>
+ <ellipse cx="72" cy="26" rx="9.4" ry="10.2" fill="#fff9df"/>
+ <ellipse cx="75" cy="27" rx="5.3" ry="6.5" fill="#302f3d" stroke="none"/>
+ <circle cx="77" cy="24" r="2.2" fill="white" stroke="none"/>
+ <path d="M78 35q5 4 10-1" fill="none" stroke-width="1.8"/>
+ <path d="M37 24q6-4 12-4" stroke="#fff" opacity=".6" fill="none" stroke-linecap="round"/></g></g><g transform="translate(21 24) scale(0.75)"><g stroke="#35303b" stroke-width="2.8" stroke-linejoin="round">
+ <path d="M27 30Q15 18 4 18Q1 25 9 31Q1 40 3 46Q16 44 28 36Z" fill="#cb8257"/>
+ <path d="M29 23Q36 9 39 19Q46 5 52 19L60 22" fill="#cb8257"/>
+ <path d="M19 32Q29 17 54 17Q78 14 88 27Q94 35 83 41Q58 53 32 41Z" fill="#cb8257"/>
+ <path d="M28 35Q52 46 84 35Q72 49 45 43Z" fill="#ffe7aa" stroke="none"/>
+ <path d="M45 33q-8-3-15 1 3 7 14 6" fill="#ffe7aa"/>
+ <ellipse cx="72" cy="26" rx="9.4" ry="10.2" fill="#fff9df"/>
+ <ellipse cx="75" cy="27" rx="5.3" ry="6.5" fill="#302f3d" stroke="none"/>
+ <circle cx="77" cy="24" r="2.2" fill="white" stroke="none"/>
+ <path d="M78 35q5 4 10-1" fill="none" stroke-width="1.8"/>
+ <path d="M37 24q6-4 12-4" stroke="#fff" opacity=".6" fill="none" stroke-linecap="round"/></g></g></svg>

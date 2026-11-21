@@ -5,9 +5,17 @@
 <rect x="18" y="40" width="18" height="30" rx="8" fill="#60462D" transform="rotate(-20 27 55)"/>
 <path d="M36 36 Q60 30 66 44 Q62 58 36 60 Q28 52 36 36Z" fill="#4FA36B"/>
 <path d="M54 44 L74 52 L72 58 L52 52Z" fill="#E3B48A"/>
-<circle cx="66" cy="30" r="13" fill="#E3B48A"/>
-<path d="M53 28 Q58 14 74 18 L76 24 Q62 22 54 32Z" fill="#322921"/>
-<path d="M52 24 Q64 12 78 22 L77 27 Q64 20 53 29Z" fill="#C8102E"/>
-<ellipse cx="74" cy="30" rx="8" ry="7" fill="#BFE6F2"/><circle cx="77" cy="31" r="2" fill="#211C16"/>
-<path d="M70 38 Q74 41 78 38" fill="none"/></g>
-<g fill="#FFE3A3"><circle cx="44" cy="46" r="1.8"/><circle cx="52" cy="48" r="1.8"/></g></svg>
+<path d="M45 25q-12-14-18-4l14 11-14 2q0 9 18 3" fill="#ed695b"/>
+<ellipse cx="64" cy="29" rx="21" ry="20" fill="#413342"/>
+<path d="M48 27q1-18 20-17 20 1 19 20 7 0 5 5l-6 2q-7 17-25 12-14-5-13-22Z" fill="#ffca9e"/>
+<path d="M45 28q-4-23 21-23 12 0 17 10-14-4-22 5l-3 9-6-6-3 9Z" fill="#46353a"/>
+<path d="M43 20q18-15 39-9l3 6q-22-7-41 10Z" fill="#fb655e"/>
+<path d="M46 29l13-3" stroke="#633c3b" stroke-width="5"/>
+<rect x="58" y="18" width="30" height="17" rx="8" fill="#a0ebe6" stroke="#303744" stroke-width="3"/>
+<ellipse cx="78" cy="26" rx="5.8" ry="6.6" fill="white" stroke="none"/>
+<ellipse cx="80" cy="27" rx="3" ry="4" fill="#333344" stroke="none"/>
+<circle cx="81" cy="25" r="1.3" fill="white" stroke="none"/>
+<path d="M62 26l4-5m1 7 5-7" stroke="white" opacity=".8"/>
+<ellipse cx="68" cy="37" rx="4.5" ry="2.5" fill="#ef9883" stroke="none"/>
+<path d="M74 39q7 1 11-3-4 10-11 3Z" fill="#793f43"/>
+</g></svg>
