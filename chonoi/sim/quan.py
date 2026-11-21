@@ -1,4 +1,4 @@
-"""Buổi tối — Mở Quán, với khách, đơn và giữ chỗ nguyên liệu theo PRD-0.
+"""Buổi tối — Mở Quán, với khách, đơn và giữ chỗ nguyên liệu theo PRD-0 và TICKET-02.
 
 Lát 4: timer bếp/ăn, tương tác, thu tiền và kết ca theo PRD-0 mục F.
 """
@@ -9,7 +9,7 @@ from collections import Counter
 
 from ..errors import BadInput
 from ..ids import id_key, sort_by_id
-from ..inventory import validate_items
+from ..inventory import KINDS_P2, validate_items
 from .ramp import ramp_velocity
 
 CUSTOMER_FIELDS = {
@@ -29,12 +29,27 @@ class QuanSim:
     mode = "quan"
     phase = "quan"
 
-    def __init__(self, tuning, scenario, streams, ids, inventory=None):
+    def __init__(self, tuning, scenario, streams, ids, inventory=None, *,
+                 day_plan=None, money=0, earned=0, reputation=None):
         scenario = copy.deepcopy(scenario)
         t = tuning["quan"]
         self.t = t
         self.tick_hz = tuning["tick_hz"]
         self.menu = tuning["menu"]
+        # Internal day adapter API; standalone scenario must not inject day state.
+        self.allowed_dishes = set(self.menu)
+        if day_plan is not None:
+            if not isinstance(day_plan, dict) or not isinstance(day_plan.get("dishes"), dict):
+                raise BadInput("day_plan cần map dishes")
+            dishes = day_plan["dishes"]
+            if not dishes or any(k not in self.menu or type(v) is not int or v <= 0
+                                 for k, v in dishes.items()):
+                raise BadInput("day_plan có món hoặc số suất không hợp lệ")
+            self.allowed_dishes = set(dishes)
+        _check_counter("money", money)
+        _check_counter("earned", earned)
+        if money > earned:
+            raise BadInput("money không được vượt earned")
         self.rng = streams
         self.ids = ids
         self.phase_tick = 0
@@ -49,10 +64,19 @@ class QuanSim:
         self._tgt = None
         self._ramp_left = 0
         # kho: --inventory HOẶC scenario.stock (cả hai -> cli đã báo mã 2)
-        self.stock = dict(inventory if inventory is not None else scenario.get("stock", {}))
+        if inventory is not None and "stock" in scenario:
+            raise BadInput("không khai cả inventory và scenario.stock")
+        if day_plan is not None and ("stock" in scenario or "reputation" in scenario):
+            raise BadInput("day không nhận quan.stock hoặc quan.reputation")
+        self.stock = validate_items(inventory if inventory is not None else scenario.get("stock", {}),
+                                    kinds=KINDS_P2)
         self.hand = scenario.get("hand")
         self.time_left_ticks = scenario.get("time_left_ticks", round(t["duration_s"] * self.tick_hz))
-        self.reputation = scenario.get("reputation", t["reputation_initial"])
+        self.reputation = (scenario.get("reputation", t["reputation_initial"])
+                           if reputation is None else reputation)
+        if (isinstance(self.reputation, bool) or not isinstance(self.reputation, (int, float))
+                or not t["reputation_min"] <= self.reputation <= t["reputation_max"]):
+            raise BadInput("reputation ngoài miền tuning")
         self.stoves = [dict(s, state=s.get("state", "idle"), dish=s.get("dish"),
                             cook_ticks_left=s.get("cook_ticks_left", 0), ready_ticks=s.get("ready_ticks", 0))
                        for s in self._merge(t["stoves"], scenario.get("stoves", []))]
@@ -61,8 +85,8 @@ class QuanSim:
         self._validate_order_dishes()
         for customer in self.customers:
             ids.reserve(customer["id"])
-        self.money = 0
-        self.earned = 0
+        self.money = money
+        self.earned = earned
         self.shift_earned = 0
         self.done = False
         self.reason = None
@@ -77,13 +101,24 @@ class QuanSim:
         return sort_by_id(list(by_id.values()))
 
     def _load_customers(self, fixtures):
+        if not isinstance(fixtures, list):
+            raise BadInput("customers phải là mảng")
         customers = []
+        seen, occupied = set(), set()
+        table_ids = {t["id"] for t in self.tables}
         for fixture in fixtures:
+            if not isinstance(fixture, dict) or not isinstance(fixture.get("id"), str) or not fixture["id"]:
+                raise BadInput("customer cần id chuỗi")
+            if (fixture["id"] in seen or not isinstance(fixture.get("table_id"), str)
+                    or fixture["table_id"] not in table_ids or fixture["table_id"] in occupied):
+                raise BadInput("customer trùng id hoặc bàn không hợp lệ")
+            seen.add(fixture["id"])
+            occupied.add(fixture["table_id"])
             order_id = fixture["id"]
             if set(fixture) - CUSTOMER_FIELDS:
                 raise BadInput(f"khách {order_id}: có trường lạ")
             dish_id = fixture.get("dish_id")
-            if not isinstance(dish_id, str) or dish_id not in self.menu:
+            if not isinstance(dish_id, str) or dish_id not in self.allowed_dishes:
                 raise BadInput(f"khách {order_id}: dish_id phải là món trong menu")
             customer = self._new_customer(order_id, fixture["table_id"], dish_id, 0)
             customer.update(fixture)
@@ -100,7 +135,7 @@ class QuanSim:
                 raise BadInput(f"khách {order_id}: trạng thái và timer ăn mâu thuẫn")
 
             expected = dict(self.menu[dish_id]["recipe"]) if status == "reserved" else {}
-            reserved = validate_items(fixture["reserved"]) if "reserved" in fixture else expected
+            reserved = validate_items(fixture["reserved"], kinds=KINDS_P2) if "reserved" in fixture else expected
             if reserved != expected:
                 raise BadInput(f"khách {order_id}: giữ chỗ không khớp công thức hoặc trạng thái đơn")
             customer["reserved"] = reserved
@@ -307,7 +342,7 @@ class QuanSim:
         if since_first < 0 or since_first % self.customer_interval_ticks:
             return
         occupied = {customer["table_id"] for customer in self.customers}
-        table = next((table for table in self.tables if table["id"] not in occupied), None)
+        table = next((table for table in sort_by_id(self.tables) if table["id"] not in occupied), None)
         if table is None:
             return
 
@@ -316,7 +351,8 @@ class QuanSim:
             available.subtract(customer["reserved"])
         choices = [
             dish_id for dish_id, dish in sorted(self.menu.items())
-            if all(available[kind] >= count for kind, count in dish["recipe"].items())
+            if dish_id in self.allowed_dishes
+            and all(available[kind] >= count for kind, count in dish["recipe"].items())
         ]
         if not choices:
             events.append(("no_dish", {}))

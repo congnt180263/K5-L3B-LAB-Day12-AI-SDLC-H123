@@ -163,6 +163,13 @@
             2,
             8
           ]
+        },
+        {
+          "id": "B2",
+          "pos": [
+            5,
+            8
+          ]
         }
       ],
       "tables": [
@@ -171,6 +178,27 @@
           "pos": [
             9,
             2
+          ]
+        },
+        {
+          "id": "T2",
+          "pos": [
+            13,
+            2
+          ]
+        },
+        {
+          "id": "T3",
+          "pos": [
+            9,
+            6
+          ]
+        },
+        {
+          "id": "T4",
+          "pos": [
+            13,
+            6
           ]
         }
       ],
@@ -210,6 +238,31 @@
         },
         "cook_s": 10,
         "price": 120
+      },
+      "canh_chua_ca_loc": {
+        "recipe": {
+          "ca_loc": 1,
+          "bong_dien_dien": 1
+        },
+        "cook_s": 8,
+        "price": 90
+      },
+      "ca_keo_nuong": {
+        "recipe": {
+          "ca_keo": 2
+        },
+        "cook_s": 6,
+        "price": 70
+      },
+      "lau_mam": {
+        "recipe": {
+          "ca_linh": 2,
+          "ca_keo": 1,
+          "keo_neo": 1,
+          "bong_dien_dien": 1
+        },
+        "cook_s": 12,
+        "price": 200
       }
     },
     "score": {

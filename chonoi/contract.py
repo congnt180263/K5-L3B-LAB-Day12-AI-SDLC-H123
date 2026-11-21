@@ -1,5 +1,6 @@
 """Đọc game.contract.json và kiểm dải hợp lệ của tuning P1 (PRD mục 13.2, Test Contract)."""
 
+import math
 import json
 import os
 
@@ -136,8 +137,34 @@ def validate_tuning(t):
         raise BadInput("quan.tip_reputation phải > 0")
     if q.get("burn_s") is not None:
         raise BadInput("burn_s phải là null ở Phase 1")
-    # TODO(nhóm): bổ sung kiểm các khóa còn lại nếu muốn chặt hơn (bếp/bàn, uy tín, ...).
+    _pos_in("quan.start_pos", q.get("start_pos"), q["bounds"], ("x", "z"))
+    for key in ("stoves", "tables"):
+        objects = q.get(key)
+        if not isinstance(objects, list) or not objects:
+            raise BadInput(f"quan.{key} phải là mảng không rỗng")
+        seen = set()
+        for obj in objects:
+            if (not isinstance(obj, dict) or not isinstance(obj.get("id"), str)
+                    or not obj["id"] or obj["id"] in seen):
+                raise BadInput(f"quan.{key}: id không hợp lệ hoặc trùng")
+            seen.add(obj["id"])
+            _pos_in(f"quan.{key}.{obj['id']}.pos", obj.get("pos"), q["bounds"], ("x", "z"))
+    if (not _num(q.get("reputation_min")) or not _num(q.get("reputation_max"))
+            or not _num(q.get("reputation_initial"))
+            or not q["reputation_min"] <= q["reputation_initial"] <= q["reputation_max"]):
+        raise BadInput("quan.reputation: miền không hợp lệ")
+    if q.get("carry_limit") != 1:
+        raise BadInput("quan.carry_limit phải bằng 1")
+    if not menu:
+        raise BadInput("menu không được rỗng")
     for dish_id, d in menu.items():
+        if not isinstance(d, dict):
+            raise BadInput(f"menu.{dish_id} phải là object")
+        from .inventory import KINDS_P2, validate_items
+        recipe = d.get("recipe")
+        if not isinstance(recipe, dict) or not recipe or any(type(n) is not int or n <= 0 for n in recipe.values()):
+            raise BadInput(f"menu.{dish_id}: công thức cần số lượng nguyên dương")
+        validate_items(recipe, kinds=KINDS_P2)
         price, cook = d.get("price"), d.get("cook_s")
-        if isinstance(price, bool) or not isinstance(price, int) or price <= 0 or not _num(cook) or cook <= 0:
+        if isinstance(price, bool) or not isinstance(price, int) or price <= 0 or not _num(cook) or not math.isfinite(cook) or round(cook * t["tick_hz"]) <= 0:
             raise BadInput(f"menu.{dish_id}: price (nguyên) và cook_s phải > 0")

@@ -1,0 +1,1 @@
+PASS: identical headless JSONL bytes; B2 cook/ready/pick; T4 closing service/payment; CLI inventory accepts ca_keo and keo_neo.

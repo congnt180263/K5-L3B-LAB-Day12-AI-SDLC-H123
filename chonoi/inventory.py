@@ -12,6 +12,7 @@ from .errors import BadInput
 
 KINDS_P1 = ("ca_loc", "ca_linh", "bong_dien_dien", "bong_sung")
 
+KINDS_P2 = (*KINDS_P1, "ca_keo", "keo_neo")
 
 def validate_items(items, kinds=KINDS_P1):
     if not isinstance(items, dict):

@@ -10,7 +10,8 @@ import math
 
 from .errors import BadInput
 
-BUTTONS_V10 = ("interact", "catch")  # v1.0; các nút khác có từ phiên bản sau
+BUTTONS_V10 = ("interact", "catch")
+BUTTONS = (*BUTTONS_V10, "pause")
 
 
 class InputState:
@@ -23,7 +24,7 @@ class InputState:
         return name in self._edges
 
 
-def load_frames(path, buttons=BUTTONS_V10):
+def load_frames(path, buttons=BUTTONS):
     if path is None:
         return []
     try:
@@ -70,7 +71,7 @@ def normalize(move):
 
 
 class InputPlayer:
-    def __init__(self, frames, buttons=BUTTONS_V10):
+    def __init__(self, frames, buttons=BUTTONS):
         self._frames = {fr["tick"]: fr for fr in frames}
         self._buttons = buttons
         self._move = (0.0, 0.0)
@@ -97,7 +98,7 @@ class LiveInputs:
     Luồng khác gọi set(); luồng mô phỏng gọi advance() mỗi tick (cần khóa ngoài nếu dùng nhiều luồng).
     """
 
-    def __init__(self, buttons=BUTTONS_V10):
+    def __init__(self, buttons=BUTTONS):
         self._buttons = buttons
         self._move = (0.0, 0.0)
         self._held = {b: False for b in buttons}

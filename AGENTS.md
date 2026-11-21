@@ -35,3 +35,11 @@
 - Lát 4 dùng cấu trúc khách/giữ chỗ và stream `customer_order` của TV2.
 - Test đầy đủ trên PowerShell: `$env:PYTHONUTF8="1"; $env:PYTHONPATH="tests;."; python -m unittest discover -s tests -v`.
 - Kiểm mâu thuẫn món/đơn tại `QuanSim` trước khi ghi output; kiểm miền bàn/bếp tại `scenario.py`.
+
+## Phase 2 — quán và bàn giao day
+- TV3 phụ trách toàn bộ `sim/quan.py`: 2 bếp, 4 bàn, 6 món theo TICKET-02; `burn_s:null` trong lõi.
+- `quan-check` (`.agents/skills/quan-check/SKILL.md`): chạy `python .agents/skills/quan-check/scripts/check.py` sau khi sửa quán, ghi proof Phase 2.
+- Day coordinator truyền thực đơn và trạng thái qua API ở `docs/quan-phase2.md`; không thêm trạng thái day vào fixture quán độc lập.
+- Pause nằm ở Session, trước bước sim; không thêm lần pause thứ hai trong QuanSim. Chỉ dùng sim_tick/phase_tick cho timer và lịch.
+- Quán đã chuyển dữ liệu P2; manifest toàn game còn 1.0 cho tới khi Integrator hoàn tất gather/day/Shop v1.1. Không gắn tag P2 chỉ vì test quán xanh.
+- Thư mục làm việc duy nhất: `D:\AITC\AFT_LAB\LAB12 - FINAL`.
