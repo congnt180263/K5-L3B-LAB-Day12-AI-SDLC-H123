@@ -27,6 +27,27 @@ def _post(url, obj):
 
 
 class LiveServerTest(unittest.TestCase):
+    def test_prepare_goi_bong_sung_over_http(self):
+        stock = [{"id": key, "kind": "bong_sung", "fresh": 100} for key in ("I1", "I2")]
+        order = {"id": "C1", "table_id": "T4", "dish_id": "goi_bong_sung"}
+        game = LiveGame("quan", load_contract()["tuning"], {
+            "player": {"pos": [2, 8]}, "stock": stock, "customers": [order]
+        }, 1)
+        server = LiveServer(game, port=0)
+        server.start()
+        try:
+            base = f"http://127.0.0.1:{server.port}"
+            self.assertTrue(json.loads(_get(base + "/state")[1])["can_prepare"])
+            self.assertEqual(_post(base + "/prepare", {
+                "order": "C1", "stove": "B2", "ingredients": ["bong_sung", "bong_sung"]
+            }), 200)
+            state = json.loads(_get(base + "/state")[1])
+            self.assertEqual(state["stoves"][1]["state"], "cooking")
+            self.assertEqual(state["stoves"][1]["dish"]["dish_id"], "goi_bong_sung")
+            self.assertEqual(state["stock"], [])
+        finally:
+            server.stop()
+
     def test_state_input_and_clean_stop(self):
         tuning = load_contract()["tuning"]
         server = LiveServer(LiveGame("gather", tuning, {}, 1), port=0)  # cổng ngẫu nhiên

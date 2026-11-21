@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
+<title>Chợ nổi lúc rạng đông</title>
+<defs>
+ <linearGradient id="sky" x2=".25" y2="1"><stop stop-color="#698e9b"/><stop offset=".55" stop-color="#f4c295"/><stop offset="1" stop-color="#ffd792"/></linearGradient>
+ <linearGradient id="river" x2=".6" y2="1"><stop stop-color="#82b9ae"/><stop offset=".4" stop-color="#398782"/><stop offset="1" stop-color="#103e4a"/></linearGradient>
+ <pattern id="ripples" width="142" height="40" patternUnits="userSpaceOnUse"><path d="M6 7q20 3 48 0m45 22 29-1" fill="none" stroke="#e5dfaa" opacity=".26" stroke-linecap="round" stroke-width="2"/></pattern>
+ <g id="palm" fill="#265955"><path d="M-6 0Q4-56-6-104Q13-56 4 0Z"/><path d="M-6-99q-34-42-68-18 35-7 66 22-49-16-65 21 35-27 66-22-28 9-32 47 14-29 35-44 21 19 28 45 3-30-21-52 37 1 59 23-13-37-57-31 33-21 60-13-25-24-66 12 8-31-8-42 10 24 3 52Z"/></g>
+ <g id="boat"><ellipse cy="13" rx="138" ry="9" fill="#13484f" opacity=".4"/><path d="M-144-22Q-32 4 144-27L116 0Q-20 32-117-3Z" fill="#713e32"/><path d="M-142-21Q-24 8 141-25" fill="none" stroke="#e7af67" stroke-width="6"/><path d="M-92-15v-66m118 71v-72" stroke="#503f35" stroke-width="6"/><path d="M-117-72l29-36 110-1 34 32-29 7Z" fill="#e5ac61"/><path d="M-116-72l29-36 15 1-24 36m43-1 12-36 15-1-8 38m41-1-7-37 15 1 14 35" fill="#ab6145"/><g fill="#efb644" stroke="#946638" stroke-width="2"><circle cx="52" cy="-22" r="11"/><circle cx="72" cy="-24" r="12"/><circle cx="64" cy="-40" r="11"/></g><path d="M-60-15l8-30 17 1 5 31" fill="#297974"/><circle cx="-43" cy="-48" r="8" fill="#bc805c"/><path d="M-63-50l18-20 22 18Z" fill="#ffda95"/></g>
+</defs>
+<rect width="1440" height="470" fill="url(#sky)"/><circle cx="1060" cy="225" r="105" fill="#ffe8a6"/>
+<path d="M0 358q140-85 280-24t290-2 295 15 300-25 275-12v161H0" fill="#76978d"/>
+<path d="M0 395q150-62 320-31t300-2 310 12 280-28 230 0v125H0" fill="#47776c"/>
+<use href="#palm" transform="translate(1170 375)"/><use href="#palm" transform="translate(1220 378) scale(.73)"/><use href="#palm" transform="translate(1300 373) scale(1.2)"/>
+<rect y="398" width="1440" height="402" fill="url(#river)"/><rect y="398" width="1440" height="402" fill="url(#ripples)"/>
+<g fill="#ffe9ac" opacity=".5"><path d="M970 412h180l-34 4H981zm-51 23h236l-66 5H951zm52 26h185l-39 4H991zm-34 37h191l-78 5h-94z"/></g>
+<use href="#boat" transform="translate(746 434) scale(.52)"/><use href="#boat" transform="translate(1284 458) scale(.7)"/><use href="#boat" transform="translate(1038 605) rotate(-4) scale(1.48)"/>
+<g fill="none" stroke="#4a625b" stroke-width="3" stroke-linecap="round"><path d="M879 174q9-3 16 5 6-10 16-10m49-35q8-2 14 5 4-8 12-9"/></g>
+</svg>

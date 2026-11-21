@@ -13,6 +13,9 @@ Kết thúc gather, bấm E thêm một lần để mở quán với nguyên li�
 Ngẫu nhiên vẫn đi qua `Streams` (seed); chỉ nhịp chạy theo đồng hồ thật, không đi vào luật.
 """
 
+import math
+from collections import Counter
+
 import argparse
 import json
 import os
@@ -144,7 +147,9 @@ class LiveGame:
             if self.session.mode == "day":
                 snap["meta"] = self.tuning.get(self.session.sim.phase, {})
                 snap["shop_catalog"] = self.tuning["shop"]["upgrades"]
-                snap["menu"] = self.tuning["menu"]
+            snap["supports_early_close"] = True
+            snap["can_prepare"] = True
+            snap["menu"] = self.tuning["menu"]
             snap["active"] = self.active
             snap["stats"] = self.stats
             snap["day_result"] = self.last_day_result
@@ -153,6 +158,46 @@ class LiveGame:
             snap["reason"] = self.session.sim.reason if self.session.done else None
             snap["error"] = self.error
             return json.dumps(snap, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+
+    def close_quan(self):
+        with self._lock:
+            session = self.session
+            if not self.active or session.done or session.paused or session.sim.phase != "quan":
+                raise ValueError("Chỉ đóng sớm khi đang mở quán")
+            kitchen = session.sim.sim if session.mode == "day" else session.sim
+            if kitchen.customers:
+                raise ValueError("Quán vẫn còn khách")
+            # Chạy bước đóng ca bình thường để ghi kết quả và chuyển Shop.
+            self.inputs = LiveInputs()
+            self._presentation_until = 0
+            kitchen.time_left_ticks = 1
+            self._tick_once()
+
+    def prepare(self, body):
+        """Xếp một mẻ từ nguyên liệu đã giữ của đơn, tại quầy có hai bếp."""
+        ingredients = body.get("ingredients")
+        if not isinstance(ingredients, list) or not all(isinstance(k, str) for k in ingredients):
+            raise ValueError("Khay nguyên liệu không hợp lệ")
+        with self._lock:
+            session = self.session
+            if not self.active or session.done or session.paused or session.sim.phase != "quan":
+                raise ValueError("Quán chưa mở")
+            kitchen = session.sim.sim if session.mode == "day" else session.sim
+            if not any(math.dist(kitchen.pos, s["pos"]) <= kitchen.t["interact_radius"] for s in kitchen.stoves):
+                raise ValueError("Hãy đến quầy bếp")
+            stove = next((s for s in kitchen.stoves if s["id"] == body.get("stove")), None)
+            orders = [c for c in kitchen.customers if c["order_status"] == "reserved"]
+            if not orders or stove is None or stove["state"] != "idle":
+                raise ValueError("Đơn hoặc bếp vừa thay đổi")
+            order = min(orders, key=kitchen._order_key)
+            if order["id"] != body.get("order"):
+                raise ValueError("Khách đã đổi đơn")
+            if Counter(ingredients) != kitchen.menu[order["dish_id"]]["recipe"]:
+                raise ValueError("Số lượng nguyên liệu chưa khớp công thức")
+            events = []
+            kitchen._interact_stove(stove, events)
+            for name, data in events:
+                self.events.append({"name": name, "data": data, "phase": "quan", "tick": session.tick})
 
     def set_input(self, body: dict):
         move = body.get("move")
@@ -241,11 +286,16 @@ class _Handler(BaseHTTPRequestHandler):
             return
         raw = self.rfile.read(n) if n else b""
         try:
-            if path == "/input":
+            if path in ("/input", "/prepare"):
                 body = json.loads(raw.decode("utf-8") or "{}")
                 if not isinstance(body, dict):
                     raise ValueError("body phải là object")
-                self.game.set_input(body)
+                if path == "/prepare":
+                    self.game.prepare(body)
+                else:
+                    self.game.set_input(body)
+            elif path == "/close-quan":
+                self.game.close_quan()
             elif path == "/restart":
                 self.game.restart()
             elif path == "/start":
@@ -319,6 +369,9 @@ def main(argv=None) -> int:
         if not 1 <= a.days <= 5:
             raise BadInput("--days phải trong [1, 5]")
         tuning = load_contract()["tuning"]
+        # Nhịp điều khiển của bản chơi trực tiếp.
+        for section, speed in (("gather", "swim_speed"), ("quan", "walk_speed")):
+            tuning[section][speed] *= 1.15
         scenario = load_scenario(a.scenario, a.mode, tuning)
         inventory = (read_inventory(a.inventory, menu_ingredients(tuning["menu"]),
                                     individual="freshness" in tuning) if a.inventory else None)
